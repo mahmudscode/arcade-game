@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Games Hub</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>🎮 Retro Arcade Classics</h1>
+        <p>Classic Arcade Games with Modern Graphics!</p>
+    </header>
+
+    <nav class="game-nav">
+        <button class="nav-btn active" data-category="all">All Games</button>
+        <button class="nav-btn" data-category="action">Action</button>
+        <button class="nav-btn" data-category="puzzle">Puzzle</button>
+        <button class="nav-btn" data-category="classic">Classic</button>
+        <button class="nav-btn" data-category="strategy">Strategy</button>
+    </nav>
+
+    <main class="games-grid" id="gamesGrid">
+        <!-- Games will be dynamically inserted here -->
+    </main>
+
+    <div class="game-modal" id="gameModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <h2 id="gameTitle">Game Title</h2>
+            <div class="game-container" id="gameContainer"></div>
+            <div class="game-controls" id="gameControls"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Arcade Games Hub. Play for free!</p>
+    </footer>
+
+    <!-- Game Engine -->
+    <script src="js/engine/GameEngine.js"></script>
+    <script src="js/engine/ParticleSystem.js"></script>
+    <script src="js/engine/SpriteRenderer.js"></script>
+    <script src="js/engine/AudioController.js"></script>
+
+    <!-- Modern Classic Games -->
+    <script src="js/games/space-invaders.js"></script>
+    <script src="js/games/asteroids.js"></script>
+    <script src="js/games/pacman.js"></script>
+    <script src="js/games/frogger.js"></script>
+    <script src="js/games/galaga.js"></script>
+    <script src="js/games/centipede.js"></script>
+    <script src="js/games/dig-dug.js"></script>
+    <script src="js/games/qbert.js"></script>
+    <script src="js/games/donkey-kong.js"></script>
+    <script src="js/games/bubble-bobble.js"></script>
+    <script src="js/games/contra.js"></script>
+    <script src="js/games/double-dragon.js"></script>
+    <script src="js/games/ghosts-n-goblins.js"></script>
+
+    <!-- Original Simple Games -->
+    <script src="js/games.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+ 
