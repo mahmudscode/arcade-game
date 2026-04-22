@@ -26,9 +26,6 @@ class PacMan extends GameEngine {
         this.isDying = false;
         this.lastKeyPressed = '';
         this.lastKeyTime = 0;
-
-        // Input fallback for environments where document key listeners are intercepted.
-        this.directKeydownHandler = null;
     }
 
     init() {
@@ -45,36 +42,6 @@ class PacMan extends GameEngine {
         this.ghostModeTimer = 0;
         this.combo = 0;
         this.isDying = false;
-
-        // Capture keyboard at window level as a fallback when other handlers interfere.
-        if (!this.directKeydownHandler) {
-            this.directKeydownHandler = (e) => {
-                if (this.state !== 'running' && !(this.state === 'gameover' && e.code === 'Space')) {
-                    return;
-                }
-
-                if (e.code === 'Space' && this.state === 'gameover') {
-                    e.preventDefault();
-                    this.destroy();
-                    setTimeout(() => {
-                        const newGame = new PacMan(this.container);
-                        newGame.start();
-                    }, 100);
-                    return;
-                }
-
-                const handled = this.setNextDirectionFromEvent(e);
-                if (handled) {
-                    e.preventDefault();
-                    // Ensure canvas keeps focus so further keys register
-                    if (this.canvas) {
-                        this.canvas.focus();
-                    }
-                }
-            };
-
-            window.addEventListener('keydown', this.directKeydownHandler, true);
-        }
     }
 
     createMaze() {
@@ -214,7 +181,7 @@ class PacMan extends GameEngine {
     }
 
     handleKeyDown(e) {
-        // Allow restart from game-over state (base engine only forwards keys while running).
+        // Allow restart from game-over state
         if (e.code === 'Space' && this.state === 'gameover') {
             e.preventDefault();
             this.destroy();
@@ -224,6 +191,10 @@ class PacMan extends GameEngine {
             }, 100);
             return;
         }
+
+        // Record key for debug display
+        this.lastKeyPressed = e.code || e.key;
+        this.lastKeyTime = Date.now();
 
         super.handleKeyDown(e);
     }
@@ -897,18 +868,10 @@ class PacMan extends GameEngine {
     }
 
     stop() {
-        if (this.directKeydownHandler) {
-            window.removeEventListener('keydown', this.directKeydownHandler, true);
-            this.directKeydownHandler = null;
-        }
         super.stop();
     }
 
     destroy() {
-        if (this.directKeydownHandler) {
-            window.removeEventListener('keydown', this.directKeydownHandler, true);
-            this.directKeydownHandler = null;
-        }
         super.destroy();
     }
 }

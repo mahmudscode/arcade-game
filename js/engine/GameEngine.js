@@ -58,9 +58,9 @@ class GameEngine {
     }
 
     setupInputListeners() {
-        // Use document for keyboard listeners (more reliable than canvas or window)
-        document.addEventListener('keydown', this.handleKeyDown);
-        document.addEventListener('keyup', this.handleKeyUp);
+        // Use window for keyboard listeners to capture events regardless of focus
+        window.addEventListener('keydown', this.handleKeyDown);
+        window.addEventListener('keyup', this.handleKeyUp);
         window.addEventListener('blur', this.handleWindowBlur);
 
         // Click to focus canvas for keyboard input
@@ -170,8 +170,8 @@ class GameEngine {
 
     stop() {
         this.state = 'idle';
-        document.removeEventListener('keydown', this.handleKeyDown);
-        document.removeEventListener('keyup', this.handleKeyUp);
+        window.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('keyup', this.handleKeyUp);
         window.removeEventListener('blur', this.handleWindowBlur);
         this.onStateChange('idle');
     }
@@ -361,8 +361,9 @@ class GameEngine {
 
     // Destroy and cleanup
     destroy() {
-        this.canvas.removeEventListener('keydown', this.handleKeyDown);
-        this.canvas.removeEventListener('keyup', this.handleKeyUp);
+        window.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('keyup', this.handleKeyUp);
+        window.removeEventListener('blur', this.handleWindowBlur);
         this.container.innerHTML = '';
     }
 }
