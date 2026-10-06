@@ -8,6 +8,7 @@ type Loader = () => Promise<{ default: GameDefinition<any> }>;
  */
 const loaders: Record<string, Loader> = {
   'comet-crusher': () => import('./comet-crusher'),
+  'saucer-swarm': () => import('./saucer-swarm'),
 };
 
 export function isPlayable(slug: string): boolean {

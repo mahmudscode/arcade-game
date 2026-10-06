@@ -9,7 +9,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 ## Shooters (25)
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
-| 1 | Space Invaders | FS | S | todo |
+| 1 | Space Invaders | FS | S | dev |
 | 2 | Galaga | FS | M | todo |
 | 3 | Asteroids | AR | S | todo |
 | 4 | Centipede | FS | M | todo |

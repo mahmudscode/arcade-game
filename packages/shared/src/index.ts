@@ -84,7 +84,15 @@ export const GAMES: GameMeta[] = [
   game('hoop-blitz', 'Hoop Blitz', 'Sports', 150_000),
   game('cave-comet', 'Cave Comet', 'Classic', 260_000),
   game('tank-trails', 'Tank Trails', 'Maze', 520_000),
-  game('saucer-swarm', 'Saucer Swarm', 'Shooter', 990_000),
+  game('saucer-swarm', 'Saucer Swarm', 'Shooter', 990_000, {
+    description: 'Stop the marching saucer swarm before it lands. Hide behind shields, snipe the bonus UFO.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [
+      { keys: ['◀', '▶'], label: 'Move' },
+      { keys: ['Space'], label: 'Fire' },
+      { keys: ['P'], label: 'Pause' },
+    ],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';
