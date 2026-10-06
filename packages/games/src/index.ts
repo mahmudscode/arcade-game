@@ -9,6 +9,19 @@ type Loader = () => Promise<{ default: GameDefinition<any> }>;
 const loaders: Record<string, Loader> = {
   'comet-crusher': () => import('./comet-crusher'),
   'saucer-swarm': () => import('./saucer-swarm'),
+  'star-divers': () => import('./star-divers'),
+  'sky-shield': () => import('./sky-shield'),
+  'lunar-descent': () => import('./lunar-descent'),
+  'brick-bash': () => import('./brick-bash'),
+  'vault-breaker': () => import('./vault-breaker'),
+  'neon-serpent': () => import('./neon-serpent'),
+  'block-tumble': () => import('./block-tumble'),
+  'gem-cascade': () => import('./gem-cascade'),
+  'bomb-catcher': () => import('./bomb-catcher'),
+  'road-hopper': () => import('./road-hopper'),
+  'echo-tones': () => import('./echo-tones'),
+  'neon-trails': () => import('./neon-trails'),
+  'pixel-pong-pro': () => import('./pixel-pong-pro'),
 };
 
 export function isPlayable(slug: string): boolean {

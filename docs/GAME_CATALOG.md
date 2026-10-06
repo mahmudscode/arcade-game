@@ -11,15 +11,15 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 |---|---|---|---|---|
 | 1 | Space Invaders | FS | S | dev |
 | 2 | Galaga | FS | M | todo |
-| 3 | Asteroids | AR | S | todo |
+| 3 | Asteroids | AR | S | dev |
 | 4 | Centipede | FS | M | todo |
 | 5 | Defender | SS | L | todo |
 | 6 | Scramble | SS | M | todo |
 | 7 | Xevious | SS | M | todo |
 | 8 | 1942 | SS | M | todo |
-| 9 | Galaxian | FS | S | todo |
+| 9 | Galaxian | FS | S | dev |
 | 10 | Gyruss | FS | M | todo |
-| 11 | Missile Command | FS | S | todo |
+| 11 | Missile Command | FS | S | dev |
 | 12 | Phoenix | FS | M | todo |
 | 13 | Zaxxon | SS | L | todo |
 | 14 | R-Type | SS | M | todo |
@@ -28,7 +28,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 17 | Robotron 2084 | AR | M | todo |
 | 18 | Tempest | FS | M | todo |
 | 19 | Star Castle | AR | S | todo |
-| 20 | Lunar Lander | AR | S | todo |
+| 20 | Lunar Lander | AR | S | dev |
 | 21 | Berzerk | MZ | M | todo |
 | 22 | Moon Patrol | SC | M | todo |
 | 23 | Battlezone | AR | L | todo |
@@ -51,7 +51,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 36 | Wizard of Wor | MZ | M | todo |
 | 37 | Amidar | MZ | S | todo |
 | 38 | Qix | GP | S | todo |
-| 39 | Tron | AR | M | todo |
+| 39 | Tron | AR | M | dev |
 
 ## Platformers (20)
 | # | Game | Archetype | Size | Status |
@@ -107,28 +107,28 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 80 | Excitebike | SC | M | todo |
 | 81 | Road Fighter | RT | M | todo |
 | 82 | Bump 'n' Jump | RT | M | todo |
-| 83 | Pong | PB | S | todo |
-| 84 | Breakout | PB | S | todo |
-| 85 | Arkanoid | PB | M | todo |
+| 83 | Pong | PB | S | dev |
+| 84 | Breakout | PB | S | dev |
+| 85 | Arkanoid | PB | M | dev |
 | 86 | Track & Field | PB | M | todo |
 | 87 | Punch-Out | FT | L | todo |
 
 ## Puzzle and Casual (13)
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
-| 88 | Tetris | FB | S | todo |
+| 88 | Tetris | FB | S | dev |
 | 89 | Dr. Mario | FB | M | todo |
 | 90 | Puyo Puyo | FB | M | todo |
-| 91 | Columns | FB | M | todo |
+| 91 | Columns | FB | M | dev |
 | 92 | Bust-A-Move | GP | M | todo |
-| 93 | Snake | GP | S | todo |
+| 93 | Snake | GP | S | dev |
 | 94 | Klax | FB | M | todo |
 | 95 | Boulder Dash | GP | M | todo |
 | 96 | Sokoban | GP | S | todo |
-| 97 | Kaboom! | PB | S | todo |
-| 98 | Frogger | GP | M | todo |
+| 97 | Kaboom! | PB | S | dev |
+| 98 | Frogger | GP | M | dev |
 | 99 | Marble Madness | GP | L | todo |
-| 100 | Simon | GP | S | todo |
+| 100 | Simon | GP | S | dev |
 
 ## Totals
 - By size: compute from `packages/games/catalog.json` (source of truth; this file is generated from it once the repo exists).
