@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1a1033;
+  --color-ink-2: #24184a;
+  --color-ink-3: #33255f;
+  --color-line: #4a3a80;
+  --color-paper: #f6efff;
+  --color-muted: #b7a9db;
+  --color-gold: #ffc93c;
+  --color-coral: #ff5d73;
+  --color-cyan: #4fe3d6;
+  --color-violet: #a78bfa;
+  --color-mint: #6ee7a0;
+  --font-sans: "Rubik", ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: "Press Start 2P", ui-monospace, monospace;
+  /* Design breakpoints: tablet >= 768 (md), desktop >= 1200 (xl). */
+  --breakpoint-xl: 75rem;
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color-scheme: dark;
+  }
+  body {
+    margin: 0;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+  button {
+    cursor: pointer;
+    font: inherit;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
+
+@layer components {
+  .page-x {
+    margin-inline: auto;
+    max-width: 1440px;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .page-x { padding-inline: 2.5rem; }
+  }
+  @media (min-width: 1200px) {
+    .page-x { padding-inline: 5rem; }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1;
+    white-space: nowrap;
+    transition: transform 0.12s, background-color 0.12s, border-color 0.12s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-gold { background: var(--color-gold); color: var(--color-ink); }
+  .btn-gold:hover { background: #ffd666; }
+  .btn-outline { border: 2px solid var(--color-paper); color: var(--color-paper); }
+  .btn-outline:hover { background: rgb(246 239 255 / 0.1); }
+  .btn-soft { background: var(--color-ink-3); color: var(--color-paper); }
+  .btn-soft:hover { background: var(--color-line); }
+
+  .hide-scrollbar { scrollbar-width: none; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+
+  .scanlines {
+    background-image: repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.14) 0 1px, transparent 1px 4px);
+  }
+}
