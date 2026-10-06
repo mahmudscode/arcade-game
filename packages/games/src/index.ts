@@ -22,7 +22,31 @@ const loaders: Record<string, Loader> = {
   'echo-tones': () => import('./echo-tones'),
   'neon-trails': () => import('./neon-trails'),
   'pixel-pong-pro': () => import('./pixel-pong-pro'),
+  'sky-ace-88': () => import('./sky-ace-88'),
+  'cavern-raid': () => import('./cavern-raid'),
+  'beam-lancer': () => import('./beam-lancer'),
+  'orbit-raider': () => import('./orbit-raider'),
+  'ghost-grid': () => import('./ghost-grid'),
+  'pellet-pursuit': () => import('./pellet-pursuit'),
+  'paint-patrol': () => import('./paint-patrol'),
+  'segment-snap': () => import('./segment-snap'),
+  'cube-hopper': () => import('./cube-hopper'),
+  'crate-shift': () => import('./crate-shift'),
+  'turbo-tunnel': () => import('./turbo-tunnel'),
+  'dune-buggy-dash': () => import('./dune-buggy-dash'),
+  'highway-hero': () => import('./highway-hero'),
+  'bot-blitz': () => import('./bot-blitz'),
+  'core-crusher': () => import('./core-crusher'),
+  'sky-circuit': () => import('./sky-circuit'),
+  'jungle-dash': () => import('./jungle-dash'),
+  'sprint-masher': () => import('./sprint-masher'),
+  'blast-grid': () => import('./blast-grid'),
+  'pit-panic': () => import('./pit-panic'),
 };
+
+export function playableSlugs(): string[] {
+  return Object.keys(loaders);
+}
 
 export function isPlayable(slug: string): boolean {
   return slug in loaders;

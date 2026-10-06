@@ -62,14 +62,22 @@ export const GAMES: GameMeta[] = [
       { keys: ['P'], label: 'Pause' },
     ],
   }),
-  game('ghost-grid', 'Ghost Grid', 'Maze', 860_000),
+  game('ghost-grid', 'Ghost Grid', 'Maze', 860000, {
+    description: 'Eat every pellet in a fresh maze while four ghosts hunt you; power pellets turn the tables.',
+    touch: { a: 'Start', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Steer' }, { keys: ['P'], label: 'Pause' }],
+  }),
   game('gravity-hop', 'Gravity Hop', 'Platform', 2_400_000),
   game('block-tumble', 'Block Tumble', 'Puzzle', 540_000, {
     description: 'Rotate and place falling blocks to clear full lines.',
     touch: { a: 'Drop', b: 'Rotate' },
     controls: [{ keys: ['◀', '▶'], label: 'Move' }, { keys: ['▲'], label: 'Rotate' }, { keys: ['▼'], label: 'Soft drop' }, { keys: ['Space'], label: 'Hard drop' }, { keys: ['P'], label: 'Pause' }],
   }),
-  game('turbo-tunnel', 'Turbo Tunnel', 'Racing', 310_000),
+  game('turbo-tunnel', 'Turbo Tunnel', 'Racing', 310000, {
+    description: 'Race through a dark tunnel with tight curves and heavy traffic against the clock.',
+    touch: { a: 'Gas', b: 'Brake' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲', 'Space'], label: 'Accelerate' }, { keys: ['▼', 'X'], label: 'Brake' }, { keys: ['P'], label: 'Pause' }],
+  }),
   game('moon-miner', 'Moon Miner', 'Classic', 1_900_000),
   game('laser-lanes', 'Laser Lanes', 'Shooter', 720_000),
   game('pixel-pong-pro', 'Pixel Pong Pro', 'Sports', 95_000, {
@@ -77,7 +85,11 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Fire', b: 'Alt' },
     controls: [{ keys: ['▲', '▼'], label: 'Move paddle' }, { keys: ['P'], label: 'Pause' }],
   }),
-  game('sky-ace-88', 'Sky Ace 88', 'Shooter', 1_100_000),
+  game('sky-ace-88', 'Sky Ace 88', 'Shooter', 1100000, {
+    description: 'Dogfight waves of planes and gunships, grab weapon pickups and survive the scroll.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Fly' }, { keys: ['Space'], label: 'Fire (hold)' }, { keys: ['P'], label: 'Pause' }],
+  }),
   game('crate-quest', 'Crate Quest', 'Platform', 430_000),
   game('neon-knuckles', 'Neon Knuckles', 'Fighting', 650_000),
   game('orbit-pinball', 'Orbit Pinball', 'Pinball', 280_000),
@@ -87,7 +99,11 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Swap', b: 'Swap back' },
     controls: [{ keys: ['◀', '▶'], label: 'Move' }, { keys: ['▲', 'Space'], label: 'Cycle gems' }, { keys: ['▼'], label: 'Soft drop' }, { keys: ['P'], label: 'Pause' }],
   }),
-  game('dune-buggy-dash', 'Dune Buggy Dash', 'Racing', 210_000),
+  game('dune-buggy-dash', 'Dune Buggy Dash', 'Racing', 210000, {
+    description: 'Drive a sunny desert road with long sweeping curves before time runs out.',
+    touch: { a: 'Gas', b: 'Brake' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲', 'Space'], label: 'Accelerate' }, { keys: ['▼', 'X'], label: 'Brake' }, { keys: ['P'], label: 'Pause' }],
+  }),
   game('hex-hunter', 'Hex Hunter', 'Maze', 610_000),
   game('robo-rumble', 'Robo Rumble', 'Fighting', 330_000),
   game('star-harvest', 'Star Harvest', 'Classic', 880_000),
@@ -154,6 +170,86 @@ export const GAMES: GameMeta[] = [
     description: 'Race a light-trail cycle and trap the rival into a crash.',
     touch: { a: 'Start', b: 'Alt' },
     controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Turn' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('cavern-raid', 'Cavern Raid', 'Shooter', 600000, {
+    description: 'Fly over scrolling terrain, shoot turrets and fuel tanks, and never run dry or crash.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Fly' }, { keys: ['Space'], label: 'Fire (hold)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('beam-lancer', 'Beam Lancer', 'Shooter', 520000, {
+    description: 'Tap to shoot, hold to charge a piercing beam.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Fly' }, { keys: ['Space'], label: 'Tap = shot, hold = charge beam' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('orbit-raider', 'Orbit Raider', 'Shooter', 480000, {
+    description: 'Collect pickups to upgrade your shot, then gain trailing option orbs that fire with you.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Fly' }, { keys: ['Space'], label: 'Fire (hold)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('pellet-pursuit', 'Pellet Pursuit', 'Maze', 610000, {
+    description: 'A wilder maze chase: ghosts wander unpredictably and the bonus fruit roams.',
+    touch: { a: 'Start', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Steer' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('paint-patrol', 'Paint Patrol', 'Maze', 300000, {
+    description: 'Paint every line of the grid to fill the boxes while patrolling enemies roam.',
+    touch: { a: 'Jump', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move along lines' }, { keys: ['Space'], label: 'Jump (3 per level)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('segment-snap', 'Segment Snap', 'Shooter', 640000, {
+    description: 'Blast a centipede of segments snaking down through a mushroom field.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space'], label: 'Fire' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('cube-hopper', 'Cube Hopper', 'Platform', 700000, {
+    description: 'Hop diagonally across a pyramid to colour every cube while foes bounce down.',
+    touch: { a: 'Start', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Hop on the four diagonals' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('crate-shift', 'Crate Shift', 'Puzzle', 350000, {
+    description: 'Push every crate onto a goal in as few moves as you can.',
+    touch: { a: 'Start', b: 'Undo' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move / push' }, { keys: ['B'], label: 'Undo' }, { keys: ['Enter'], label: 'Restart level' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('highway-hero', 'Highway Hero', 'Racing', 280000, {
+    description: 'Dodge traffic and oil slicks, refuel on the move and reach the goal.',
+    touch: { a: 'Gas', b: 'Brake' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲', 'Space'], label: 'Accelerate' }, { keys: ['▼', 'X'], label: 'Brake' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('bot-blitz', 'Bot Blitz', 'Shooter', 540000, {
+    description: 'Run and gun through an arena swarming with chasing robots.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move (8-way)' }, { keys: ['Space'], label: 'Fire in your facing direction' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('core-crusher', 'Core Crusher', 'Shooter', 430000, {
+    description: 'Shoot gaps through three rotating shields to hit the cannon at the core.',
+    touch: { a: 'Fire', b: 'Thrust' },
+    controls: [{ keys: ['◀', '▶'], label: 'Rotate' }, { keys: ['▲'], label: 'Thrust' }, { keys: ['Space'], label: 'Fire' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('sky-circuit', 'Sky Circuit', 'Shooter', 390000, {
+    description: 'Loop through the sky in a dogfight, then take down the stage boss.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶'], label: 'Turn' }, { keys: ['Space'], label: 'Fire (hold)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('jungle-dash', 'Jungle Dash', 'Platform', 420000, {
+    description: 'Sprint through the jungle, leaping logs, pits and scorpions to grab gems.',
+    touch: { a: 'Jump', b: 'Alt' },
+    controls: [{ keys: ['Space', '▲'], label: 'Jump' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('sprint-masher', 'Sprint Masher', 'Sports', 260000, {
+    description: 'Mash left and right to sprint, then clear the hurdles in a qualifying race.',
+    touch: { a: 'Jump', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶'], label: 'Alternate to run' }, { keys: ['Space'], label: 'Jump (hurdles)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('blast-grid', 'Blast Grid', 'Maze', 500000, {
+    description: 'Plant bombs to blast through blocks and take out every roaming creature.',
+    touch: { a: 'Bomb', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space'], label: 'Place bomb' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('pit-panic', 'Pit Panic', 'Platform', 240000, {
+    description: 'Dig traps in the floor, then whack the monsters that fall in.',
+    touch: { a: 'Dig', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['▲', '▼'], label: 'Climb ladders' }, { keys: ['Space'], label: 'Dig / whack' }, { keys: ['P'], label: 'Pause' }],
   }),
 ];
 

@@ -12,22 +12,22 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 1 | Space Invaders | FS | S | dev |
 | 2 | Galaga | FS | M | todo |
 | 3 | Asteroids | AR | S | dev |
-| 4 | Centipede | FS | M | todo |
+| 4 | Centipede | FS | M | dev |
 | 5 | Defender | SS | L | todo |
-| 6 | Scramble | SS | M | todo |
+| 6 | Scramble | SS | M | dev |
 | 7 | Xevious | SS | M | todo |
-| 8 | 1942 | SS | M | todo |
+| 8 | 1942 | SS | M | dev |
 | 9 | Galaxian | FS | S | dev |
 | 10 | Gyruss | FS | M | todo |
 | 11 | Missile Command | FS | S | dev |
 | 12 | Phoenix | FS | M | todo |
 | 13 | Zaxxon | SS | L | todo |
-| 14 | R-Type | SS | M | todo |
-| 15 | Gradius | SS | M | todo |
-| 16 | Time Pilot | AR | M | todo |
-| 17 | Robotron 2084 | AR | M | todo |
+| 14 | R-Type | SS | M | dev |
+| 15 | Gradius | SS | M | dev |
+| 16 | Time Pilot | AR | M | dev |
+| 17 | Robotron 2084 | AR | M | dev |
 | 18 | Tempest | FS | M | todo |
-| 19 | Star Castle | AR | S | todo |
+| 19 | Star Castle | AR | S | dev |
 | 20 | Lunar Lander | AR | S | dev |
 | 21 | Berzerk | MZ | M | todo |
 | 22 | Moon Patrol | SC | M | todo |
@@ -38,18 +38,18 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 ## Maze and Chase (14)
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
-| 26 | Pac-Man | MZ | M | todo |
-| 27 | Ms. Pac-Man | MZ | M | todo |
+| 26 | Pac-Man | MZ | M | dev |
+| 27 | Ms. Pac-Man | MZ | M | dev |
 | 28 | Dig Dug | MZ | M | todo |
 | 29 | Pengo | MZ | M | todo |
 | 30 | Lady Bug | MZ | M | todo |
 | 31 | Mr. Do! | MZ | M | todo |
-| 32 | Bomberman | MZ | M | todo |
+| 32 | Bomberman | MZ | M | dev |
 | 33 | Lode Runner | PF | M | todo |
 | 34 | Rally-X | MZ | M | todo |
 | 35 | Mappy | PF | M | todo |
 | 36 | Wizard of Wor | MZ | M | todo |
-| 37 | Amidar | MZ | S | todo |
+| 37 | Amidar | MZ | S | dev |
 | 38 | Qix | GP | S | todo |
 | 39 | Tron | AR | M | dev |
 
@@ -60,9 +60,9 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 41 | Donkey Kong Jr. | PF | M | todo |
 | 42 | Mario Bros. | PF | M | todo |
 | 43 | Bubble Bobble | PF | L | todo |
-| 44 | Q*bert | GP | M | todo |
+| 44 | Q*bert | GP | M | dev |
 | 45 | Popeye | PF | M | todo |
-| 46 | Pitfall! | SC | M | todo |
+| 46 | Pitfall! | SC | M | dev |
 | 47 | Ice Climber | SC | M | todo |
 | 48 | Joust | PF | M | todo |
 | 49 | Elevator Action | PF | M | todo |
@@ -74,7 +74,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 55 | Kangaroo | PF | M | todo |
 | 56 | Bomb Jack | PF | M | todo |
 | 57 | Congo Bongo | PF | L | todo |
-| 58 | Space Panic | PF | S | todo |
+| 58 | Space Panic | PF | S | dev |
 | 59 | Toki | SC | L | todo |
 
 ## Action and Fighting (14)
@@ -98,19 +98,19 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 ## Racing and Sports (14)
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
-| 74 | Pole Position | R3 | L | todo |
-| 75 | Out Run | R3 | L | todo |
+| 74 | Pole Position | R3 | L | dev |
+| 75 | Out Run | R3 | L | dev |
 | 76 | Hang-On | R3 | L | todo |
 | 77 | Night Driver | R3 | M | todo |
 | 78 | Super Sprint | RT | M | todo |
 | 79 | Paperboy | SC | M | todo |
 | 80 | Excitebike | SC | M | todo |
-| 81 | Road Fighter | RT | M | todo |
+| 81 | Road Fighter | RT | M | dev |
 | 82 | Bump 'n' Jump | RT | M | todo |
 | 83 | Pong | PB | S | dev |
 | 84 | Breakout | PB | S | dev |
 | 85 | Arkanoid | PB | M | dev |
-| 86 | Track & Field | PB | M | todo |
+| 86 | Track & Field | PB | M | dev |
 | 87 | Punch-Out | FT | L | todo |
 
 ## Puzzle and Casual (13)
@@ -124,7 +124,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 93 | Snake | GP | S | dev |
 | 94 | Klax | FB | M | todo |
 | 95 | Boulder Dash | GP | M | todo |
-| 96 | Sokoban | GP | S | todo |
+| 96 | Sokoban | GP | S | dev |
 | 97 | Kaboom! | PB | S | dev |
 | 98 | Frogger | GP | M | dev |
 | 99 | Marble Madness | GP | L | todo |
