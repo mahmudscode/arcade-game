@@ -4,6 +4,32 @@ A web app that runs 100 classic arcade-style games with modern visuals, accounts
 
 > Status: **early implementation.** Done: monorepo, game engine, one playable game (Comet Crusher), and the web app (Home, Game player, responsive layouts) built from the design in [docs/design/](docs/design/). Not started: backend (`apps/api`), accounts, verified leaderboards, the other 99 games.
 
+## Live demo
+
+<https://arcade-game-8nptha4pp-acme-372b.vercel.app/>
+
+Hosted on Vercel as a static preview. Visitors may see a Vercel login page until Deployment Protection is turned off for the project.
+
+## Screenshots
+
+**Desktop home**
+
+![Desktop home](docs/screenshots/home-desktop.png)
+
+**Desktop game player** (Comet Crusher, running)
+
+![Desktop game player](docs/screenshots/player-desktop.png)
+
+**Tablet and mobile**
+
+<p>
+  <img src="docs/screenshots/home-tablet.png" alt="Tablet home" width="380">
+  <img src="docs/screenshots/home-mobile.png" alt="Mobile home" width="200">
+  <img src="docs/screenshots/player-mobile.png" alt="Mobile game player with on-screen controller" width="200">
+</p>
+
+Design reference: [docs/design/](docs/design/). Differences from the design are listed in [docs/DESIGN.md](docs/DESIGN.md).
+
 ## Documentation
 
 | Doc | Purpose |
