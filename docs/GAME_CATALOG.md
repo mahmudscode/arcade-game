@@ -18,7 +18,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 7 | Xevious | SS | M | todo |
 | 8 | 1942 | SS | M | dev |
 | 9 | Galaxian | FS | S | dev |
-| 10 | Gyruss | FS | M | todo |
+| 10 | Gyruss | FS | M | dev |
 | 11 | Missile Command | FS | S | dev |
 | 12 | Phoenix | FS | M | todo |
 | 13 | Zaxxon | SS | L | todo |

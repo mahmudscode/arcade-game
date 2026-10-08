@@ -43,6 +43,7 @@ const loaders: Record<string, Loader> = {
   'blast-grid': () => import('./blast-grid'),
   'pit-panic': () => import('./pit-panic'),
   'hive-strike': () => import('./hive-strike'),
+  'ring-runner': () => import('./ring-runner'),
 };
 
 export function playableSlugs(): string[] {

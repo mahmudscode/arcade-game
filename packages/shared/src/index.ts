@@ -256,6 +256,11 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Fire', b: 'Alt' },
     controls: [{ keys: ['◀', '▶'], label: 'Move' }, { keys: ['Space'], label: 'Fire (hold)' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('ring-runner', 'Ring Runner', 'Shooter', 680000, {
+    description: 'Orbit the rim of the screen and fire inward at beetles spiralling out of the centre.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶'], label: 'Orbit' }, { keys: ['Space'], label: 'Fire (hold)' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

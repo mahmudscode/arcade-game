@@ -6,13 +6,13 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 
 | Category | 🟢 Built | 🔴 Left | Total |
 |---|---|---|---|
-| Shooters | 14 | 11 | 25 |
+| Shooters | 15 | 10 | 25 |
 | Maze and Chase | 5 | 9 | 14 |
 | Platformers | 3 | 17 | 20 |
 | Action and Fighting | 0 | 14 | 14 |
 | Racing and Sports | 7 | 7 | 14 |
 | Puzzle and Casual | 7 | 6 | 13 |
-| **Total** | **36** | **64** | **100** |
+| **Total** | **37** | **63** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -29,7 +29,7 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🔴 | 7 | Xevious | Shooters | SS | M | todo |
 | 🟢 | 8 | 1942 | Shooters | SS | M | dev |
 | 🟢 | 9 | Galaxian | Shooters | FS | S | dev |
-| 🔴 | 10 | Gyruss | Shooters | FS | M | todo |
+| 🟢 | 10 | Gyruss | Shooters | FS | M | dev |
 | 🟢 | 11 | Missile Command | Shooters | FS | S | dev |
 | 🔴 | 12 | Phoenix | Shooters | FS | M | todo |
 | 🔴 | 13 | Zaxxon | Shooters | SS | L | todo |
