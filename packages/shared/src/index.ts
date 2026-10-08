@@ -251,6 +251,11 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Dig', b: 'Alt' },
     controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['▲', '▼'], label: 'Climb ladders' }, { keys: ['Space'], label: 'Dig / whack' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('hive-strike', 'Hive Strike', 'Shooter', 760000, {
+    description: 'Shoot the swooping swarm, dodge boss tractor beams and win back your ship for double firepower.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶'], label: 'Move' }, { keys: ['Space'], label: 'Fire (hold)' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

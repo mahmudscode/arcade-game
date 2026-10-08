@@ -10,7 +10,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
 | 1 | Space Invaders | FS | S | dev |
-| 2 | Galaga | FS | M | todo |
+| 2 | Galaga | FS | M | dev |
 | 3 | Asteroids | AR | S | dev |
 | 4 | Centipede | FS | M | dev |
 | 5 | Defender | SS | L | todo |
