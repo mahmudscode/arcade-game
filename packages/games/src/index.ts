@@ -44,6 +44,16 @@ const loaders: Record<string, Loader> = {
   'pit-panic': () => import('./pit-panic'),
   'hive-strike': () => import('./hive-strike'),
   'ring-runner': () => import('./ring-runner'),
+  'ember-wing': () => import('./ember-wing'),
+  'web-warden': () => import('./web-warden'),
+  'line-weaver': () => import('./line-weaver'),
+  'robo-maze': () => import('./robo-maze'),
+  'lance-flyers': () => import('./lance-flyers'),
+  'night-lane': () => import('./night-lane'),
+  'tunnel-tinker': () => import('./tunnel-tinker'),
+  'rally-maze': () => import('./rally-maze'),
+  'tile-catcher': () => import('./tile-catcher'),
+  'lunar-rover': () => import('./lunar-rover'),
 };
 
 export function playableSlugs(): string[] {

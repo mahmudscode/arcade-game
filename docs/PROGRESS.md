@@ -6,13 +6,13 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 
 | Category | 🟢 Built | 🔴 Left | Total |
 |---|---|---|---|
-| Shooters | 15 | 10 | 25 |
-| Maze and Chase | 5 | 9 | 14 |
-| Platformers | 3 | 17 | 20 |
+| Shooters | 19 | 6 | 25 |
+| Maze and Chase | 8 | 6 | 14 |
+| Platformers | 4 | 16 | 20 |
 | Action and Fighting | 0 | 14 | 14 |
-| Racing and Sports | 7 | 7 | 14 |
-| Puzzle and Casual | 7 | 6 | 13 |
-| **Total** | **37** | **63** | **100** |
+| Racing and Sports | 8 | 6 | 14 |
+| Puzzle and Casual | 8 | 5 | 13 |
+| **Total** | **47** | **53** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -31,33 +31,33 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 9 | Galaxian | Shooters | FS | S | dev |
 | 🟢 | 10 | Gyruss | Shooters | FS | M | dev |
 | 🟢 | 11 | Missile Command | Shooters | FS | S | dev |
-| 🔴 | 12 | Phoenix | Shooters | FS | M | todo |
+| 🟢 | 12 | Phoenix | Shooters | FS | M | dev |
 | 🔴 | 13 | Zaxxon | Shooters | SS | L | todo |
 | 🟢 | 14 | R-Type | Shooters | SS | M | dev |
 | 🟢 | 15 | Gradius | Shooters | SS | M | dev |
 | 🟢 | 16 | Time Pilot | Shooters | AR | M | dev |
 | 🟢 | 17 | Robotron 2084 | Shooters | AR | M | dev |
-| 🔴 | 18 | Tempest | Shooters | FS | M | todo |
+| 🟢 | 18 | Tempest | Shooters | FS | M | dev |
 | 🟢 | 19 | Star Castle | Shooters | AR | S | dev |
 | 🟢 | 20 | Lunar Lander | Shooters | AR | S | dev |
-| 🔴 | 21 | Berzerk | Shooters | MZ | M | todo |
-| 🔴 | 22 | Moon Patrol | Shooters | SC | M | todo |
+| 🟢 | 21 | Berzerk | Shooters | MZ | M | dev |
+| 🟢 | 22 | Moon Patrol | Shooters | SC | M | dev |
 | 🔴 | 23 | Battlezone | Shooters | AR | L | todo |
 | 🔴 | 24 | Bosconian | Shooters | AR | M | todo |
 | 🔴 | 25 | Stargate | Shooters | SS | L | todo |
 | 🟢 | 26 | Pac-Man | Maze and Chase | MZ | M | dev |
 | 🟢 | 27 | Ms. Pac-Man | Maze and Chase | MZ | M | dev |
-| 🔴 | 28 | Dig Dug | Maze and Chase | MZ | M | todo |
+| 🟢 | 28 | Dig Dug | Maze and Chase | MZ | M | dev |
 | 🔴 | 29 | Pengo | Maze and Chase | MZ | M | todo |
 | 🔴 | 30 | Lady Bug | Maze and Chase | MZ | M | todo |
 | 🔴 | 31 | Mr. Do! | Maze and Chase | MZ | M | todo |
 | 🟢 | 32 | Bomberman | Maze and Chase | MZ | M | dev |
 | 🔴 | 33 | Lode Runner | Maze and Chase | PF | M | todo |
-| 🔴 | 34 | Rally-X | Maze and Chase | MZ | M | todo |
+| 🟢 | 34 | Rally-X | Maze and Chase | MZ | M | dev |
 | 🔴 | 35 | Mappy | Maze and Chase | PF | M | todo |
 | 🔴 | 36 | Wizard of Wor | Maze and Chase | MZ | M | todo |
 | 🟢 | 37 | Amidar | Maze and Chase | MZ | S | dev |
-| 🔴 | 38 | Qix | Maze and Chase | GP | S | todo |
+| 🟢 | 38 | Qix | Maze and Chase | GP | S | dev |
 | 🟢 | 39 | Tron | Maze and Chase | AR | M | dev |
 | 🔴 | 40 | Donkey Kong | Platformers | PF | M | todo |
 | 🔴 | 41 | Donkey Kong Jr. | Platformers | PF | M | todo |
@@ -67,7 +67,7 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🔴 | 45 | Popeye | Platformers | PF | M | todo |
 | 🟢 | 46 | Pitfall! | Platformers | SC | M | dev |
 | 🔴 | 47 | Ice Climber | Platformers | SC | M | todo |
-| 🔴 | 48 | Joust | Platformers | PF | M | todo |
+| 🟢 | 48 | Joust | Platformers | PF | M | dev |
 | 🔴 | 49 | Elevator Action | Platformers | PF | M | todo |
 | 🔴 | 50 | BurgerTime | Platformers | PF | M | todo |
 | 🔴 | 51 | Rygar | Platformers | SC | M | todo |
@@ -96,7 +96,7 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 74 | Pole Position | Racing and Sports | R3 | L | dev |
 | 🟢 | 75 | Out Run | Racing and Sports | R3 | L | dev |
 | 🔴 | 76 | Hang-On | Racing and Sports | R3 | L | todo |
-| 🔴 | 77 | Night Driver | Racing and Sports | R3 | M | todo |
+| 🟢 | 77 | Night Driver | Racing and Sports | R3 | M | dev |
 | 🔴 | 78 | Super Sprint | Racing and Sports | RT | M | todo |
 | 🔴 | 79 | Paperboy | Racing and Sports | SC | M | todo |
 | 🔴 | 80 | Excitebike | Racing and Sports | SC | M | todo |
@@ -113,7 +113,7 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 91 | Columns | Puzzle and Casual | FB | M | dev |
 | 🔴 | 92 | Bust-A-Move | Puzzle and Casual | GP | M | todo |
 | 🟢 | 93 | Snake | Puzzle and Casual | GP | S | dev |
-| 🔴 | 94 | Klax | Puzzle and Casual | FB | M | todo |
+| 🟢 | 94 | Klax | Puzzle and Casual | FB | M | dev |
 | 🔴 | 95 | Boulder Dash | Puzzle and Casual | GP | M | todo |
 | 🟢 | 96 | Sokoban | Puzzle and Casual | GP | S | dev |
 | 🟢 | 97 | Kaboom! | Puzzle and Casual | PB | S | dev |

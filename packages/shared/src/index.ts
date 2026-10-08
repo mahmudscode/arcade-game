@@ -261,6 +261,56 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Fire', b: 'Alt' },
     controls: [{ keys: ['◀', '▶'], label: 'Orbit' }, { keys: ['Space'], label: 'Fire (hold)' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('ember-wing', 'Ember Wing', 'Shooter', 520000, {
+    description: 'Shoot swooping firebirds, shield against bombs, then break open the mothership.',
+    touch: { a: 'Fire', b: 'Shield' },
+    controls: [{ keys: ['◀', '▶'], label: 'Move' }, { keys: ['Space'], label: 'Fire' }, { keys: ['X'], label: 'Shield' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('web-warden', 'Web Warden', 'Shooter', 470000, {
+    description: 'Ride the rim of a circular web and blast the climbers coming up the lanes.',
+    touch: { a: 'Fire', b: 'Zap' },
+    controls: [{ keys: ['◀', '▶'], label: 'Move lane' }, { keys: ['Space'], label: 'Fire' }, { keys: ['X'], label: 'Zapper' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('line-weaver', 'Line Weaver', 'Maze', 330000, {
+    description: 'Draw lines to wall off territory while a spinning line and wall-crawling sparks hunt you.',
+    touch: { a: 'Draw', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space'], label: 'Draw (hold)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('robo-maze', 'Robo Maze', 'Maze', 300000, {
+    description: 'Blast robots in a maze of rooms and leave before the smiley pursuer finds you.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space'], label: 'Fire (faces last move)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('lance-flyers', 'Lance Flyers', 'Platform', 360000, {
+    description: 'Flap above rivals to win the joust and collect their eggs before they hatch.',
+    touch: { a: 'Flap', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['Space', '▲'], label: 'Flap' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('night-lane', 'Night Lane', 'Racing', 240000, {
+    description: 'Race a pitch-black road lit only by reflectors and headlights against the clock.',
+    touch: { a: 'Gas', b: 'Brake' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲', 'Space'], label: 'Accelerate' }, { keys: ['▼', 'X'], label: 'Brake' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('tunnel-tinker', 'Tunnel Tinker', 'Maze', 380000, {
+    description: 'Dig tunnels, pump underground monsters until they pop and drop rocks on the rest.',
+    touch: { a: 'Pump', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Dig / move' }, { keys: ['Space'], label: 'Pump (hold)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('rally-maze', 'Rally Maze', 'Racing', 290000, {
+    description: 'Race a maze for flags while rival cars hunt you and a smoke screen stalls them.',
+    touch: { a: 'Alt', b: 'Smoke' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Steer' }, { keys: ['X'], label: 'Smoke screen' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('tile-catcher', 'Tile Catcher', 'Puzzle', 410000, {
+    description: 'Catch coloured tiles on a paddle and stack them in a bin to line up three of a colour.',
+    touch: { a: 'Toss', b: 'Drop' },
+    controls: [{ keys: ['◀', '▶'], label: 'Move paddle' }, { keys: ['Space', '▲'], label: 'Toss tile' }, { keys: ['X', '▼'], label: 'Drop to bin' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('lunar-rover', 'Lunar Rover', 'Shooter', 350000, {
+    description: 'Hop craters, shoot boulders and alien bombers while a lunar rover races across the moon.',
+    touch: { a: 'Jump', b: 'Fire' },
+    controls: [{ keys: ['◀', '▶'], label: 'Speed up / slow' }, { keys: ['Space', '▲'], label: 'Jump' }, { keys: ['X'], label: 'Fire forward + up' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

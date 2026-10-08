@@ -20,17 +20,17 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 9 | Galaxian | FS | S | dev |
 | 10 | Gyruss | FS | M | dev |
 | 11 | Missile Command | FS | S | dev |
-| 12 | Phoenix | FS | M | todo |
+| 12 | Phoenix | FS | M | dev |
 | 13 | Zaxxon | SS | L | todo |
 | 14 | R-Type | SS | M | dev |
 | 15 | Gradius | SS | M | dev |
 | 16 | Time Pilot | AR | M | dev |
 | 17 | Robotron 2084 | AR | M | dev |
-| 18 | Tempest | FS | M | todo |
+| 18 | Tempest | FS | M | dev |
 | 19 | Star Castle | AR | S | dev |
 | 20 | Lunar Lander | AR | S | dev |
-| 21 | Berzerk | MZ | M | todo |
-| 22 | Moon Patrol | SC | M | todo |
+| 21 | Berzerk | MZ | M | dev |
+| 22 | Moon Patrol | SC | M | dev |
 | 23 | Battlezone | AR | L | todo |
 | 24 | Bosconian | AR | M | todo |
 | 25 | Stargate | SS | L | todo |
@@ -40,17 +40,17 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 |---|---|---|---|---|
 | 26 | Pac-Man | MZ | M | dev |
 | 27 | Ms. Pac-Man | MZ | M | dev |
-| 28 | Dig Dug | MZ | M | todo |
+| 28 | Dig Dug | MZ | M | dev |
 | 29 | Pengo | MZ | M | todo |
 | 30 | Lady Bug | MZ | M | todo |
 | 31 | Mr. Do! | MZ | M | todo |
 | 32 | Bomberman | MZ | M | dev |
 | 33 | Lode Runner | PF | M | todo |
-| 34 | Rally-X | MZ | M | todo |
+| 34 | Rally-X | MZ | M | dev |
 | 35 | Mappy | PF | M | todo |
 | 36 | Wizard of Wor | MZ | M | todo |
 | 37 | Amidar | MZ | S | dev |
-| 38 | Qix | GP | S | todo |
+| 38 | Qix | GP | S | dev |
 | 39 | Tron | AR | M | dev |
 
 ## Platformers (20)
@@ -64,7 +64,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 45 | Popeye | PF | M | todo |
 | 46 | Pitfall! | SC | M | dev |
 | 47 | Ice Climber | SC | M | todo |
-| 48 | Joust | PF | M | todo |
+| 48 | Joust | PF | M | dev |
 | 49 | Elevator Action | PF | M | todo |
 | 50 | BurgerTime | PF | M | todo |
 | 51 | Rygar | SC | M | todo |
@@ -101,7 +101,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 74 | Pole Position | R3 | L | dev |
 | 75 | Out Run | R3 | L | dev |
 | 76 | Hang-On | R3 | L | todo |
-| 77 | Night Driver | R3 | M | todo |
+| 77 | Night Driver | R3 | M | dev |
 | 78 | Super Sprint | RT | M | todo |
 | 79 | Paperboy | SC | M | todo |
 | 80 | Excitebike | SC | M | todo |
@@ -122,7 +122,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 91 | Columns | FB | M | dev |
 | 92 | Bust-A-Move | GP | M | todo |
 | 93 | Snake | GP | S | dev |
-| 94 | Klax | FB | M | todo |
+| 94 | Klax | FB | M | dev |
 | 95 | Boulder Dash | GP | M | todo |
 | 96 | Sokoban | GP | S | dev |
 | 97 | Kaboom! | PB | S | dev |
