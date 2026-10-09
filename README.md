@@ -73,3 +73,4 @@ packages/shared    catalog and types (moves to the API later)
 - Every game is a **pure, deterministic module** (seeded RNG, fixed 60 Hz step) so the server can re-simulate replays and verify scores.
 - Games are grouped into ~14 **archetypes** so 100 games are built in waves, not from scratch.
 - Original art, audio and (where needed) names; see [docs/LEGAL.md](docs/LEGAL.md).
+-make a game for my self
