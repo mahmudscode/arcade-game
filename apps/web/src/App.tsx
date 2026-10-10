@@ -7,7 +7,9 @@ import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Player } from './pages/Player';
 import { Settings } from './pages/Settings';
-import { Leaderboards, NotFound } from './pages/Simple';
+import { Leaderboards } from './pages/Leaderboards';
+import { MyProfile, Profile } from './pages/Profile';
+import { NotFound } from './pages/Simple';
 
 function Layout() {
   const { pathname } = useLocation();
@@ -32,6 +34,8 @@ export function App() {
         <Route path="play/:slug" element={<Player />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path="login" element={<Login />} />
+        <Route path="profile" element={<MyProfile />} />
+        <Route path="profile/:username" element={<Profile />} />
         <Route path="settings" element={<Settings />} />
         <Route path="leaderboards" element={<Leaderboards />} />
         <Route path="*" element={<NotFound />} />

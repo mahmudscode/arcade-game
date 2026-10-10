@@ -4,7 +4,9 @@ import Fastify, { type FastifyReply, type FastifyRequest } from 'fastify';
 import { randomInt } from 'node:crypto';
 import { schema, uuidv7, type Db } from '@arcade/db';
 import {
+  MAX_REPLAY_FRAMES,
   REPLAY_MAX_BYTES,
+  leaderboardQuery,
   SESSION_TTL_MS,
   TICK_HZ,
   createSessionBody,
@@ -16,8 +18,11 @@ import {
   type ApiGame,
   type ApiScore,
   type ApiUser,
+  type LeaderboardEntry,
+  type Period,
 } from '@arcade/shared';
 import { z } from 'zod';
+import { Verifier } from './verifier';
 import { AppError, installErrorHandler, parse } from './errors';
 import { RateLimiter, checkOrigin, hashPassword, hashToken, newToken, verifyPassword } from './security';
 
@@ -32,9 +37,14 @@ export interface AppOptions {
   /** Set false in tests to disable rate limits. */
   rateLimit?: boolean;
   logger?: boolean;
+  /** Set false to leave scores pending (tests that exercise the queue by hand). */
+  autoVerify?: boolean;
 }
 
 declare module 'fastify' {
+  interface FastifyInstance {
+    verifier: Verifier;
+  }
   interface FastifyRequest {
     user: ApiUser | null;
   }
@@ -56,6 +66,8 @@ export function buildApp(opts: AppOptions) {
   const limiter = new RateLimiter(opts.rateLimit ?? true);
   const app = Fastify({ logger: opts.logger ?? false, bodyLimit: 512 * 1024, trustProxy: true });
 
+  const verifier = new Verifier(db, app.log);
+  app.decorate('verifier', verifier);
   installErrorHandler(app);
   app.register(cookie);
   app.decorateRequest('user', null);
@@ -174,6 +186,7 @@ export function buildApp(opts: AppOptions) {
       if (replay.length > REPLAY_MAX_BYTES) throw new AppError(413, 'replay_too_large', 'Replay exceeds size limit');
       if (replay.length < 4) throw new AppError(400, 'bad_replay', 'Replay is missing its header');
       const frames = replay.readUInt32LE(0);
+      if (frames > MAX_REPLAY_FRAMES) throw new AppError(400, 'replay_too_long', 'Replay is too long');
       const expectedMs = (frames / TICK_HZ) * 1000;
       if (Math.abs(body.durationMs - expectedMs) > Math.max(1000, expectedMs * 0.05)) {
         throw new AppError(400, 'duration_mismatch', 'durationMs does not match replay length');
@@ -198,7 +211,8 @@ export function buildApp(opts: AppOptions) {
           score: body.score, levelReached: body.levelReached, durationMs: body.durationMs, replay, idempotencyKey: idem ?? null,
         })
         .returning();
-      // Client-claimed score is stored as `pending` only; the verifier (next milestone) decides.
+      // The client's score is stored as `pending`; only the verifier can promote it.
+      if (opts.autoVerify !== false) verifier.enqueue(row!.id);
       return reply.status(202).send({ scoreId: row!.id, status: row!.status });
     });
 
@@ -208,6 +222,98 @@ export function buildApp(opts: AppOptions) {
       const [s] = await db.select().from(scores).where(and(eq(scores.id, id), eq(scores.userId, user.id)));
       if (!s) throw new AppError(404, 'not_found', 'Score not found');
       return { score: toScore(s) };
+    });
+
+
+    // ---- score status stream (SSE)
+    instance.get('/scores/:id/events', async (req, reply) => {
+      const user = requireUser(req);
+      const { id } = parse(z.object({ id: z.string().uuid() }), req.params);
+      const [s] = await db.select().from(scores).where(and(eq(scores.id, id), eq(scores.userId, user.id)));
+      if (!s) throw new AppError(404, 'not_found', 'Score not found');
+
+      reply.hijack();
+      const res = reply.raw;
+      res.writeHead(200, { 'content-type': 'text/event-stream', 'cache-control': 'no-cache', connection: 'keep-alive', 'x-accel-buffering': 'no' });
+      const send = (status: string) => res.write(`data: ${JSON.stringify({ scoreId: id, status })}\n\n`);
+      send(s.status);
+      if (s.status !== 'pending') return void res.end();
+
+      const done = (status: string) => {
+        send(status);
+        cleanup();
+        res.end();
+      };
+      const heartbeat = setInterval(() => res.write(': keep-alive\n\n'), 15_000);
+      const timeout = setTimeout(() => (cleanup(), res.end()), 60_000);
+      const cleanup = () => {
+        clearInterval(heartbeat);
+        clearTimeout(timeout);
+        verifier.events.off(id, done);
+      };
+      verifier.events.on(id, done);
+      req.raw.on('close', cleanup);
+      // Close the race where verification finished between the first read and subscribing.
+      const [again] = await db.select({ status: scores.status }).from(scores).where(eq(scores.id, id));
+      if (again && again.status !== 'pending') done(again.status);
+    });
+
+    // ---- leaderboards (verified scores only, best per player)
+    const boardFor = (slug: string, period: Period) => {
+      const now = new Date();
+      const since =
+        period === 'daily' ? new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()))
+        : period === 'weekly' ? new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - ((now.getUTCDay() + 6) % 7)))
+        : new Date(0);
+      return sql`
+        WITH best AS (
+          SELECT DISTINCT ON (s.user_id) s.user_id, u.username, s.score, s.created_at
+          FROM scores s JOIN users u ON u.id = s.user_id
+          WHERE s.game_slug = ${slug} AND s.status = 'verified' AND s.created_at >= ${since.toISOString()}::timestamptz
+          ORDER BY s.user_id, s.score DESC, s.created_at ASC
+        ), ranked AS (
+          SELECT user_id, username, score, created_at, row_number() OVER (ORDER BY score DESC, created_at ASC, user_id) AS rank FROM best
+        )`;
+    };
+    type Row = { rank: string | number; username: string; score: string | number; created_at: string | Date };
+    const toEntry = (r: Row): LeaderboardEntry => ({ rank: Number(r.rank), username: r.username, score: Number(r.score), achievedAt: new Date(r.created_at).toISOString() });
+
+    instance.get('/leaderboards/:slug', async (req) => {
+      limiter.check(`read:${req.ip}`, 120);
+      const { slug } = parse(z.object({ slug: slugSchema }), req.params);
+      const { period, limit } = parse(leaderboardQuery, req.query);
+      const res = await db.execute<Row>(sql`${boardFor(slug, period)} SELECT * FROM ranked ORDER BY rank LIMIT ${limit}`);
+      return { period, items: res.rows.map(toEntry) };
+    });
+
+    instance.get('/leaderboards/:slug/me', async (req) => {
+      const user = requireUser(req);
+      const { slug } = parse(z.object({ slug: slugSchema }), req.params);
+      const { period } = parse(leaderboardQuery, req.query);
+      const res = await db.execute<Row & { user_id: string }>(sql`${boardFor(slug, period)}
+        SELECT * FROM ranked
+        WHERE rank BETWEEN (SELECT rank FROM ranked WHERE user_id = ${user.id}) - 2 AND (SELECT rank FROM ranked WHERE user_id = ${user.id}) + 2
+        ORDER BY rank`);
+      const mine = res.rows.find((r) => r.user_id === user.id);
+      return { period, rank: mine ? Number(mine.rank) : null, items: res.rows.map(toEntry) };
+    });
+
+    // ---- public profile
+    instance.get('/users/:username', async (req) => {
+      limiter.check(`read:${req.ip}`, 120);
+      const { username } = parse(z.object({ username: z.string().regex(/^[A-Za-z0-9_]{3,20}$/) }), req.params);
+      const [u] = await db.select().from(users).where(sql`lower(${users.username}) = ${username.toLowerCase()}`);
+      if (!u) throw new AppError(404, 'not_found', 'Player not found');
+      const res = await db.execute<{ game_slug: string; title: string; best: string | number; plays: string | number }>(sql`
+        SELECT s.game_slug, g.title, max(s.score) AS best, count(*) AS plays
+        FROM scores s JOIN games g ON g.slug = s.game_slug
+        WHERE s.user_id = ${u.id} AND s.status = 'verified'
+        GROUP BY s.game_slug, g.title ORDER BY max(s.score) DESC`);
+      const games = res.rows.map((r) => ({ gameSlug: r.game_slug, title: r.title, bestScore: Number(r.best), verifiedRuns: Number(r.plays) }));
+      return {
+        user: { username: u.username, joinedAt: u.createdAt.toISOString() },
+        stats: { verifiedRuns: games.reduce((n, g) => n + g.verifiedRuns, 0), games },
+      };
     });
 
     instance.get('/me/scores', async (req) => {

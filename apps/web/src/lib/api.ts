@@ -1,4 +1,4 @@
-import { sessionResponse, type ApiScore, type ApiUser, type SessionResponse } from '@arcade/shared';
+import { sessionResponse, type ApiScore, type ApiUser, type LeaderboardEntry, type Period, type SessionResponse } from '@arcade/shared';
 
 const BASE = '/api/v1';
 
@@ -28,7 +28,31 @@ async function call<T>(method: string, path: string, body?: unknown, headers: Re
 
 export type PlaySession = SessionResponse;
 
+export interface Profile {
+  user: { username: string; joinedAt: string };
+  stats: { verifiedRuns: number; games: { gameSlug: string; title: string; bestScore: number; verifiedRuns: number }[] };
+}
+
+/** Streams a score's status until it leaves `pending`. Returns a stop function. */
+export function watchScore(scoreId: string, onStatus: (s: ApiScore['status']) => void): () => void {
+  if (typeof EventSource === 'undefined') return () => undefined;
+  const es = new EventSource(`${BASE}/scores/${scoreId}/events`);
+  es.onmessage = (m) => {
+    try {
+      const { status } = JSON.parse(m.data) as { status: ApiScore['status'] };
+      onStatus(status);
+      if (status !== 'pending') es.close();
+    } catch {
+      // Ignore malformed frames; the stream closes itself when done.
+    }
+  };
+  es.onerror = () => es.close();
+  return () => es.close();
+}
+
 export const api = {
+  leaderboard: (slug: string, period: Period) => call<{ items: LeaderboardEntry[] }>('GET', `/leaderboards/${slug}?period=${period}&limit=50`).then((r) => r.items),
+  profile: (username: string) => call<Profile>('GET', `/users/${encodeURIComponent(username)}`),
   me: () => call<{ user: ApiUser }>('GET', '/me').then((r) => r.user),
   register: (b: { email: string; username: string; password: string }) => call<{ user: ApiUser }>('POST', '/auth/register', b).then((r) => r.user),
   login: (b: { email: string; password: string }) => call<{ user: ApiUser }>('POST', '/auth/login', b).then((r) => r.user),

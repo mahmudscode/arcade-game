@@ -23,6 +23,9 @@ importers:
       '@arcade/engine':
         specifier: workspace:*
         version: link:../../packages/engine
+      '@arcade/games':
+        specifier: workspace:*
+        version: link:../../packages/games
       '@arcade/shared':
         specifier: workspace:*
         version: link:../../packages/shared

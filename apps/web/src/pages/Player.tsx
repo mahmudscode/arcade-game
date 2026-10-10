@@ -1,23 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { CATEGORIES, GAMES, formatPlays, getGame, type GameMeta } from '@arcade/shared';
+import { CATEGORIES, GAMES, formatPlays, getGame, type GameMeta, type LeaderboardEntry } from '@arcade/shared';
 import { Sprite, Thumb } from '../components/Sprite';
 import { TouchPad } from '../components/TouchPad';
 import { ChevronLeftIcon, FullscreenIcon, HeartIcon, PauseIcon, PlayIcon } from '../components/icons';
+import { api } from '../lib/api';
 import { useGameSession, type SubmitState } from '../lib/useGameSession';
 import { getHiScore, putSave, useFavorites } from '../lib/storage';
 import { updateSettings, useSettings } from '../lib/settings';
 import { useAuth } from '../lib/auth';
 import { NotFound } from './Simple';
 import { useRef } from 'react';
-
-// Sample data until the leaderboard API exists.
-const SAMPLE_SCORES = [
-  { name: 'NOVA_K', score: 182400 },
-  { name: 'ByteRider', score: 176950 },
-  { name: 'mahi_bd', score: 161200 },
-  { name: 'PX_Queen', score: 158075 },
-];
 
 const pad = (n: number) => String(n).padStart(6, '0');
 const fmt = (n: number) => n.toLocaleString('en-US');
@@ -41,6 +34,7 @@ function PlayerView({ game }: { game: GameMeta }) {
   const fav = favs.has(game.slug);
   const categoryLabel = CATEGORIES.find((c) => c.id === game.category)?.label ?? game.category;
   const playable = loadState !== 'unavailable';
+  const [top, setTop] = useState<LeaderboardEntry[] | null>(null);
   const hi = Math.max(status?.hiScore ?? 0, getHiScore(game.slug));
 
   useEffect(() => {
@@ -49,6 +43,16 @@ function PlayerView({ game }: { game: GameMeta }) {
       document.title = 'Arcade Hub';
     };
   }, [game.title]);
+
+  // Refetch when a run's score gets verified so the board reflects it.
+  const verifiedScore = submit.kind === 'verified' ? submit.score : 0;
+  useEffect(() => {
+    let live = true;
+    api.leaderboard(game.slug, 'weekly').then((items) => live && setTop(items.slice(0, 5)), () => live && setTop([]));
+    return () => {
+      live = false;
+    };
+  }, [game.slug, verifiedScore]);
 
   const flash = (set: (v: boolean) => void) => {
     set(true);
@@ -198,10 +202,10 @@ function PlayerView({ game }: { game: GameMeta }) {
           <section className="mt-5 rounded-2xl border border-line bg-ink-2 p-5">
             <h2 className="font-semibold">Top scores this week</h2>
             <ol className="mt-3 space-y-1">
-              {SAMPLE_SCORES.map((s, i) => (
-                <li key={s.name} className="flex items-center px-2 py-1.5 text-sm">
-                  <span className="w-9 font-pixel text-[11px] text-muted">{i + 1}</span>
-                  <span className={`flex-1 font-semibold ${i === 0 ? 'text-gold' : ''}`}>{s.name}</span>
+              {(top ?? []).map((s, i) => (
+                <li key={s.username} className="flex items-center px-2 py-1.5 text-sm">
+                  <span className="w-9 font-pixel text-[11px] text-muted">{s.rank}</span>
+                  <Link to={`/profile/${s.username}`} className={`flex-1 font-semibold hover:underline ${i === 0 ? 'text-gold' : ''}`}>{s.username}</Link>
                   <span className={`font-pixel text-[11px] ${i === 0 ? 'text-gold' : ''}`}>{fmt(s.score)}</span>
                 </li>
               ))}
@@ -211,7 +215,9 @@ function PlayerView({ game }: { game: GameMeta }) {
                 <span className="font-pixel text-[11px] text-cyan">{fmt(hi)}</span>
               </li>
             </ol>
-            <p className="mt-3 text-xs text-muted">Sample leaderboard. Real rankings arrive once scores are verified.</p>
+            <p className="mt-3 text-xs text-muted">
+              {top === null ? 'Loading…' : top.length === 0 ? 'No verified scores yet this week. Sign in and set the first.' : 'Verified scores only. “You” is your best on this browser.'}
+            </p>
           </section>
 
           <section className="mt-6">
@@ -241,6 +247,8 @@ function ScoreNotice({ submit, signedIn, onAgain }: { submit: SubmitState; signe
   const text =
     submit.kind === 'sending' ? 'Submitting your score…'
     : submit.kind === 'pending' ? `Score ${fmt(submit.score)} submitted. Pending verification.`
+    : submit.kind === 'verified' ? `Score ${fmt(submit.score)} verified. It's on the leaderboard.`
+    : submit.kind === 'rejected' ? `Score ${fmt(submit.score)} failed verification and won't be ranked.`
     : submit.kind === 'error' ? `Couldn't submit your score: ${submit.message}`
     : submit.reason === 'guest' ? 'Sign in to submit scores. This run counts for this browser only.'
     : submit.reason === 'resumed' ? 'Runs continued from a saved state can’t be verified, so this score stays on this browser.'

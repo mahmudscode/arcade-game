@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { GameSession, type GameStatus } from '@arcade/engine';
 import { loadGame } from '@arcade/games';
-import { api, ApiError } from './api';
+import { api, ApiError, watchScore } from './api';
 import { useAuth } from './auth';
 import { buildKeyMap, getSettings } from './settings';
 import { getHiScore, getSave, setHiScore } from './storage';
@@ -14,6 +14,8 @@ export type SubmitState =
   | { kind: 'local'; reason: 'guest' | 'offline' | 'resumed' }
   | { kind: 'sending' }
   | { kind: 'pending'; score: number }
+  | { kind: 'verified'; score: number }
+  | { kind: 'rejected'; score: number }
   | { kind: 'error'; message: string };
 
 /**
@@ -36,6 +38,7 @@ export function useGameSession(slug: string, resume: boolean) {
     if (!ready) return; // wait for /me so we know whether to ask for a server seed
     let cancelled = false;
     let current: GameSession<unknown> | null = null;
+    let stopWatch: (() => void) | null = null;
     setLoadState('loading');
     setStatus(null);
     setSubmit({ kind: 'idle' });
@@ -83,7 +86,12 @@ export function useGameSession(slug: string, resume: boolean) {
               { sessionId: play.sessionId, score: s.score, levelReached: s.level, durationMs: Math.round((run.frames / 60) * 1000), replay: run.replay },
               play.sessionId,
             )
-            .then(() => setSubmit({ kind: 'pending', score: s.score }))
+            .then((r) => {
+              setSubmit({ kind: 'pending', score: s.score });
+              stopWatch = watchScore(r.scoreId, (st) => {
+                if (st !== 'pending') setSubmit({ kind: st, score: s.score });
+              });
+            })
             .catch((e: Error) => setSubmit({ kind: 'error', message: e.message }));
         },
         onHiScore: (score) => setHiScore(slug, score),
@@ -99,6 +107,7 @@ export function useGameSession(slug: string, resume: boolean) {
     return () => {
       cancelled = true;
       window.removeEventListener('keydown', unlockAudio);
+      stopWatch?.();
       current?.destroy();
       setSession(null);
     };

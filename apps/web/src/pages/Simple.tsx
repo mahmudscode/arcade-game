@@ -1,16 +1,5 @@
 import { Link } from 'react-router-dom';
 
-export function Leaderboards() {
-  return (
-    <div className="page-x pt-8">
-      <h1 className="text-2xl font-bold">Leaderboards</h1>
-      <p className="mt-4 max-w-xl text-muted">
-        Global and per-game leaderboards arrive with the replay verifier: only server-verified scores will be ranked. Submitted scores are stored as pending until then. Your personal best for each game is tracked in this browser.
-      </p>
-    </div>
-  );
-}
-
 export function NotFound() {
   return (
     <div className="page-x pt-16 text-center">

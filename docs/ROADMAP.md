@@ -21,7 +21,7 @@ Strategy: **platform first, then archetype by archetype.** Building an archetype
 - Catalog, game host with lazy loading, play page, settings (key remap, volume, reduced motion), login, mobile touch overlay.
 - **Exit:** a player can find, play and pause a game on desktop and phone.
 
-## Milestone 4 - Verified leaderboards
+## Milestone 4 - Verified leaderboards (built; boards read from Postgres, Valkey and BullMQ deferred)
 - Replay verifier worker, Valkey boards (all/weekly/daily), profile page, SSE status.
 - **Exit:** tampered replay is rejected in an automated test; boards update only from verified scores.
 

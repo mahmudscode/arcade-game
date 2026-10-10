@@ -6,7 +6,7 @@ Guidance for AI coding sessions in this repo. Read [README.md](README.md) and th
 Web app hosting 100 classic arcade-style games, with a backend for accounts, verified leaderboards and saves. Planned monorepo: `apps/web`, `apps/api`, `packages/{engine,archetypes,games,shared,db,ui}`. See [docs/TECH_STACK.md](docs/TECH_STACK.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 The old prototype was removed. The UI follows [docs/DESIGN.md](docs/DESIGN.md); keep it matching `docs/design/`.
-Implemented so far: `apps/web` (catalog, player, login, settings, score submission), `apps/api` (auth, catalog, sessions, pending scores), `packages/{engine,games,shared,db}`. Still planned: `packages/{archetypes,ui}`, Turborepo, Biome.
+Implemented so far: `apps/web` (catalog, player, login, settings, score submission), `apps/api` (auth, catalog, sessions, replay verifier, leaderboards, profiles), `packages/{engine,games,shared,db}`. Still planned: `packages/{archetypes,ui}`, Turborepo, Biome.
 
 ## Hard rules
 1. Code inside `packages/games/**` and `packages/archetypes/**` must be deterministic: no `Math.random`, `Date.now`, `performance.now`, `window`, `document`. Use `ctx.rng` and `dt`.

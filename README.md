@@ -2,7 +2,7 @@
 
 A web app that runs 100 classic arcade-style games with modern visuals, accounts, verified leaderboards and cloud saves. Games run in the browser (Canvas 2D); the backend handles accounts, scores and anti-cheat.
 
-> Status: **early implementation.** Done: monorepo, game engine, one playable game (Comet Crusher), and the web app (Home, Game player, responsive layouts) built from the design in [docs/design/](docs/design/). Backend core (`apps/api`, `packages/db`): accounts, sessions, pending scores. Not started: replay verification and leaderboards, the remaining games.
+> Status: **early implementation.** Done: monorepo, game engine, one playable game (Comet Crusher), and the web app (Home, Game player, responsive layouts) built from the design in [docs/design/](docs/design/). Backend (`apps/api`, `packages/db`): accounts, sessions, server-side replay verification, verified leaderboards, profiles. Not started: Valkey/BullMQ, achievements, saves sync, the remaining games.
 
 ## Live demo
 

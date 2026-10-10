@@ -41,6 +41,7 @@ export function Settings() {
           {user ? (
             <>
               <p className="mt-3 text-sm text-muted">Signed in as <span className="font-semibold text-paper">{user.username}</span> ({user.email})</p>
+              <Link to={`/profile/${user.username}`} className="btn btn-soft mt-4 mr-3 h-10 px-6">View profile</Link>
               <button type="button" className="btn btn-outline mt-4 h-10 px-6" onClick={async () => { await logout(); navigate('/'); }}>Sign out</button>
             </>
           ) : (

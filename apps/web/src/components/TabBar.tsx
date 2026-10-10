@@ -27,7 +27,7 @@ export function TabBar() {
           </li>
         ))}
         <li>
-          <NavLink to="/settings" className={({ isActive }) => `flex flex-col items-center gap-1 px-3 py-2.5 text-[11px] font-medium ${isActive ? 'text-gold' : 'text-muted'}`}>
+          <NavLink to="/profile" className={({ isActive }) => `flex flex-col items-center gap-1 px-3 py-2.5 text-[11px] font-medium ${isActive ? 'text-gold' : 'text-muted'}`}>
             <ProfileIcon width={22} height={22} />
             Profile
           </NavLink>

@@ -3,6 +3,9 @@ import { z } from 'zod';
 export const REPLAY_MAX_BYTES = 256 * 1024;
 export const SESSION_TTL_MS = 4 * 60 * 60 * 1000;
 export const TICK_HZ = 60;
+/** One hour of play. Bounds how much work verifying a replay can cost. */
+export const MAX_REPLAY_FRAMES = 60 * 60 * TICK_HZ;
+export const VERIFY_TIMEOUT_MS = 10_000;
 
 export const slugSchema = z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/).max(64);
 
@@ -56,7 +59,7 @@ export const submitScoreBody = z.object({
   sessionId: z.string().uuid(),
   score: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   levelReached: z.number().int().min(0).max(10_000).default(0),
-  durationMs: z.number().int().min(0).max(SESSION_TTL_MS),
+  durationMs: z.number().int().min(0).max(Math.ceil((MAX_REPLAY_FRAMES / TICK_HZ) * 1000) + 1000),
   replay: z.string().max(Math.ceil((REPLAY_MAX_BYTES * 4) / 3) + 4).regex(/^[A-Za-z0-9+/]*={0,2}$/),
 });
 
@@ -77,3 +80,15 @@ export const errorSchema = z.object({
   error: z.object({ code: z.string(), message: z.string(), details: z.unknown().optional() }),
 });
 export type SessionResponse = z.infer<typeof sessionResponse>;
+
+export const periodSchema = z.enum(['all', 'weekly', 'daily']);
+export type Period = z.infer<typeof periodSchema>;
+export const leaderboardQuery = z.object({ period: periodSchema.default('all'), limit: z.coerce.number().int().min(1).max(100).default(50) });
+
+export const leaderboardEntry = z.object({
+  rank: z.number().int(),
+  username: z.string(),
+  score: z.number().int(),
+  achievedAt: z.string(),
+});
+export type LeaderboardEntry = z.infer<typeof leaderboardEntry>;

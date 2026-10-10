@@ -12,6 +12,7 @@
   "dependencies": {
     "@arcade/db": "workspace:*",
     "@arcade/engine": "workspace:*",
+    "@arcade/games": "workspace:*",
     "@arcade/shared": "workspace:*",
     "@fastify/cookie": "^11.0.0",
     "drizzle-orm": "^0.44.0",

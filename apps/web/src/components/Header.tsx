@@ -57,7 +57,7 @@ export function Header({ hideOnMobile = false }: { hideOnMobile?: boolean }) {
             <SearchIcon />
           </button>
           {user ? (
-            <Link to="/settings" className="btn btn-outline hidden h-11 px-6 xl:inline-flex">{user.username}</Link>
+            <Link to="/profile" className="btn btn-outline hidden h-11 px-6 xl:inline-flex">{user.username}</Link>
           ) : (
             <Link to="/login" className="btn btn-outline hidden h-11 px-6 xl:inline-flex">Sign in</Link>
           )}
