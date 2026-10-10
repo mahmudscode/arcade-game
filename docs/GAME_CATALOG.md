@@ -41,14 +41,14 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 26 | Pac-Man | MZ | M | dev |
 | 27 | Ms. Pac-Man | MZ | M | dev |
 | 28 | Dig Dug | MZ | M | dev |
-| 29 | Pengo | MZ | M | todo |
-| 30 | Lady Bug | MZ | M | todo |
-| 31 | Mr. Do! | MZ | M | todo |
+| 29 | Pengo | MZ | M | dev |
+| 30 | Lady Bug | MZ | M | dev |
+| 31 | Mr. Do! | MZ | M | dev |
 | 32 | Bomberman | MZ | M | dev |
 | 33 | Lode Runner | PF | M | todo |
 | 34 | Rally-X | MZ | M | dev |
 | 35 | Mappy | PF | M | todo |
-| 36 | Wizard of Wor | MZ | M | todo |
+| 36 | Wizard of Wor | MZ | M | dev |
 | 37 | Amidar | MZ | S | dev |
 | 38 | Qix | GP | S | dev |
 | 39 | Tron | AR | M | dev |

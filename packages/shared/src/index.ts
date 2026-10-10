@@ -331,6 +331,26 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Fire', b: 'Fire' },
     controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Steer (8-way)' }, { keys: ['Space'], label: 'Fire ahead and astern' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('frost-shover', 'Frost Shover', 'Maze', 450_000, {
+    description: 'Slide ice blocks to crush the creatures hunting you. Line up the three gold blocks for a big bonus.',
+    touch: { a: 'Push', b: 'Push' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move / push block' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('garden-gates', 'Garden Gates', 'Maze', 380_000, {
+    description: 'Eat every dot in a hedge maze. Push the swinging gates open, then let them slam shut on the bugs behind you.',
+    touch: { a: 'Start', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move / push gate' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('orchard-digger', 'Orchard Digger', 'Maze', 520_000, {
+    description: 'Dig tunnels, pick every cherry and drop apples on the grubs. A bouncing power ball keeps them at bay.',
+    touch: { a: 'Ball', b: 'Ball' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Dig / move' }, { keys: ['Space'], label: 'Throw ball' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('crypt-crawler', 'Crypt Crawler', 'Maze', 410_000, {
+    description: 'Prowl a monster-filled dungeon, watch the radar and shoot first. Yellow monsters are invisible until close.',
+    touch: { a: 'Fire', b: 'Fire' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space'], label: 'Fire' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

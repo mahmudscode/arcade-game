@@ -58,6 +58,10 @@ const loaders: Record<string, Loader> = {
   'jelly-pop': () => import('./jelly-pop'),
   'grid-tanker': () => import('./grid-tanker'),
   'outpost-raid': () => import('./outpost-raid'),
+  'frost-shover': () => import('./frost-shover'),
+  'garden-gates': () => import('./garden-gates'),
+  'orchard-digger': () => import('./orchard-digger'),
+  'crypt-crawler': () => import('./crypt-crawler'),
 };
 
 export function playableSlugs(): string[] {

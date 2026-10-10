@@ -22,7 +22,7 @@ describe('client/verifier parity', () => {
     g.HTMLElement = class {};
     const canvas = { getContext: () => ctx, width: 0, height: 0 };
 
-    for (const [slug, seed] of [['comet-crusher', 777], ['star-divers', 4242], ['jelly-pop', 99], ['capsule-clinic', 5], ['grid-tanker', 31], ['outpost-raid', 17]] as const) {
+    for (const [slug, seed] of [['comet-crusher', 777], ['star-divers', 4242], ['jelly-pop', 99], ['capsule-clinic', 5], ['grid-tanker', 31], ['outpost-raid', 17], ['frost-shover', 8], ['garden-gates', 12], ['orchard-digger', 3], ['crypt-crawler', 21]] as const) {
       const def = (await loadGame(slug))!;
       let last: GameStatus | null = null;
       let atOver: GameStatus | null = null; // what the web client submits: the status when the game first ends
