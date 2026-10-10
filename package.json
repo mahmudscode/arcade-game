@@ -5,6 +5,9 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "dev": "pnpm --filter @arcade/web dev",
+    "dev:api": "pnpm --filter @arcade/api dev",
+    "db:migrate": "pnpm --filter @arcade/db migrate",
+    "db:seed": "pnpm --filter @arcade/db seed",
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r --if-present test"

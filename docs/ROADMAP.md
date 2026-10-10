@@ -12,7 +12,7 @@ Strategy: **platform first, then archetype by archetype.** Building an archetype
 - Reference game: **Pong** end-to-end through the real contract, with a replay test.
 - **Exit:** Pong runs in browser and headless with identical results; 60 FPS; destroy leaves no listeners.
 
-## Milestone 2 - Backend core
+## Milestone 2 - Backend core (done, except OpenAPI + generated client; Postgres path untested)
 - Auth, users, games catalog, sessions, scores (pending only), Postgres schema + migrations, seed 100 games.
 - OpenAPI + generated client.
 - **Exit:** register, play Pong, submit score, see it stored.

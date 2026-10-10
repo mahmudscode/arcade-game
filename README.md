@@ -2,7 +2,7 @@
 
 A web app that runs 100 classic arcade-style games with modern visuals, accounts, verified leaderboards and cloud saves. Games run in the browser (Canvas 2D); the backend handles accounts, scores and anti-cheat.
 
-> Status: **early implementation.** Done: monorepo, game engine, one playable game (Comet Crusher), and the web app (Home, Game player, responsive layouts) built from the design in [docs/design/](docs/design/). Not started: backend (`apps/api`), accounts, verified leaderboards, the other 99 games.
+> Status: **early implementation.** Done: monorepo, game engine, one playable game (Comet Crusher), and the web app (Home, Game player, responsive layouts) built from the design in [docs/design/](docs/design/). Backend core (`apps/api`, `packages/db`): accounts, sessions, pending scores. Not started: replay verification and leaderboards, the remaining games.
 
 ## Live demo
 
@@ -59,7 +59,7 @@ pnpm test         # engine + game tests (determinism, invariants, save/load)
 pnpm typecheck
 pnpm build
 ```
-Backend commands (`docker compose up`, `db:migrate`) arrive with `apps/api`.
+Backend: `pnpm dev:api` starts the API on :3001 (Vite proxies `/api`). With no `DATABASE_URL` it uses embedded PGlite (set `PGLITE_DIR` to persist); set `DATABASE_URL` for PostgreSQL. `pnpm db:migrate` / `pnpm db:seed` run manually; the API also does both on start.
 
 ## Layout
 ```
