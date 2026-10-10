@@ -11,8 +11,8 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 | Platformers | 4 | 16 | 20 |
 | Action and Fighting | 0 | 14 | 14 |
 | Racing and Sports | 8 | 6 | 14 |
-| Puzzle and Casual | 8 | 5 | 13 |
-| **Total** | **47** | **53** | **100** |
+| Puzzle and Casual | 10 | 3 | 13 |
+| **Total** | **49** | **51** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -108,8 +108,8 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 86 | Track & Field | Racing and Sports | PB | M | dev |
 | 🔴 | 87 | Punch-Out | Racing and Sports | FT | L | todo |
 | 🟢 | 88 | Tetris | Puzzle and Casual | FB | S | dev |
-| 🔴 | 89 | Dr. Mario | Puzzle and Casual | FB | M | todo |
-| 🔴 | 90 | Puyo Puyo | Puzzle and Casual | FB | M | todo |
+| 🟢 | 89 | Dr. Mario | Puzzle and Casual | FB | M | dev |
+| 🟢 | 90 | Puyo Puyo | Puzzle and Casual | FB | M | dev |
 | 🟢 | 91 | Columns | Puzzle and Casual | FB | M | dev |
 | 🔴 | 92 | Bust-A-Move | Puzzle and Casual | GP | M | todo |
 | 🟢 | 93 | Snake | Puzzle and Casual | GP | S | dev |

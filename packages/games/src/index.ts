@@ -54,6 +54,8 @@ const loaders: Record<string, Loader> = {
   'rally-maze': () => import('./rally-maze'),
   'tile-catcher': () => import('./tile-catcher'),
   'lunar-rover': () => import('./lunar-rover'),
+  'capsule-clinic': () => import('./capsule-clinic'),
+  'jelly-pop': () => import('./jelly-pop'),
 };
 
 export function playableSlugs(): string[] {

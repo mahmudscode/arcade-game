@@ -311,6 +311,16 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Jump', b: 'Fire' },
     controls: [{ keys: ['◀', '▶'], label: 'Speed up / slow' }, { keys: ['Space', '▲'], label: 'Jump' }, { keys: ['X'], label: 'Fire forward + up' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('capsule-clinic', 'Capsule Clinic', 'Puzzle', 430_000, {
+    description: 'Drop two-colour capsules into the bottle and line up four of a colour to wipe out every germ.',
+    touch: { a: 'Rotate', b: 'Rotate back' },
+    controls: [{ keys: ['◀', '▶'], label: 'Move' }, { keys: ['▲', 'Space'], label: 'Rotate' }, { keys: ['X'], label: 'Rotate back' }, { keys: ['▼'], label: 'Soft drop' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('jelly-pop', 'Jelly Pop', 'Puzzle', 510_000, {
+    description: 'Stack falling jelly pairs and connect four or more of a colour to pop them. Chain pops for huge scores.',
+    touch: { a: 'Rotate', b: 'Rotate back' },
+    controls: [{ keys: ['◀', '▶'], label: 'Move' }, { keys: ['▲', 'Space'], label: 'Rotate' }, { keys: ['X'], label: 'Rotate back' }, { keys: ['▼'], label: 'Soft drop' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

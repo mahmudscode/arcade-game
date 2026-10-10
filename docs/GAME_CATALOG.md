@@ -117,8 +117,8 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
 | 88 | Tetris | FB | S | dev |
-| 89 | Dr. Mario | FB | M | todo |
-| 90 | Puyo Puyo | FB | M | todo |
+| 89 | Dr. Mario | FB | M | dev |
+| 90 | Puyo Puyo | FB | M | dev |
 | 91 | Columns | FB | M | dev |
 | 92 | Bust-A-Move | GP | M | todo |
 | 93 | Snake | GP | S | dev |

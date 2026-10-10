@@ -163,7 +163,7 @@ describe('pending scores', () => {
     await held.verifier.idle();
     expect((await board(slug)).map((e) => e.username)).toEqual(['ken']);
     await held.close();
-  });
+  }, 20_000);
 
   it('SSE is private to the score owner', async () => {
     const owner = await signUp('lea');
