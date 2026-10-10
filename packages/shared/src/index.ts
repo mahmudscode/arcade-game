@@ -321,6 +321,16 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Rotate', b: 'Rotate back' },
     controls: [{ keys: ['◀', '▶'], label: 'Move' }, { keys: ['▲', 'Space'], label: 'Rotate' }, { keys: ['X'], label: 'Rotate back' }, { keys: ['▼'], label: 'Soft drop' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('grid-tanker', 'Grid Tanker', 'Shooter', 620_000, {
+    description: 'Command a wireframe tank on a neon plain. Use the radar, hide behind blocks and out-aim enemy tanks and missiles.',
+    touch: { a: 'Fire', b: 'Fire' },
+    controls: [{ keys: ['◀', '▶'], label: 'Turn' }, { keys: ['▲', '▼'], label: 'Drive / reverse' }, { keys: ['Space'], label: 'Fire' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('outpost-raid', 'Outpost Raid', 'Shooter', 470_000, {
+    description: 'Fly in eight directions over a wrapping star map, blast gun pods and slip shots into enemy base cores.',
+    touch: { a: 'Fire', b: 'Fire' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Steer (8-way)' }, { keys: ['Space'], label: 'Fire ahead and astern' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

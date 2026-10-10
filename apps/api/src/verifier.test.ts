@@ -1,4 +1,4 @@
-import { NO_INPUT, Recorder, runHeadless, type Input } from '@arcade/engine';
+import { NO_INPUT, Recorder, TICK, createRng, type GameDefinition, type Input } from '@arcade/engine';
 import { loadGame } from '@arcade/games';
 import { connect, migrate, seedGames, type DbHandle } from '@arcade/db';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
@@ -28,6 +28,20 @@ const script = (f: number): Input => ({
 });
 const idle = (): Input => NO_INPUT;
 
+/**
+ * What an honest client submits: the score when the game first ends, or after `frames` if it never
+ * does. (A finished game restarts on the next Space press, so the final state is not the result.)
+ */
+function honest(def: GameDefinition<any>, seed: number, frames: number) {
+  const rng = createRng(seed);
+  const state = def.init({ rng, hiScore: 0 });
+  for (let f = 0; f < frames; f++) {
+    def.update(state, script(f), TICK, { rng, emit: () => undefined });
+    if (def.status(state).over) break;
+  }
+  return def.status(state);
+}
+
 function record(frames: number, inputAt: (f: number) => Input = script) {
   const r = new Recorder();
   for (let f = 0; f < frames; f++) r.record(inputAt(f));
@@ -43,7 +57,7 @@ async function signUp(name: string) {
 async function play(cookie: string, frames: number, slug = SLUG, appRef = app) {
   const s = (await appRef.inject({ method: 'POST', url: `${P}/sessions`, payload: { gameSlug: slug }, headers: { cookie } })).json();
   const def = (await loadGame(slug))!;
-  const truth = runHeadless(def, { seed: s.seed, frames, inputAt: script }).status;
+  const truth = honest(def, s.seed, frames);
   return { sessionId: s.sessionId as string, seed: s.seed as number, score: truth.score, level: truth.level, frames };
 }
 
@@ -139,7 +153,7 @@ describe('pending scores', () => {
     const cookie = await signUp('ken');
     const def = (await loadGame(slug))!;
     const s = (await held.inject({ method: 'POST', url: `${P}/sessions`, payload: { gameSlug: slug }, headers: { cookie } })).json();
-    const truth = runHeadless(def, { seed: s.seed, frames: 900, inputAt: script }).status;
+    const truth = honest(def, s.seed, 900);
     const id = await submit(cookie, { sessionId: s.sessionId, score: truth.score, durationMs: 15_000, replay: record(900).toBase64() }, held);
 
     expect(await board(slug)).toEqual([]);

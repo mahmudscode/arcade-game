@@ -6,13 +6,13 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 
 | Category | 🟢 Built | 🔴 Left | Total |
 |---|---|---|---|
-| Shooters | 19 | 6 | 25 |
+| Shooters | 21 | 4 | 25 |
 | Maze and Chase | 8 | 6 | 14 |
 | Platformers | 4 | 16 | 20 |
 | Action and Fighting | 0 | 14 | 14 |
 | Racing and Sports | 8 | 6 | 14 |
 | Puzzle and Casual | 10 | 3 | 13 |
-| **Total** | **49** | **51** | **100** |
+| **Total** | **51** | **49** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -42,8 +42,8 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 20 | Lunar Lander | Shooters | AR | S | dev |
 | 🟢 | 21 | Berzerk | Shooters | MZ | M | dev |
 | 🟢 | 22 | Moon Patrol | Shooters | SC | M | dev |
-| 🔴 | 23 | Battlezone | Shooters | AR | L | todo |
-| 🔴 | 24 | Bosconian | Shooters | AR | M | todo |
+| 🟢 | 23 | Battlezone | Shooters | AR | L | dev |
+| 🟢 | 24 | Bosconian | Shooters | AR | M | dev |
 | 🔴 | 25 | Stargate | Shooters | SS | L | todo |
 | 🟢 | 26 | Pac-Man | Maze and Chase | MZ | M | dev |
 | 🟢 | 27 | Ms. Pac-Man | Maze and Chase | MZ | M | dev |

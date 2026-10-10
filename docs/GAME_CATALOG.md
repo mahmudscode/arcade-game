@@ -31,8 +31,8 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 20 | Lunar Lander | AR | S | dev |
 | 21 | Berzerk | MZ | M | dev |
 | 22 | Moon Patrol | SC | M | dev |
-| 23 | Battlezone | AR | L | todo |
-| 24 | Bosconian | AR | M | todo |
+| 23 | Battlezone | AR | L | dev |
+| 24 | Bosconian | AR | M | dev |
 | 25 | Stargate | SS | L | todo |
 
 ## Maze and Chase (14)

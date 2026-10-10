@@ -56,6 +56,8 @@ const loaders: Record<string, Loader> = {
   'lunar-rover': () => import('./lunar-rover'),
   'capsule-clinic': () => import('./capsule-clinic'),
   'jelly-pop': () => import('./jelly-pop'),
+  'grid-tanker': () => import('./grid-tanker'),
+  'outpost-raid': () => import('./outpost-raid'),
 };
 
 export function playableSlugs(): string[] {

@@ -22,10 +22,11 @@ describe('client/verifier parity', () => {
     g.HTMLElement = class {};
     const canvas = { getContext: () => ctx, width: 0, height: 0 };
 
-    for (const [slug, seed] of [['comet-crusher', 777], ['star-divers', 4242], ['jelly-pop', 99], ['capsule-clinic', 5]] as const) {
+    for (const [slug, seed] of [['comet-crusher', 777], ['star-divers', 4242], ['jelly-pop', 99], ['capsule-clinic', 5], ['grid-tanker', 31], ['outpost-raid', 17]] as const) {
       const def = (await loadGame(slug))!;
       let last: GameStatus | null = null;
-      const session = new GameSession(canvas as any, def, { seed, onStatus: (s) => (last = s) });
+      let atOver: GameStatus | null = null; // what the web client submits: the status when the game first ends
+      const session = new GameSession(canvas as any, def, { seed, onStatus: (s) => ((last = s), s.over && !atOver && (atOver = s)) });
       session.start();
 
       let now = 0;
@@ -44,8 +45,8 @@ describe('client/verifier parity', () => {
       const bytes = Uint8Array.from(atob(run.replay), (c) => c.charCodeAt(0));
       const verdict = simulate(def, seed, bytes, run.frames);
       expect(verdict.ok).toBe(true);
-      // Compare with the status at the same moment the client would report it.
-      expect(verdict).toMatchObject({ score: last!.score });
+      // Compare with the status at the same moment the client reports it (a finished game restarts on Space).
+      expect(verdict).toMatchObject({ score: ((atOver as GameStatus | null) ?? (last as GameStatus | null))!.score });
       if (slug === 'comet-crusher' || slug === 'star-divers') expect(last!.score).toBeGreaterThan(0);
     }
   });
