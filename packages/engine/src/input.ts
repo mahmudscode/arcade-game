@@ -10,7 +10,9 @@ export interface Input {
   pressed: ButtonMap;
 }
 
-const KEY_MAP: Record<string, Button> = {
+export type KeyMap = Readonly<Record<string, Button>>;
+
+export const DEFAULT_KEY_MAP: KeyMap = {
   ArrowLeft: 'left',
   KeyA: 'left',
   ArrowRight: 'right',
@@ -42,10 +44,17 @@ export class InputManager {
   private held = emptyMap();
   private pressed = emptyMap();
   private target: Window | null = null;
+  private keyMap: KeyMap = DEFAULT_KEY_MAP;
+
+  /** Replaces the key bindings (player remapping). Takes effect immediately. */
+  setKeyMap(map: KeyMap): void {
+    this.keyMap = map;
+    this.reset();
+  }
 
   private onKeyDown = (e: KeyboardEvent) => {
     if (isTyping(e.target)) return;
-    const button = KEY_MAP[e.code];
+    const button = this.keyMap[e.code];
     if (!button) return;
     if (e.code === 'Tab') return; // never trap Tab: keyboard users need it to leave the game
     if (PREVENT_DEFAULT.has(e.code)) e.preventDefault();
@@ -53,7 +62,7 @@ export class InputManager {
   };
 
   private onKeyUp = (e: KeyboardEvent) => {
-    const button = KEY_MAP[e.code];
+    const button = this.keyMap[e.code];
     if (button) this.set(button, false);
   };
 
@@ -98,4 +107,25 @@ export class InputManager {
 function isTyping(target: EventTarget | null): boolean {
   if (!(target instanceof HTMLElement)) return false;
   return target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
+}
+
+/**
+ * Resolves with the next key code pressed (for the rebind UI), or null on Escape or when
+ * `cancel()` is called. Removes its listener either way.
+ */
+export function captureKey(): { result: Promise<string | null>; cancel(): void } {
+  let finish!: (code: string | null) => void;
+  const result = new Promise<string | null>((resolve) => (finish = resolve));
+  const onKey = (e: KeyboardEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    cancel();
+    finish(e.code === 'Escape' ? null : e.code);
+  };
+  const cancel = () => {
+    window.removeEventListener('keydown', onKey, true);
+    finish(null);
+  };
+  window.addEventListener('keydown', onKey, true);
+  return { result, cancel };
 }

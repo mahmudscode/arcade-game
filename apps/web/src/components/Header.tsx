@@ -1,5 +1,6 @@
-import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { GAMES } from '@arcade/shared';
+import { useAuth } from '../lib/auth';
 import { Logo } from './Logo';
 import { SearchIcon } from './icons';
 
@@ -8,12 +9,14 @@ const NAV = [
   { to: '/#categories', label: 'Categories' },
   { to: '/leaderboards', label: 'Leaderboards' },
   { to: '/favorites', label: 'Favorites' },
+  { to: '/settings', label: 'Settings' },
 ];
 
 export function Header({ hideOnMobile = false }: { hideOnMobile?: boolean }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [params] = useSearchParams();
+  const { user } = useAuth();
 
   const onSearch = (value: string) => {
     navigate({ pathname: '/', search: value ? `?q=${encodeURIComponent(value)}` : '' }, { replace: location.pathname === '/' });
@@ -53,12 +56,14 @@ export function Header({ hideOnMobile = false }: { hideOnMobile?: boolean }) {
           <button type="button" onClick={() => navigate('/?q=')} className="grid size-9 place-items-center rounded-full text-paper md:hidden" aria-label="Search">
             <SearchIcon />
           </button>
-          <button className="btn btn-outline hidden h-11 px-6 xl:inline-flex" type="button">
-            Sign in
-          </button>
-          <button className="grid size-9 place-items-center rounded-full bg-ink-3 text-sm font-semibold xl:hidden" type="button" aria-label="Account">
-            M
-          </button>
+          {user ? (
+            <Link to="/settings" className="btn btn-outline hidden h-11 px-6 xl:inline-flex">{user.username}</Link>
+          ) : (
+            <Link to="/login" className="btn btn-outline hidden h-11 px-6 xl:inline-flex">Sign in</Link>
+          )}
+          <Link to={user ? '/settings' : '/login'} className="grid size-9 place-items-center rounded-full bg-ink-3 text-sm font-semibold xl:hidden" aria-label={user ? 'Account and settings' : 'Sign in'}>
+            {user ? user.username[0]!.toUpperCase() : '?'}
+          </Link>
         </div>
       </div>
     </header>

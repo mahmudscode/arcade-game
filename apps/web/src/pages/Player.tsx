@@ -4,11 +4,12 @@ import { CATEGORIES, GAMES, formatPlays, getGame, type GameMeta } from '@arcade/
 import { Sprite, Thumb } from '../components/Sprite';
 import { TouchPad } from '../components/TouchPad';
 import { ChevronLeftIcon, FullscreenIcon, HeartIcon, PauseIcon, PlayIcon } from '../components/icons';
-import { useGameSession } from '../lib/useGameSession';
-import { getHiScore, putSave, setVolume, useFavorites } from '../lib/storage';
+import { useGameSession, type SubmitState } from '../lib/useGameSession';
+import { getHiScore, putSave, useFavorites } from '../lib/storage';
+import { updateSettings, useSettings } from '../lib/settings';
+import { useAuth } from '../lib/auth';
 import { NotFound } from './Simple';
 import { useRef } from 'react';
-import { getVolume } from '../lib/storage';
 
 // Sample data until the leaderboard API exists.
 const SAMPLE_SCORES = [
@@ -30,12 +31,13 @@ export function Player() {
 function PlayerView({ game }: { game: GameMeta }) {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const { canvasRef, session, status, paused, loadState } = useGameSession(game.slug, params.get('resume') === '1');
+  const { canvasRef, session, status, paused, loadState, submit, newRun } = useGameSession(game.slug, params.get('resume') === '1');
   const { favs, toggle } = useFavorites();
   const frameRef = useRef<HTMLDivElement>(null);
   const [saved, setSaved] = useState(false);
   const [shared, setShared] = useState(false);
-  const [volume, setVol] = useState(getVolume);
+  const { volume } = useSettings();
+  const { user } = useAuth();
   const fav = favs.has(game.slug);
   const categoryLabel = CATEGORIES.find((c) => c.id === game.category)?.label ?? game.category;
   const playable = loadState !== 'unavailable';
@@ -129,7 +131,7 @@ function PlayerView({ game }: { game: GameMeta }) {
             <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={() => (paused ? session?.resume() : session?.pause())}>
               {paused ? 'Resume' : 'Pause'}
             </button>
-            <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={() => session?.restart()}>Restart</button>
+            <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={newRun}>Restart</button>
             <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={save}>{saved ? 'Saved ✓' : 'Save state'}</button>
             <label className="ml-auto flex items-center gap-3 text-sm text-muted">
               Sound
@@ -142,8 +144,7 @@ function PlayerView({ game }: { game: GameMeta }) {
                 aria-label="Volume"
                 onChange={(e) => {
                   const v = Number(e.target.value);
-                  setVol(v);
-                  setVolume(v);
+                  updateSettings({ volume: v });
                   if (session) session.audio.volume = v;
                 }}
                 className="w-28 accent-cyan"
@@ -153,6 +154,8 @@ function PlayerView({ game }: { game: GameMeta }) {
               <FullscreenIcon width={18} height={18} />
             </button>
           </div>
+
+          <ScoreNotice submit={submit} signedIn={!!user} onAgain={newRun} />
 
           {/* Mobile score bar + controller */}
           <div className="mt-3 flex items-center justify-between rounded-xl border border-line bg-ink-2 px-4 py-3 md:hidden">
@@ -208,7 +211,7 @@ function PlayerView({ game }: { game: GameMeta }) {
                 <span className="font-pixel text-[11px] text-cyan">{fmt(hi)}</span>
               </li>
             </ol>
-            <p className="mt-3 text-xs text-muted">Sample leaderboard. Real rankings arrive with accounts.</p>
+            <p className="mt-3 text-xs text-muted">Sample leaderboard. Real rankings arrive once scores are verified.</p>
           </section>
 
           <section className="mt-6">
@@ -229,6 +232,24 @@ function PlayerView({ game }: { game: GameMeta }) {
           </section>
         </aside>
       </div>
+    </div>
+  );
+}
+
+function ScoreNotice({ submit, signedIn, onAgain }: { submit: SubmitState; signedIn: boolean; onAgain: () => void }) {
+  if (submit.kind === 'idle') return null;
+  const text =
+    submit.kind === 'sending' ? 'Submitting your score…'
+    : submit.kind === 'pending' ? `Score ${fmt(submit.score)} submitted. Pending verification.`
+    : submit.kind === 'error' ? `Couldn't submit your score: ${submit.message}`
+    : submit.reason === 'guest' ? 'Sign in to submit scores. This run counts for this browser only.'
+    : submit.reason === 'resumed' ? 'Runs continued from a saved state can’t be verified, so this score stays on this browser.'
+    : 'The server isn’t reachable, so this score stays on this browser.';
+  return (
+    <div role="status" className="mt-3 flex flex-wrap items-center gap-3 rounded-xl border border-line bg-ink-2 px-4 py-3 text-sm">
+      <span className="flex-1 text-muted">{text}</span>
+      {submit.kind === 'local' && submit.reason === 'guest' && !signedIn && <Link to="/login" className="btn btn-gold h-9 px-5">Sign in</Link>}
+      {submit.kind !== 'sending' && <button type="button" className="btn btn-soft h-9 px-5" onClick={onAgain}>Play again</button>}
     </div>
   );
 }

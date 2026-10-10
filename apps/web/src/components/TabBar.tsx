@@ -27,10 +27,10 @@ export function TabBar() {
           </li>
         ))}
         <li>
-          <span className="flex flex-col items-center gap-1 px-3 py-2.5 text-[11px] font-medium text-muted/60" aria-disabled="true">
+          <NavLink to="/settings" className={({ isActive }) => `flex flex-col items-center gap-1 px-3 py-2.5 text-[11px] font-medium ${isActive ? 'text-gold' : 'text-muted'}`}>
             <ProfileIcon width={22} height={22} />
             Profile
-          </span>
+          </NavLink>
         </li>
       </ul>
     </nav>

@@ -4,7 +4,9 @@ import { Header } from './components/Header';
 import { TabBar } from './components/TabBar';
 import { Favorites } from './pages/Favorites';
 import { Home } from './pages/Home';
+import { Login } from './pages/Login';
 import { Player } from './pages/Player';
+import { Settings } from './pages/Settings';
 import { Leaderboards, NotFound } from './pages/Simple';
 
 function Layout() {
@@ -29,6 +31,8 @@ export function App() {
         <Route index element={<Home />} />
         <Route path="play/:slug" element={<Player />} />
         <Route path="favorites" element={<Favorites />} />
+        <Route path="login" element={<Login />} />
+        <Route path="settings" element={<Settings />} />
         <Route path="leaderboards" element={<Leaderboards />} />
         <Route path="*" element={<NotFound />} />
       </Route>

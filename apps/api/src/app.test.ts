@@ -1,4 +1,5 @@
 import { connect, migrate, seedGames, schema, type DbHandle } from '@arcade/db';
+import { NO_INPUT, Recorder } from '@arcade/engine';
 import { eq } from 'drizzle-orm';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { buildApp } from './app';
@@ -127,6 +128,15 @@ describe('sessions and scores', () => {
     const { cookie } = await signUp('gina');
     const s = await newSession();
     const res = await app.inject({ method: 'POST', url: `${P}/scores`, headers: { cookie }, payload: { sessionId: s.sessionId, score: 5, durationMs: 0, replay: replayOf(0) } });
+    expect(res.statusCode).toBe(202);
+  });
+
+  it('accepts a replay produced by the engine Recorder', async () => {
+    const { cookie } = await signUp('hana');
+    const s = await newSession(cookie);
+    const rec = new Recorder();
+    for (let i = 0; i < 300; i++) rec.record(NO_INPUT);
+    const res = await app.inject({ method: 'POST', url: `${P}/scores`, headers: { cookie }, payload: { sessionId: s.sessionId, score: 7, durationMs: 5000, replay: rec.toBase64() } });
     expect(res.statusCode).toBe(202);
   });
 

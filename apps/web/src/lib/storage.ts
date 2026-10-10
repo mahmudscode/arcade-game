@@ -78,8 +78,6 @@ export function useSaves(): SavedState[] {
 export const getHiScore = (slug: string) => read<number>(`arcade:hi:${slug}`, 0);
 export const setHiScore = (slug: string, score: number) => write(`arcade:hi:${slug}`, score);
 
-export const getVolume = () => read<number>('arcade:volume', 0.7);
-export const setVolume = (v: number) => write('arcade:volume', v);
 
 export function timeAgo(ms: number): string {
   const mins = Math.floor((Date.now() - ms) / 60000);

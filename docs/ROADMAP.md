@@ -17,7 +17,7 @@ Strategy: **platform first, then archetype by archetype.** Building an archetype
 - OpenAPI + generated client.
 - **Exit:** register, play Pong, submit score, see it stored.
 
-## Milestone 3 - Web shell
+## Milestone 3 - Web shell (built; login, settings and score submission not yet checked in a browser)
 - Catalog, game host with lazy loading, play page, settings (key remap, volume, reduced motion), login, mobile touch overlay.
 - **Exit:** a player can find, play and pause a game on desktop and phone.
 

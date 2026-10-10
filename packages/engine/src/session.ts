@@ -1,6 +1,7 @@
 import { AudioBus } from './audio';
 import { TICK, type GameDefinition, type GameStatus } from './game';
-import { InputManager, type Button } from './input';
+import { InputManager, type Button, type KeyMap } from './input';
+import { Recorder } from './recorder';
 import { createRng, type Rng } from './rng';
 
 export interface SavedState {
@@ -15,6 +16,7 @@ export interface SessionOptions {
   seed?: number;
   audio?: AudioBus;
   hiScore?: number;
+  keyMap?: KeyMap;
   onStatus?: (status: GameStatus, paused: boolean) => void;
   onHiScore?: (score: number) => void;
 }
@@ -34,6 +36,8 @@ export class GameSession<S> {
   private destroyed = false;
   private hiScore: number;
   private lastKey = '';
+  private readonly recorder = new Recorder();
+  private replayable = true;
 
   constructor(
     private readonly canvas: HTMLCanvasElement,
@@ -47,6 +51,7 @@ export class GameSession<S> {
     this.hiScore = options.hiScore ?? 0;
     canvas.width = def.size.width;
     canvas.height = def.size.height;
+    if (options.keyMap) this.input.setKeyMap(options.keyMap);
     this.reset();
   }
 
@@ -55,6 +60,8 @@ export class GameSession<S> {
     this.state = this.def.init({ rng: this.rng, hiScore: this.hiScore });
     this.time = 0;
     this.acc = 0;
+    this.recorder.reset();
+    this.replayable = true;
     this.pushStatus(true);
   }
 
@@ -110,8 +117,15 @@ export class GameSession<S> {
     if (saved.gameId !== this.def.id) return;
     this.state = JSON.parse(JSON.stringify(saved.state)) as S;
     this.rng.setState(saved.rng);
+    this.replayable = false; // a restored state can't be re-simulated from the seed
     this.paused = false;
     this.pushStatus(true);
+  }
+
+  /** Base64 replay of this run, or null if it can't be verified (state was loaded, or no seed). */
+  getReplay(): { replay: string; frames: number } | null {
+    if (!this.replayable || this.options.seed === undefined) return null;
+    return { replay: this.recorder.toBase64(), frames: this.recorder.frameCount };
   }
 
   destroy(): void {
@@ -139,6 +153,7 @@ export class GameSession<S> {
           this.pause();
           break;
         }
+        this.recorder.record(input);
         this.def.update(this.state, input, TICK, { rng: this.rng, emit: (e) => this.audio.play(e) });
         this.time += TICK;
         this.acc -= TICK;

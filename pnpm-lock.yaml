@@ -20,6 +20,9 @@ importers:
       '@arcade/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@arcade/engine':
+        specifier: workspace:*
+        version: link:../../packages/engine
       '@arcade/shared':
         specifier: workspace:*
         version: link:../../packages/shared
