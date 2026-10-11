@@ -1,19 +1,21 @@
 import { NavLink } from 'react-router-dom';
+import { useT, type Key } from '../lib/i18n';
 import { BrowseIcon, HomeIcon, ProfileIcon, ScoresIcon, HeartIcon } from './icons';
 
-const TABS = [
-  { to: '/', label: 'Home', icon: HomeIcon, end: true },
-  { to: '/#all-games', label: 'Browse', icon: BrowseIcon },
-  { to: '/leaderboards', label: 'Scores', icon: ScoresIcon },
-  { to: '/favorites', label: 'Saved', icon: HeartIcon },
+const TABS: { to: string; key: Key; icon: typeof HomeIcon; end?: boolean }[] = [
+  { to: '/', key: 'tab.home', icon: HomeIcon, end: true },
+  { to: '/#all-games', key: 'tab.browse', icon: BrowseIcon },
+  { to: '/leaderboards', key: 'tab.scores', icon: ScoresIcon },
+  { to: '/favorites', key: 'tab.saved', icon: HeartIcon },
 ];
 
 export function TabBar() {
+  const t = useT();
   return (
     <nav aria-label="Primary" className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-ink-2 pb-[env(safe-area-inset-bottom)] md:hidden">
       <ul className="mx-auto flex max-w-md justify-around">
-        {TABS.map(({ to, label, icon: Icon, end }) => (
-          <li key={label}>
+        {TABS.map(({ to, key, icon: Icon, end }) => (
+          <li key={key}>
             <NavLink
               to={to}
               end={end}
@@ -22,7 +24,7 @@ export function TabBar() {
               }
             >
               <Icon width={22} height={22} />
-              {label}
+              {t(key)}
             </NavLink>
           </li>
         ))}

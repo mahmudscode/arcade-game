@@ -1,16 +1,18 @@
 import { useEffect } from 'react';
+import { useT } from '../lib/i18n';
 import { syncUnlocks, useAchievements } from '../lib/achievements';
 
 export function Achievements() {
   const { list, unlocked } = useAchievements();
+  const t = useT();
   // Favorites and daily streaks live in other stores; pick up anything they earned.
   useEffect(() => {
     syncUnlocks();
   }, []);
   return (
     <div className="page-x pt-8">
-      <h1 className="text-2xl font-bold">Achievements</h1>
-      <p className="mt-2 text-sm text-muted">{unlocked} of {list.length} unlocked. Progress is saved on this browser.</p>
+      <h1 className="text-2xl font-bold">{t('achievements.title')}</h1>
+      <p className="mt-2 text-sm text-muted">{t('achievements.summary', { n: unlocked, total: list.length })}</p>
       <ul className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {list.map(({ a, done, goal, unlockedAt }) => (
           <li key={a.id} className={`rounded-2xl border p-4 ${unlockedAt ? 'border-gold/60 bg-ink-2' : 'border-line bg-ink-2/60'}`}>

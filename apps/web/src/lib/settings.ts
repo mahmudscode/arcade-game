@@ -4,12 +4,18 @@ import { DEFAULT_KEY_MAP, type Button, type KeyMap } from '@arcade/engine';
 export interface Settings {
   volume: number;
   reducedMotion: boolean;
+  /** Scanlines and a soft vignette over the game screen. */
+  crt: boolean;
+  /** Interface language id; empty = follow the browser. */
+  language: string;
+  /** Stronger borders and text in the site shell. */
+  highContrast: boolean;
   /** Only overrides; anything missing uses DEFAULT_KEY_MAP. Stored as button -> key codes. */
   keys: Partial<Record<Button, string[]>>;
 }
 
 const KEY = 'arcade:settings';
-const DEFAULTS: Settings = { volume: 0.7, reducedMotion: false, keys: {} };
+const DEFAULTS: Settings = { volume: 0.7, reducedMotion: false, crt: false, language: '', highContrast: false, keys: {} };
 
 function load(): Settings {
   try {
@@ -46,6 +52,8 @@ export function useSettings(): Settings {
 /** Reduced motion applies to the shell via CSS, in addition to the OS preference. */
 export function applyDom(): void {
   document.documentElement.toggleAttribute('data-reduced-motion', current.reducedMotion);
+  document.documentElement.toggleAttribute('data-high-contrast', current.highContrast);
+  document.documentElement.lang = current.language || (typeof navigator === 'undefined' ? 'en' : navigator.language.slice(0, 2));
 }
 
 /** Builds the engine key map: a remapped button loses its default keys and uses the chosen ones. */

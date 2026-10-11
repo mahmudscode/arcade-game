@@ -97,3 +97,18 @@
   transition-duration: 0.01ms !important;
   scroll-behavior: auto !important;
 }
+
+/* CRT effect over the game screen: scanlines plus a vignette, never blocking input. */
+.crt-overlay {
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.22) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 55%, rgb(0 0 0 / 0.45) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* Player-chosen high contrast for the site shell. */
+[data-high-contrast] {
+  --color-muted: #e9e1ff;
+  --color-line: #8f7ccf;
+}

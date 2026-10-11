@@ -13,6 +13,8 @@ import { NotFound } from './Simple';
 import { useRef } from 'react';
 import { dailyFromParam } from '../lib/daily';
 import { shareLink } from '../lib/share';
+import { useT } from '../lib/i18n';
+import { setPageMeta } from '../lib/meta';
 
 const pad = (n: number) => String(n).padStart(6, '0');
 const fmt = (n: number) => n.toLocaleString('en-US');
@@ -32,7 +34,8 @@ function PlayerView({ game }: { game: GameMeta }) {
   const frameRef = useRef<HTMLDivElement>(null);
   const [saved, setSaved] = useState(false);
   const [shared, setShared] = useState(false);
-  const { volume } = useSettings();
+  const { volume, crt } = useSettings();
+  const t = useT();
   const { user } = useAuth();
   const fav = favs.has(game.slug);
   const categoryLabel = CATEGORIES.find((c) => c.id === game.category)?.label ?? game.category;
@@ -41,11 +44,9 @@ function PlayerView({ game }: { game: GameMeta }) {
   const hi = Math.max(status?.hiScore ?? 0, getHiScore(game.slug));
 
   useEffect(() => {
-    document.title = `${game.title} · Arcade Hub`;
-    return () => {
-      document.title = 'Arcade Hub';
-    };
-  }, [game.title]);
+    const restore = setPageMeta(`${game.title} · Arcade Hub`, `${game.description} Free to play in your browser.`);
+    return restore;
+  }, [game.title, game.description]);
 
   // Refetch when a run's score gets verified so the board reflects it.
   const verifiedScore = submit.kind === 'verified' ? submit.score : 0;
@@ -128,6 +129,7 @@ function PlayerView({ game }: { game: GameMeta }) {
                   </div>
                 </>
               )}
+              {crt && playable && <div aria-hidden className="crt-overlay absolute inset-0" />}
               {playable && loadState === 'loading' && <div className="absolute inset-0 grid place-items-center font-pixel text-xs text-muted">LOADING…</div>}
               {paused && (
                 <div className="absolute inset-0 grid place-items-center bg-ink/70">
@@ -140,12 +142,12 @@ function PlayerView({ game }: { game: GameMeta }) {
           {/* Desktop / tablet control bar */}
           <div className="mt-4 hidden items-center gap-3 rounded-2xl border border-line bg-ink-2 p-3 md:flex">
             <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={() => (paused ? session?.resume() : session?.pause())}>
-              {paused ? 'Resume' : 'Pause'}
+              {paused ? t('player.resume') : t('player.pause')}
             </button>
-            <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={newRun}>Restart</button>
-            <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={save}>{saved ? 'Saved ✓' : 'Save state'}</button>
+            <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={newRun}>{t('player.restart')}</button>
+            <button type="button" className="btn btn-soft h-10 px-6" disabled={!session} onClick={save}>{saved ? t('player.saved') : t('player.save')}</button>
             <label className="ml-auto flex items-center gap-3 text-sm text-muted">
-              Sound
+              {t('player.sound')}
               <input
                 type="range"
                 min={0}
@@ -167,7 +169,7 @@ function PlayerView({ game }: { game: GameMeta }) {
           </div>
 
           {daily && <p className="mt-3 rounded-xl border border-gold/40 bg-ink-2 px-4 py-2 text-sm text-gold">Daily challenge {daily.day}: everyone gets the same seed. Scores stay on this browser.</p>}
-          <ScoreNotice submit={submit} signedIn={!!user} onAgain={newRun} onShare={shareScore} shared={shared} />
+          <ScoreNotice submit={submit} signedIn={!!user} onAgain={newRun} onShare={shareScore} shared={shared} t={t} />
 
           {/* Mobile score bar + controller */}
           <div className="mt-3 flex items-center justify-between rounded-xl border border-line bg-ink-2 px-4 py-3 md:hidden">
@@ -186,13 +188,13 @@ function PlayerView({ game }: { game: GameMeta }) {
           </p>
           <div className="mt-5 flex gap-3">
             <button type="button" onClick={() => toggle(game.slug)} aria-pressed={fav} className="btn btn-outline h-12 px-8">
-              {fav ? 'Favorited' : 'Favorite'}
+              {fav ? t('player.favorited') : t('player.favorite')}
             </button>
-            <button type="button" onClick={share} className="btn btn-outline h-12 px-8">{shared ? 'Link copied' : 'Share'}</button>
+            <button type="button" onClick={share} className="btn btn-outline h-12 px-8">{shared ? t('player.copied') : t('player.share')}</button>
           </div>
 
           <section className="mt-6 rounded-2xl border border-line bg-ink-2 p-5">
-            <h2 className="font-semibold">How to play</h2>
+            <h2 className="font-semibold">{t('player.howTo')}</h2>
             <ul className="mt-4 space-y-3 text-sm">
               {game.controls.map((c) => (
                 <li key={c.label} className="flex items-center gap-3">
@@ -250,7 +252,7 @@ function PlayerView({ game }: { game: GameMeta }) {
   );
 }
 
-function ScoreNotice({ submit, signedIn, onAgain, onShare, shared }: { submit: SubmitState; signedIn: boolean; onAgain: () => void; onShare: () => void; shared: boolean }) {
+function ScoreNotice({ submit, signedIn, onAgain, onShare, shared, t }: { submit: SubmitState; signedIn: boolean; onAgain: () => void; onShare: () => void; shared: boolean; t: ReturnType<typeof useT> }) {
   if (submit.kind === 'idle') return null;
   const text =
     submit.kind === 'sending' ? 'Submitting your score…'
@@ -266,8 +268,8 @@ function ScoreNotice({ submit, signedIn, onAgain, onShare, shared }: { submit: S
     <div role="status" className="mt-3 flex flex-wrap items-center gap-3 rounded-xl border border-line bg-ink-2 px-4 py-3 text-sm">
       <span className="flex-1 text-muted">{text}</span>
       {submit.kind === 'local' && submit.reason === 'guest' && !signedIn && <Link to="/login" className="btn btn-gold h-9 px-5">Sign in</Link>}
-      {submit.kind !== 'sending' && <button type="button" className="btn btn-soft h-9 px-5" onClick={onShare}>{shared ? 'Shared ✓' : 'Share score'}</button>}
-      {submit.kind !== 'sending' && <button type="button" className="btn btn-soft h-9 px-5" onClick={onAgain}>Play again</button>}
+      {submit.kind !== 'sending' && <button type="button" className="btn btn-soft h-9 px-5" onClick={onShare}>{shared ? t('player.shared') : t('player.shareScore')}</button>}
+      {submit.kind !== 'sending' && <button type="button" className="btn btn-soft h-9 px-5" onClick={onAgain}>{t('player.playAgain')}</button>}
     </div>
   );
 }

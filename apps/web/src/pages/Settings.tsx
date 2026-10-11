@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { LANGUAGES, detectLanguage, useT } from '../lib/i18n';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { REMAPPABLE, keyLabel, keysFor, updateSettings, useSettings } from '../lib/settings';
@@ -8,6 +9,7 @@ const card = 'rounded-2xl border border-line bg-ink-2 p-5';
 
 export function Settings() {
   const s = useSettings();
+  const t = useT();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [capturing, setCapturing] = useState<Button | null>(null);
@@ -34,7 +36,7 @@ export function Settings() {
 
   return (
     <div className="page-x pt-8 pb-8">
-      <h1 className="text-2xl font-bold">Settings</h1>
+      <h1 className="text-2xl font-bold">{t('settings.title')}</h1>
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <section className={card}>
           <h2 className="font-semibold">Account</h2>
@@ -53,7 +55,13 @@ export function Settings() {
         </section>
 
         <section className={card}>
-          <h2 className="font-semibold">Sound and motion</h2>
+          <h2 className="font-semibold">{t('settings.sound')}</h2>
+          <label className="mt-4 flex items-center gap-4 text-sm text-muted">
+            {t('settings.language')}
+            <select value={s.language || detectLanguage()} onChange={(e) => updateSettings({ language: e.target.value })} className="h-10 rounded-full border border-line bg-ink-2 px-4 text-paper">
+              {LANGUAGES.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}
+            </select>
+          </label>
           <label className="mt-4 flex items-center gap-4 text-sm text-muted">
             Volume
             <input type="range" min={0} max={1} step={0.01} value={s.volume} onChange={(e) => updateSettings({ volume: Number(e.target.value) })} className="flex-1 accent-cyan" />
@@ -61,7 +69,15 @@ export function Settings() {
           </label>
           <label className="mt-4 flex items-center gap-3 text-sm">
             <input type="checkbox" checked={s.reducedMotion} onChange={(e) => updateSettings({ reducedMotion: e.target.checked })} className="size-4 accent-gold" />
-            Reduce motion (turns off animations and transitions in the site)
+            {t('settings.reduceMotion')}
+          </label>
+          <label className="mt-4 flex items-center gap-3 text-sm">
+            <input type="checkbox" checked={s.crt} onChange={(e) => updateSettings({ crt: e.target.checked })} className="size-4 accent-gold" />
+            {t('settings.crt')}
+          </label>
+          <label className="mt-4 flex items-center gap-3 text-sm">
+            <input type="checkbox" checked={s.highContrast} onChange={(e) => updateSettings({ highContrast: e.target.checked })} className="size-4 accent-gold" />
+            {t('settings.contrast')}
           </label>
         </section>
 

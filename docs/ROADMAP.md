@@ -48,8 +48,11 @@ Total 100. (Counts are checked against `catalog.json` in CI.)
 Per-game pipeline: spec ([GAME_SPEC_TEMPLATE.md](GAME_SPEC_TEMPLATE.md)) -> implement -> determinism test -> replay test -> QA checklist ([TESTING.md](TESTING.md)) -> `live`.
 
 ## Milestone 6 - Polish and growth
-- Achievements, daily challenges (fixed seed), favorites, share links, PWA/offline for solo play, CRT/shader themes, localization.
-- Performance pass, accessibility audit, SEO for game pages.
+- [x] Achievements (13, tracked in the browser), daily challenges (same game and seed for everyone each UTC day, with a streak), favorites, share links (native share sheet or clipboard, plus a share-score text).
+- [x] PWA/offline for solo play (manifest + service worker caching the shell and each game chunk), CRT and high-contrast display options.
+- [x] Localization infrastructure (English, Spanish, French for the main shell; games' own text stays English for now).
+- [x] Performance: route-level code splitting (main bundle 465 kB to 427 kB); accessibility: skip link, labelled progress bars.
+- [ ] Still open: server-side daily leaderboards, translating the remaining pages, a full WCAG audit with a screen reader, prerendered game pages and a sitemap for SEO (per-game titles and descriptions are set client-side today), real-device performance checks.
 
 ## Later / out of scope for v1
 - Real-time multiplayer and netplay.

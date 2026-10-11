@@ -1,16 +1,17 @@
 import { Link, NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { GAMES } from '@arcade/shared';
 import { useAuth } from '../lib/auth';
+import { useT, type Key } from '../lib/i18n';
 import { Logo } from './Logo';
 import { SearchIcon } from './icons';
 
-const NAV = [
-  { to: '/', label: 'Games', end: true },
-  { to: '/#categories', label: 'Categories' },
-  { to: '/leaderboards', label: 'Leaderboards' },
-  { to: '/favorites', label: 'Favorites' },
-  { to: '/achievements', label: 'Achievements' },
-  { to: '/settings', label: 'Settings' },
+const NAV: { to: string; key: Key; end?: boolean }[] = [
+  { to: '/', key: 'nav.games', end: true },
+  { to: '/#categories', key: 'nav.categories' },
+  { to: '/leaderboards', key: 'nav.leaderboards' },
+  { to: '/favorites', key: 'nav.favorites' },
+  { to: '/achievements', key: 'nav.achievements' },
+  { to: '/settings', key: 'nav.settings' },
 ];
 
 export function Header({ hideOnMobile = false }: { hideOnMobile?: boolean }) {
@@ -18,6 +19,7 @@ export function Header({ hideOnMobile = false }: { hideOnMobile?: boolean }) {
   const location = useLocation();
   const [params] = useSearchParams();
   const { user } = useAuth();
+  const t = useT();
 
   const onSearch = (value: string) => {
     navigate({ pathname: '/', search: value ? `?q=${encodeURIComponent(value)}` : '' }, { replace: location.pathname === '/' });
@@ -30,14 +32,14 @@ export function Header({ hideOnMobile = false }: { hideOnMobile?: boolean }) {
         <nav aria-label="Main" className="ml-6 hidden items-center gap-8 xl:flex">
           {NAV.map((item) => (
             <NavLink
-              key={item.label}
+              key={item.key}
               to={item.to}
               end={item.end}
               className={({ isActive }) =>
                 `relative py-2 text-[15px] font-semibold ${isActive && !item.to.includes('#') ? 'text-paper after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:rounded after:bg-gold' : 'text-muted hover:text-paper'}`
               }
             >
-              {item.label}
+              {t(item.key)}
             </NavLink>
           ))}
         </nav>
