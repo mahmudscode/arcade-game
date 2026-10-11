@@ -83,7 +83,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 60 | Contra | RG | L | dev |
 | 61 | Double Dragon | BU | L | dev |
 | 62 | Kung-Fu Master | BU | M | dev |
-| 63 | Street Fighter II | FT | L | todo |
+| 63 | Street Fighter II | FT | L | dev |
 | 64 | Final Fight | BU | L | dev |
 | 65 | Commando | RG | M | dev |
 | 66 | Ikari Warriors | RG | M | dev |
@@ -91,7 +91,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 68 | Shinobi | SC | L | dev |
 | 69 | Golden Axe | BU | L | dev |
 | 70 | Gauntlet | AR | L | dev |
-| 71 | Karate Champ | FT | M | todo |
+| 71 | Karate Champ | FT | M | dev |
 | 72 | Rampage | AR | M | dev |
 | 73 | Spy Hunter | RT | M | dev |
 
@@ -111,7 +111,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 84 | Breakout | PB | S | dev |
 | 85 | Arkanoid | PB | M | dev |
 | 86 | Track & Field | PB | M | dev |
-| 87 | Punch-Out | FT | L | todo |
+| 87 | Punch-Out | FT | L | dev |
 
 ## Puzzle and Casual (13)
 | # | Game | Archetype | Size | Status |

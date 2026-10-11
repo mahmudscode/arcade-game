@@ -551,6 +551,21 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Big jump', b: 'Big jump' },
     controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲'], label: 'Faster' }, { keys: ['▼'], label: 'Brake' }, { keys: ['Space', 'Z'], label: 'Big jump (as you land)' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('arena-masters', 'Arena Masters', 'Fighting', 400000, {
+    description: 'Square off one-on-one: punches, kicks, sweeps and a fireball (Down, Forward, Punch). Win two rounds against a ladder of tougher fighters.',
+    touch: { a: 'Punch', b: 'Kick' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk (hold back to block)' }, { keys: ['▲'], label: 'Jump' }, { keys: ['▼'], label: 'Crouch' }, { keys: ['Space', 'Z'], label: 'Punch' }, { keys: ['X'], label: 'Kick (crouching: sweep)' }, { keys: ['▼', '▶', 'Space'], label: 'Fireball' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('dojo-duel', 'Dojo Duel', 'Fighting', 380000, {
+    description: 'A karate duel scored in points: the first clean hit wins the exchange; first to four takes the round.',
+    touch: { a: 'Punch', b: 'Kick' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk (hold back to block)' }, { keys: ['▲'], label: 'Jump' }, { keys: ['▼'], label: 'Crouch' }, { keys: ['Space', 'Z'], label: 'Punch' }, { keys: ['X'], label: 'Kick (crouching: sweep)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('glove-rush', 'Glove Rush', 'Fighting', 360000, {
+    description: 'Read the wind-up, lean away from the glove, counter while he is open, and spend stars on an uppercut.',
+    touch: { a: 'Head punch', b: 'Body punch' },
+    controls: [{ keys: ['◀', '▶'], label: 'Lean away from the glove' }, { keys: ['▼'], label: 'Block (hold)' }, { keys: ['Space', 'Z'], label: 'Punch head (with ▲ and a star: uppercut)' }, { keys: ['X'], label: 'Punch body' }, { keys: ['Space'], label: 'Mash to get up from a knockdown' }, { keys: ['P'], label: 'Pause' }],
+  }),
   game('route-rider', 'Route Rider', 'Racing', 350000, {
     description: 'Ride down the street throwing papers into mailboxes, smashing windows of non-subscribers, and dodging cars, dogs and potholes.',
     touch: { a: 'Throw left', b: 'Throw right' },

@@ -104,6 +104,9 @@ const loaders: Record<string, Loader> = {
   'ridge-rider': () => import('./ridge-rider'),
   'sprint-circuit': () => import('./sprint-circuit'),
   'bounce-buggy': () => import('./bounce-buggy'),
+  'arena-masters': () => import('./arena-masters'),
+  'dojo-duel': () => import('./dojo-duel'),
+  'glove-rush': () => import('./glove-rush'),
 };
 
 export function playableSlugs(): string[] {
