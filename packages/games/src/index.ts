@@ -83,6 +83,16 @@ const loaders: Record<string, Loader> = {
   'portal-patrol': () => import('./portal-patrol'),
   'zone-striker': () => import('./zone-striker'),
   'altitude-raid': () => import('./altitude-raid'),
+  'peak-climber': () => import('./peak-climber'),
+  'disc-warrior': () => import('./disc-warrior'),
+  'fruit-runner': () => import('./fruit-runner'),
+  'grave-knight': () => import('./grave-knight'),
+  'deep-delver': () => import('./deep-delver'),
+  'jungle-spitter': () => import('./jungle-spitter'),
+  'shadow-agent': () => import('./shadow-agent'),
+  'ninja-strike': () => import('./ninja-strike'),
+  'route-rider': () => import('./route-rider'),
+  'dirt-rider': () => import('./dirt-rider'),
 };
 
 export function playableSlugs(): string[] {

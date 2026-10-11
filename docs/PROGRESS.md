@@ -8,11 +8,11 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 |---|---|---|---|
 | Shooters | 25 | 0 | 25 |
 | Maze and Chase | 14 | 0 | 14 |
-| Platformers | 14 | 6 | 20 |
-| Action and Fighting | 2 | 12 | 14 |
-| Racing and Sports | 8 | 6 | 14 |
+| Platformers | 20 | 0 | 20 |
+| Action and Fighting | 4 | 10 | 14 |
+| Racing and Sports | 10 | 4 | 14 |
 | Puzzle and Casual | 13 | 0 | 13 |
-| **Total** | **76** | **24** | **100** |
+| **Total** | **86** | **14** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -66,19 +66,19 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 44 | Q*bert | Platformers | GP | M | dev |
 | 🟢 | 45 | Popeye | Platformers | PF | M | dev |
 | 🟢 | 46 | Pitfall! | Platformers | SC | M | dev |
-| 🔴 | 47 | Ice Climber | Platformers | SC | M | todo |
+| 🟢 | 47 | Ice Climber | Platformers | SC | M | dev |
 | 🟢 | 48 | Joust | Platformers | PF | M | dev |
 | 🟢 | 49 | Elevator Action | Platformers | PF | M | dev |
 | 🟢 | 50 | BurgerTime | Platformers | PF | M | dev |
-| 🔴 | 51 | Rygar | Platformers | SC | M | todo |
-| 🔴 | 52 | Wonder Boy | Platformers | SC | M | todo |
-| 🔴 | 53 | Ghosts 'n Goblins | Platformers | SC | L | todo |
-| 🔴 | 54 | Spelunker | Platformers | SC | M | todo |
+| 🟢 | 51 | Rygar | Platformers | SC | M | dev |
+| 🟢 | 52 | Wonder Boy | Platformers | SC | M | dev |
+| 🟢 | 53 | Ghosts 'n Goblins | Platformers | SC | L | dev |
+| 🟢 | 54 | Spelunker | Platformers | SC | M | dev |
 | 🟢 | 55 | Kangaroo | Platformers | PF | M | dev |
 | 🟢 | 56 | Bomb Jack | Platformers | PF | M | dev |
 | 🟢 | 57 | Congo Bongo | Platformers | PF | L | dev |
 | 🟢 | 58 | Space Panic | Platformers | PF | S | dev |
-| 🔴 | 59 | Toki | Platformers | SC | L | todo |
+| 🟢 | 59 | Toki | Platformers | SC | L | dev |
 | 🔴 | 60 | Contra | Action and Fighting | RG | L | todo |
 | 🔴 | 61 | Double Dragon | Action and Fighting | BU | L | todo |
 | 🔴 | 62 | Kung-Fu Master | Action and Fighting | BU | M | todo |
@@ -86,8 +86,8 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🔴 | 64 | Final Fight | Action and Fighting | BU | L | todo |
 | 🔴 | 65 | Commando | Action and Fighting | RG | M | todo |
 | 🔴 | 66 | Ikari Warriors | Action and Fighting | RG | M | todo |
-| 🔴 | 67 | Rolling Thunder | Action and Fighting | SC | L | todo |
-| 🔴 | 68 | Shinobi | Action and Fighting | SC | L | todo |
+| 🟢 | 67 | Rolling Thunder | Action and Fighting | SC | L | dev |
+| 🟢 | 68 | Shinobi | Action and Fighting | SC | L | dev |
 | 🔴 | 69 | Golden Axe | Action and Fighting | BU | L | todo |
 | 🟢 | 70 | Gauntlet | Action and Fighting | AR | L | dev |
 | 🔴 | 71 | Karate Champ | Action and Fighting | FT | M | todo |
@@ -98,8 +98,8 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🔴 | 76 | Hang-On | Racing and Sports | R3 | L | todo |
 | 🟢 | 77 | Night Driver | Racing and Sports | R3 | M | dev |
 | 🔴 | 78 | Super Sprint | Racing and Sports | RT | M | todo |
-| 🔴 | 79 | Paperboy | Racing and Sports | SC | M | todo |
-| 🔴 | 80 | Excitebike | Racing and Sports | SC | M | todo |
+| 🟢 | 79 | Paperboy | Racing and Sports | SC | M | dev |
+| 🟢 | 80 | Excitebike | Racing and Sports | SC | M | dev |
 | 🟢 | 81 | Road Fighter | Racing and Sports | RT | M | dev |
 | 🔴 | 82 | Bump 'n' Jump | Racing and Sports | RT | M | todo |
 | 🟢 | 83 | Pong | Racing and Sports | PB | S | dev |

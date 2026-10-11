@@ -456,6 +456,56 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Fire', b: 'Alt' },
     controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲', '▼'], label: 'Climb / dive' }, { keys: ['Space'], label: 'Fire' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('peak-climber', 'Peak Climber', 'Platform', 540000, {
+    description: 'Jump up through the brick floors to climb the mountain, hammering seals and birds on the way to the summit.',
+    touch: { a: 'Hammer', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['X', '▲'], label: 'Jump (knocks bricks out)' }, { keys: ['Space'], label: 'Hammer' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('disc-warrior', 'Disc Warrior', 'Platform', 470000, {
+    description: 'Run through a hostile land swinging a spinning disc on a tether to cut down everything ahead of you.',
+    touch: { a: 'Disc', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['X', '▲'], label: 'Jump' }, { keys: ['Space'], label: 'Disc attack' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('fruit-runner', 'Fruit Runner', 'Platform', 610000, {
+    description: 'Race across an island hurling hatchets, keeping your energy up by grabbing fruit before it runs out.',
+    touch: { a: 'Throw', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['X', '▲'], label: 'Jump' }, { keys: ['Space'], label: 'Throw hatchet' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('grave-knight', 'Grave Knight', 'Platform', 500000, {
+    description: 'Fight through a haunted graveyard throwing lances. Your armour takes the first hit; the second one kills.',
+    touch: { a: 'Lance', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['X', '▲'], label: 'Jump' }, { keys: ['Space'], label: 'Throw lance' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('deep-delver', 'Deep Delver', 'Platform', 380000, {
+    description: 'Descend a cave on ropes before your air runs out. Any fall of more than three tiles is fatal, and a ghost hunts you; flares drive it off.',
+    touch: { a: 'Flare', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['▲', '▼'], label: 'Climb ropes' }, { keys: ['X'], label: 'Jump' }, { keys: ['Space'], label: 'Flare' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('jungle-spitter', 'Jungle Spitter', 'Platform', 420000, {
+    description: 'Bounce through the jungle as an ape who spits fireballs, with huge jumps over hopping and flying enemies.',
+    touch: { a: 'Spit', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['X', '▲'], label: 'Jump' }, { keys: ['Space'], label: 'Spit' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('shadow-agent', 'Shadow Agent', 'Shooter', 440000, {
+    description: 'Fight through the enemy base with a limited pistol. Slip through doors to restock your ammunition.',
+    touch: { a: 'Fire', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['X'], label: 'Jump' }, { keys: ['Space'], label: 'Fire' }, { keys: ['▲'], label: 'Enter door (restock)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('ninja-strike', 'Ninja Strike', 'Platform', 560000, {
+    description: 'Throw shuriken at range, slash anything that gets close, and free the hostages before the boss at the end.',
+    touch: { a: 'Strike', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['X', '▲'], label: 'Jump' }, { keys: ['Space'], label: 'Shuriken / sword' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('route-rider', 'Route Rider', 'Racing', 350000, {
+    description: 'Ride down the street throwing papers into mailboxes, smashing windows of non-subscribers, and dodging cars, dogs and potholes.',
+    touch: { a: 'Throw left', b: 'Throw right' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲', '▼'], label: 'Faster / slower' }, { keys: ['Space'], label: 'Throw left' }, { keys: ['X'], label: 'Throw right' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('dirt-rider', 'Dirt Rider', 'Racing', 460000, {
+    description: 'Race a dirt bike over ramps and hurdles. Watch the temperature gauge, and level the bike before you land.',
+    touch: { a: 'Gas', b: 'Turbo' },
+    controls: [{ keys: ['Space'], label: 'Throttle' }, { keys: ['X'], label: 'Turbo (heats the engine)' }, { keys: ['▲', '▼'], label: 'Change lane / tilt in the air' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

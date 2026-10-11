@@ -63,19 +63,19 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 44 | Q*bert | GP | M | dev |
 | 45 | Popeye | PF | M | dev |
 | 46 | Pitfall! | SC | M | dev |
-| 47 | Ice Climber | SC | M | todo |
+| 47 | Ice Climber | SC | M | dev |
 | 48 | Joust | PF | M | dev |
 | 49 | Elevator Action | PF | M | dev |
 | 50 | BurgerTime | PF | M | dev |
-| 51 | Rygar | SC | M | todo |
-| 52 | Wonder Boy | SC | M | todo |
-| 53 | Ghosts 'n Goblins | SC | L | todo |
-| 54 | Spelunker | SC | M | todo |
+| 51 | Rygar | SC | M | dev |
+| 52 | Wonder Boy | SC | M | dev |
+| 53 | Ghosts 'n Goblins | SC | L | dev |
+| 54 | Spelunker | SC | M | dev |
 | 55 | Kangaroo | PF | M | dev |
 | 56 | Bomb Jack | PF | M | dev |
 | 57 | Congo Bongo | PF | L | dev |
 | 58 | Space Panic | PF | S | dev |
-| 59 | Toki | SC | L | todo |
+| 59 | Toki | SC | L | dev |
 
 ## Action and Fighting (14)
 | # | Game | Archetype | Size | Status |
@@ -87,8 +87,8 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 64 | Final Fight | BU | L | todo |
 | 65 | Commando | RG | M | todo |
 | 66 | Ikari Warriors | RG | M | todo |
-| 67 | Rolling Thunder | SC | L | todo |
-| 68 | Shinobi | SC | L | todo |
+| 67 | Rolling Thunder | SC | L | dev |
+| 68 | Shinobi | SC | L | dev |
 | 69 | Golden Axe | BU | L | todo |
 | 70 | Gauntlet | AR | L | dev |
 | 71 | Karate Champ | FT | M | todo |
@@ -103,8 +103,8 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 76 | Hang-On | R3 | L | todo |
 | 77 | Night Driver | R3 | M | dev |
 | 78 | Super Sprint | RT | M | todo |
-| 79 | Paperboy | SC | M | todo |
-| 80 | Excitebike | SC | M | todo |
+| 79 | Paperboy | SC | M | dev |
+| 80 | Excitebike | SC | M | dev |
 | 81 | Road Fighter | RT | M | dev |
 | 82 | Bump 'n' Jump | RT | M | todo |
 | 83 | Pong | PB | S | dev |

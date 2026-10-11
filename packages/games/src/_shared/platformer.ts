@@ -111,7 +111,7 @@ export function stepBody(b: Body, w: PlatWorld, intent: Intent, dt: number, cfg:
       if (dy < 0) {
         // Climbing past the top cell: stand on it.
         if (!isLadder(w, col, Math.floor(ny - EPS))) {
-          ny = Math.floor(b.y - EPS);
+          ny = Math.floor(b.y - EPS) + 0;
           b.climbing = false;
           b.onGround = true;
           b.y = ny;
@@ -120,7 +120,7 @@ export function stepBody(b: Body, w: PlatWorld, intent: Intent, dt: number, cfg:
       } else if (dy > 0) {
         // Climbing down off the bottom: stand on whatever is there, else keep falling.
         if (!isLadder(w, col, Math.floor(ny + EPS)) && Math.floor(ny + EPS) !== Math.floor(b.y + EPS)) {
-          ny = Math.floor(ny);
+          ny = Math.floor(ny) + 0;
           b.y = ny;
           b.climbing = false;
           b.onGround = supported(b, w, cfg);
@@ -135,7 +135,7 @@ export function stepBody(b: Body, w: PlatWorld, intent: Intent, dt: number, cfg:
         if (isFloor(w, sideX, row) && !w.solid(sideX, row - 1)) {
           // Hop onto the floor tile, so both feet are over it and it doesn't fall past the edge.
           b.x = intent.dir > 0 ? sideX + cfg.hw + 0.02 : sideX + 1 - cfg.hw - 0.02;
-          b.y = row;
+          b.y = row + 0;
           b.climbing = false;
           b.onGround = true;
         }
@@ -189,7 +189,7 @@ export function stepBody(b: Body, w: PlatWorld, intent: Intent, dt: number, cfg:
       // Every tile top the feet cross this step is a chance to land.
       for (let k = Math.ceil(prev - EPS); k <= Math.floor(ny + EPS); k++) {
         if (isFloor(w, l, k, b.drop > 0) || isFloor(w, r, k, b.drop > 0)) {
-          b.y = k;
+          b.y = k + 0; // (+ 0 turns a -0 from Math.ceil into 0)
           b.vy = 0;
           b.onGround = true;
           result.landed = true;

@@ -233,4 +233,13 @@ describe('platformer physics', () => {
     expect(b.climbing).toBe(false); // still in the air, not yanked back
     expect(b.vy).not.toBe(0);
   });
+
+  it('never leaves -0 in a body, even landing on a floor at height zero from above', () => {
+    const w = world(['##########']);
+    const c = newBody(5.5, -2.5);
+    for (let f = 0; f < 80; f++) stepBody(c, w, NONE, DT);
+    expect(c.y).toBe(0);
+    expect(Object.is(c.y, -0)).toBe(false);
+    expect(JSON.parse(JSON.stringify(c))).toEqual(c);
+  });
 });
