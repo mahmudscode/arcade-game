@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { CATEGORIES, FEATURED_SLUG, GAMES, getGame, type Category } from '@arcade/shared';
+import { DailyChallenge } from '../components/DailyChallenge';
 import { CategoryChips } from '../components/CategoryChips';
 import { ContinuePlaying } from '../components/ContinuePlaying';
 import { GameCard } from '../components/GameCard';
@@ -34,6 +35,7 @@ export function Home() {
   return (
     <div className="page-x pt-6 md:pt-8">
       <Hero game={featured} />
+      <DailyChallenge />
       <div className="mt-8 md:mt-10">
         <CategoryChips value={category} onChange={(c) => { setCategory(c); setLimit(PAGE); }} />
       </div>

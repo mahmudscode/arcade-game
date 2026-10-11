@@ -11,6 +11,8 @@ import { updateSettings, useSettings } from '../lib/settings';
 import { useAuth } from '../lib/auth';
 import { NotFound } from './Simple';
 import { useRef } from 'react';
+import { dailyFromParam } from '../lib/daily';
+import { shareLink } from '../lib/share';
 
 const pad = (n: number) => String(n).padStart(6, '0');
 const fmt = (n: number) => n.toLocaleString('en-US');
@@ -24,7 +26,8 @@ export function Player() {
 function PlayerView({ game }: { game: GameMeta }) {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const { canvasRef, session, status, paused, loadState, submit, newRun } = useGameSession(game.slug, params.get('resume') === '1');
+  const daily = dailyFromParam(params.get('daily'), game.slug);
+  const { canvasRef, session, status, paused, loadState, submit, newRun } = useGameSession(game.slug, params.get('resume') === '1', daily);
   const { favs, toggle } = useFavorites();
   const frameRef = useRef<HTMLDivElement>(null);
   const [saved, setSaved] = useState(false);
@@ -66,12 +69,16 @@ function PlayerView({ game }: { game: GameMeta }) {
   };
 
   const share = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      flash(setShared);
-    } catch {
-      // Clipboard can be unavailable (insecure context); nothing else to do.
-    }
+    const url = `${window.location.origin}/play/${game.slug}${daily ? `?daily=${daily.day}` : ''}`;
+    const text = daily ? `Try the ${daily.day} daily challenge: ${game.title}` : `Play ${game.title} on Arcade Hub`;
+    if (await shareLink({ title: game.title, text, url })) flash(setShared);
+  };
+
+  const shareScore = async () => {
+    const score = status?.score ?? 0;
+    const url = `${window.location.origin}/play/${game.slug}${daily ? `?daily=${daily.day}` : ''}`;
+    const text = `I scored ${fmt(score)} in ${game.title}${daily ? ` (daily ${daily.day})` : ''} on Arcade Hub. Beat it!`;
+    if (await shareLink({ title: game.title, text, url })) flash(setShared);
   };
 
   const fullscreen = () => {
@@ -159,7 +166,8 @@ function PlayerView({ game }: { game: GameMeta }) {
             </button>
           </div>
 
-          <ScoreNotice submit={submit} signedIn={!!user} onAgain={newRun} />
+          {daily && <p className="mt-3 rounded-xl border border-gold/40 bg-ink-2 px-4 py-2 text-sm text-gold">Daily challenge {daily.day}: everyone gets the same seed. Scores stay on this browser.</p>}
+          <ScoreNotice submit={submit} signedIn={!!user} onAgain={newRun} onShare={shareScore} shared={shared} />
 
           {/* Mobile score bar + controller */}
           <div className="mt-3 flex items-center justify-between rounded-xl border border-line bg-ink-2 px-4 py-3 md:hidden">
@@ -242,7 +250,7 @@ function PlayerView({ game }: { game: GameMeta }) {
   );
 }
 
-function ScoreNotice({ submit, signedIn, onAgain }: { submit: SubmitState; signedIn: boolean; onAgain: () => void }) {
+function ScoreNotice({ submit, signedIn, onAgain, onShare, shared }: { submit: SubmitState; signedIn: boolean; onAgain: () => void; onShare: () => void; shared: boolean }) {
   if (submit.kind === 'idle') return null;
   const text =
     submit.kind === 'sending' ? 'Submitting your score…'
@@ -250,6 +258,7 @@ function ScoreNotice({ submit, signedIn, onAgain }: { submit: SubmitState; signe
     : submit.kind === 'verified' ? `Score ${fmt(submit.score)} verified. It's on the leaderboard.`
     : submit.kind === 'rejected' ? `Score ${fmt(submit.score)} failed verification and won't be ranked.`
     : submit.kind === 'error' ? `Couldn't submit your score: ${submit.message}`
+    : submit.reason === 'daily' ? 'Daily run finished. Your best for today is saved on this browser.'
     : submit.reason === 'guest' ? 'Sign in to submit scores. This run counts for this browser only.'
     : submit.reason === 'resumed' ? 'Runs continued from a saved state can’t be verified, so this score stays on this browser.'
     : 'The server isn’t reachable, so this score stays on this browser.';
@@ -257,6 +266,7 @@ function ScoreNotice({ submit, signedIn, onAgain }: { submit: SubmitState; signe
     <div role="status" className="mt-3 flex flex-wrap items-center gap-3 rounded-xl border border-line bg-ink-2 px-4 py-3 text-sm">
       <span className="flex-1 text-muted">{text}</span>
       {submit.kind === 'local' && submit.reason === 'guest' && !signedIn && <Link to="/login" className="btn btn-gold h-9 px-5">Sign in</Link>}
+      {submit.kind !== 'sending' && <button type="button" className="btn btn-soft h-9 px-5" onClick={onShare}>{shared ? 'Shared ✓' : 'Share score'}</button>}
       {submit.kind !== 'sending' && <button type="button" className="btn btn-soft h-9 px-5" onClick={onAgain}>Play again</button>}
     </div>
   );

@@ -1,4 +1,6 @@
 import { Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { AchievementToast } from './components/AchievementToast';
+import { Achievements } from './pages/Achievements';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { TabBar } from './components/TabBar';
@@ -21,6 +23,7 @@ function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <AchievementToast />
       {!playing && <TabBar />}
     </div>
   );
@@ -33,6 +36,7 @@ export function App() {
         <Route index element={<Home />} />
         <Route path="play/:slug" element={<Player />} />
         <Route path="favorites" element={<Favorites />} />
+        <Route path="achievements" element={<Achievements />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<MyProfile />} />
         <Route path="profile/:username" element={<Profile />} />

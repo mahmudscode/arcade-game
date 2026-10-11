@@ -9,6 +9,7 @@ const NAV = [
   { to: '/#categories', label: 'Categories' },
   { to: '/leaderboards', label: 'Leaderboards' },
   { to: '/favorites', label: 'Favorites' },
+  { to: '/achievements', label: 'Achievements' },
   { to: '/settings', label: 'Settings' },
 ];
 

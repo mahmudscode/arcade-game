@@ -4,6 +4,8 @@ import { loadGame } from '@arcade/games';
 import { api, ApiError, watchScore } from './api';
 import { useAuth } from './auth';
 import { buildKeyMap, getSettings } from './settings';
+import { recordRun } from './achievements';
+import { recordDaily } from './daily';
 import { getHiScore, getSave, setHiScore } from './storage';
 
 export type LoadState = 'loading' | 'ready' | 'unavailable';
@@ -11,7 +13,7 @@ export type LoadState = 'loading' | 'ready' | 'unavailable';
 /** Where a finished run's score ended up. `local` means it only counts for this browser. */
 export type SubmitState =
   | { kind: 'idle' }
-  | { kind: 'local'; reason: 'guest' | 'offline' | 'resumed' }
+  | { kind: 'local'; reason: 'guest' | 'offline' | 'resumed' | 'daily' }
   | { kind: 'sending' }
   | { kind: 'pending'; score: number }
   | { kind: 'verified'; score: number }
@@ -23,7 +25,7 @@ export type SubmitState =
  * Signed-in players get a server-issued seed so the run can be verified; everyone else plays with a
  * local seed and keeps scores in the browser.
  */
-export function useGameSession(slug: string, resume: boolean) {
+export function useGameSession(slug: string, resume: boolean, daily: { day: string; seed: number } | null = null) {
   const { user, ready } = useAuth();
   const userId = user?.id ?? null;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -33,6 +35,8 @@ export function useGameSession(slug: string, resume: boolean) {
   const [loadState, setLoadState] = useState<LoadState>('loading');
   const [submit, setSubmit] = useState<SubmitState>({ kind: 'idle' });
   const [runId, setRunId] = useState(0);
+  const dailyDay = daily?.day ?? null;
+  const dailySeed = daily?.seed ?? null;
 
   useEffect(() => {
     if (!ready) return; // wait for /me so we know whether to ask for a server seed
@@ -51,9 +55,9 @@ export function useGameSession(slug: string, resume: boolean) {
       if (cancelled) return;
       if (!def) return setLoadState('unavailable');
 
-      const saved = resume ? getSave(slug) : null;
+      const saved = resume && dailySeed === null ? getSave(slug) : null;
       let play: { sessionId: string; seed: number } | null = null;
-      if (userId && !saved) {
+      if (userId && !saved && dailySeed === null) {
         play = await api.createSession(slug).catch((e) => {
           if (!(e instanceof ApiError) || e.status !== 0) console.warn('session failed', e);
           return null;
@@ -69,7 +73,7 @@ export function useGameSession(slug: string, resume: boolean) {
       let sent = false;
       const sessionRef: { s?: GameSession<unknown> } = {};
       current = new GameSession(canvas, def, {
-        seed: play?.seed,
+        seed: dailySeed ?? play?.seed,
         hiScore: getHiScore(slug),
         keyMap: buildKeyMap(settings.keys),
         onStatus: (s, p) => {
@@ -78,6 +82,9 @@ export function useGameSession(slug: string, resume: boolean) {
           if (!s.over || sent) return;
           sent = true;
           const run = sessionRef.s?.getReplay();
+          if (dailyDay !== null) recordDaily(dailyDay, slug, s.score);
+          recordRun(slug, s.score, s.level);
+          if (dailyDay !== null) return setSubmit({ kind: 'local', reason: 'daily' });
           if (!userId) return setSubmit({ kind: 'local', reason: 'guest' });
           if (!play || !run) return setSubmit({ kind: 'local', reason: saved ? 'resumed' : 'offline' });
           setSubmit({ kind: 'sending' });
@@ -111,7 +118,7 @@ export function useGameSession(slug: string, resume: boolean) {
       current?.destroy();
       setSession(null);
     };
-  }, [slug, resume, ready, userId, runId]);
+  }, [slug, resume, ready, userId, runId, dailyDay, dailySeed]);
 
   /** Starts a fresh run (new server session, so the old replay can't be reused). */
   const newRun = () => setRunId((n) => n + 1);
