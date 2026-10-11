@@ -8,11 +8,11 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 |---|---|---|---|
 | Shooters | 21 | 4 | 25 |
 | Maze and Chase | 13 | 1 | 14 |
-| Platformers | 5 | 15 | 20 |
+| Platformers | 8 | 12 | 20 |
 | Action and Fighting | 2 | 12 | 14 |
 | Racing and Sports | 8 | 6 | 14 |
 | Puzzle and Casual | 13 | 0 | 13 |
-| **Total** | **62** | **38** | **100** |
+| **Total** | **65** | **35** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -61,7 +61,7 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 39 | Tron | Maze and Chase | AR | M | dev |
 | 🟢 | 40 | Donkey Kong | Platformers | PF | M | dev |
 | 🔴 | 41 | Donkey Kong Jr. | Platformers | PF | M | todo |
-| 🔴 | 42 | Mario Bros. | Platformers | PF | M | todo |
+| 🟢 | 42 | Mario Bros. | Platformers | PF | M | dev |
 | 🔴 | 43 | Bubble Bobble | Platformers | PF | L | todo |
 | 🟢 | 44 | Q*bert | Platformers | GP | M | dev |
 | 🔴 | 45 | Popeye | Platformers | PF | M | todo |
@@ -69,13 +69,13 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🔴 | 47 | Ice Climber | Platformers | SC | M | todo |
 | 🟢 | 48 | Joust | Platformers | PF | M | dev |
 | 🔴 | 49 | Elevator Action | Platformers | PF | M | todo |
-| 🔴 | 50 | BurgerTime | Platformers | PF | M | todo |
+| 🟢 | 50 | BurgerTime | Platformers | PF | M | dev |
 | 🔴 | 51 | Rygar | Platformers | SC | M | todo |
 | 🔴 | 52 | Wonder Boy | Platformers | SC | M | todo |
 | 🔴 | 53 | Ghosts 'n Goblins | Platformers | SC | L | todo |
 | 🔴 | 54 | Spelunker | Platformers | SC | M | todo |
 | 🔴 | 55 | Kangaroo | Platformers | PF | M | todo |
-| 🔴 | 56 | Bomb Jack | Platformers | PF | M | todo |
+| 🟢 | 56 | Bomb Jack | Platformers | PF | M | dev |
 | 🔴 | 57 | Congo Bongo | Platformers | PF | L | todo |
 | 🟢 | 58 | Space Panic | Platformers | PF | S | dev |
 | 🔴 | 59 | Toki | Platformers | SC | L | todo |

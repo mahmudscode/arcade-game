@@ -69,6 +69,9 @@ const loaders: Record<string, Loader> = {
   'tilt-track': () => import('./tilt-track'),
   'gold-raider': () => import('./gold-raider'),
   'barrel-brute': () => import('./barrel-brute'),
+  'pipe-bumper': () => import('./pipe-bumper'),
+  'stack-chef': () => import('./stack-chef'),
+  'bomb-hopper': () => import('./bomb-hopper'),
 };
 
 export function playableSlugs(): string[] {

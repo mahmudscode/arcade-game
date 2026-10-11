@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_PLAT, isFloor, newBody, stepBody, supported, type Body, type Intent, type PlatWorld } from './platformer';
+import { DEFAULT_PLAT, isFloor, newBody, pathStep, stepBody, supported, type Body, type Intent, type PlatWorld } from './platformer';
 
 const NONE: Intent = { dir: 0, up: false, down: false, jump: false };
 const DT = 1 / 60;
@@ -161,5 +161,37 @@ describe('platformer physics', () => {
     const w = world(['    ', ' H  ', ' H  ', '####']);
     expect(isFloor(w, 1, 1)).toBe(true);
     expect(isFloor(w, 1, 2)).toBe(false);
+  });
+
+  describe('pathStep', () => {
+    // Body cells are (x, row of the body); the feet are one row lower, on the floor.
+    it('walks toward a target on the same floor', () => {
+      const w = world(['            ', '            ', '############']);
+      expect(pathStep(w, 12, 3, { x: 8, y: 1 }, { x: 2, y: 1 })).toEqual({ dir: -1, up: false, down: false });
+      expect(pathStep(w, 12, 3, { x: 2, y: 1 }, { x: 9, y: 1 })).toEqual({ dir: 1, up: false, down: false });
+    });
+
+    it('heads for the ladder to change floors, then climbs', () => {
+      // Upper floor (feet y = 2) over a lower one (feet y = 5), joined by a ladder at x = 4.
+      const w = world(['            ', '            ', '####H#######', '    H       ', '    H       ', '############']);
+      const rows = 6;
+      expect(pathStep(w, 12, rows, { x: 9, y: 4 }, { x: 8, y: 1 })).toEqual({ dir: -1, up: false, down: false });
+      expect(pathStep(w, 12, rows, { x: 4, y: 4 }, { x: 8, y: 1 })).toEqual({ dir: 0, up: true, down: false });
+      // Back down again: from the upper floor the ladder leads down.
+      expect(pathStep(w, 12, rows, { x: 4, y: 1 }, { x: 8, y: 4 })).toEqual({ dir: 0, up: false, down: true });
+    });
+
+    it('returns null when the target is unreachable, and when already there', () => {
+      const split = world(['    #       ', '    #       ', '############']);
+      expect(pathStep(split, 12, 3, { x: 2, y: 1 }, { x: 8, y: 1 })).toBeNull();
+      const open = world(['            ', '            ', '############']);
+      expect(pathStep(open, 12, 3, { x: 3, y: 1 }, { x: 3, y: 1 })).toBeNull();
+    });
+
+    it('routes through a drop: walking off a ledge is an edge', () => {
+      // A platform (feet y = 1) over the ground (feet y = 3): from the platform the way to the ground is leftward off the edge.
+      const w = world(['          ', '      ####', '          ', '##########']);
+      expect(pathStep(w, 10, 4, { x: 8, y: 0 }, { x: 2, y: 2 })).toEqual({ dir: -1, up: false, down: false });
+    });
   });
 });

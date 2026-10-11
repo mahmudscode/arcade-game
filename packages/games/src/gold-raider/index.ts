@@ -1,6 +1,6 @@
 import type { GameDefinition, Input, Rng, UpdateContext } from '@arcade/engine';
 import { COLORS, H, W, banner, burst, clear, drawSparks, gameOver, hud, makeStatus, stepSparks, type Spark } from '../_shared/ui';
-import { DEFAULT_PLAT, isFloor, newBody, stepBody, type Body, type Intent, type PlatConfig, type PlatWorld } from '../_shared/platformer';
+import { DEFAULT_PLAT, isFloor, newBody, pathStep, stepBody, type Body, type Intent, type PathStep, type PlatConfig, type PlatWorld } from '../_shared/platformer';
 
 const COLS = 28;
 const ROWS = 16;
@@ -143,41 +143,13 @@ function init({ rng, hiScore }: { rng: Rng; hiScore: number }): RaiderState {
   return s;
 }
 
-/** Breadth-first walk over body cells (x, row-of-body) to find the first step toward the target. */
-function firstStep(s: RaiderState, w: PlatWorld, fx: number, fy: number, tx: number, ty: number): { dir: number; up: boolean; down: boolean } | null {
-  const free = (x: number, r: number) => x >= 0 && x < COLS && r >= 0 && r < ROWS && !w.solid(x, r);
-  const stand = (x: number, r: number) => isFloor(w, x, r + 1) || !!w.ladder?.(x, r);
-  const key = (x: number, r: number) => r * COLS + x;
-  const parent = new Map<number, number>([[key(fx, fy), -1]]);
-  const queue: [number, number][] = [[fx, fy]];
-  const push = (x: number, r: number, from: [number, number]) => {
-    // Falling continues until something can be stood on.
-    let rr = r;
-    while (free(x, rr) && !stand(x, rr) && rr < ROWS - 1) rr += 1;
-    if (!free(x, rr) || !stand(x, rr) || parent.has(key(x, rr))) return;
-    parent.set(key(x, rr), key(from[0], from[1]));
-    queue.push([x, rr]);
-  };
-  for (let h = 0; h < queue.length; h++) {
-    const [x, r] = queue[h]!;
-    if (x === tx && r === ty) break;
-    // Sideways steps need a floor underfoot (not the middle of a ladder).
-    // (The start cell may be a ledge over a pit: let the guard keep walking.)
-    if (isFloor(w, x, r + 1) || (x === fx && r === fy && !w.ladder?.(x, r))) for (const dx of [-1, 1]) if (free(x + dx, r)) push(x + dx, r, [x, r]);
+function guardStep(s: RaiderState, w: PlatWorld, fx: number, fy: number, tx: number, ty: number): PathStep | null {
+  return pathStep(w, COLS, ROWS, { x: fx, y: fy }, { x: tx, y: ty }, (x, r, push) => {
     // A guard in a pit can scramble out to either side.
     if (holeAt(s, x, r + 1) === undefined && holeAt(s, x, r)) {
-      for (const dx of [-1, 1]) if (free(x + dx, r - 1) && isFloor(w, x + dx, r)) push(x + dx, r - 1, [x, r]);
+      for (const dx of [-1, 1]) if (!w.solid(x + dx, r - 1) && isFloor(w, x + dx, r)) push(x + dx, r - 1);
     }
-    if (w.ladder?.(x, r) && free(x, r - 1)) push(x, r - 1, [x, r]);
-    if (w.ladder?.(x, r + 1)) push(x, r + 1, [x, r]);
-  }
-  if (!parent.has(key(tx, ty))) return null;
-  let cur = key(tx, ty);
-  while (parent.get(cur) !== key(fx, fy) && parent.get(cur) !== -1) cur = parent.get(cur)!;
-  if (cur === key(fx, fy)) return null;
-  const nx = cur % COLS;
-  const nr = Math.floor(cur / COLS);
-  return { dir: Math.sign(nx - fx), up: nr < fy && nx === fx, down: nr > fy && nx === fx };
+  });
 }
 
 function loseLife(s: RaiderState, rng: Rng, emit: UpdateContext['emit']): void {
@@ -317,7 +289,7 @@ function update(s: RaiderState, input: Input, dt: number, ctx: UpdateContext): v
     g.think -= dt;
     if (g.think <= 0 && me.alive) {
       g.think = 0.18;
-      const step = firstStep(s, w, Math.floor(b.x), Math.floor(b.y - 0.01), Math.floor(me.x), Math.floor(me.y - 0.01));
+      const step = guardStep(s, w, Math.floor(b.x), Math.floor(b.y - 0.01), Math.floor(me.x), Math.floor(me.y - 0.01));
       if (step) {
         g.dir = step.dir;
         g.up = step.up;

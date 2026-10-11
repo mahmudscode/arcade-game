@@ -206,3 +206,57 @@ export function stepBody(b: Body, w: PlatWorld, intent: Intent, dt: number, cfg:
   }
   return result;
 }
+
+export interface PathStep {
+  dir: number;
+  up: boolean;
+  down: boolean;
+}
+
+/**
+ * First step of a shortest route between two body cells (x, row-of-body, where the feet are at row + 1),
+ * following the same rules the physics allows: walking on floors, climbing ladders, and falling.
+ * `extra` can add game-specific edges (e.g. scrambling out of a pit). Returns null if unreachable.
+ */
+export function pathStep(
+  w: PlatWorld,
+  cols: number,
+  rows: number,
+  from: { x: number; y: number },
+  to: { x: number; y: number },
+  extra?: (x: number, r: number, push: (nx: number, nr: number) => void) => void,
+): PathStep | null {
+  const free = (x: number, r: number) => x >= 0 && x < cols && r >= 0 && r < rows && !w.solid(x, r);
+  const stand = (x: number, r: number) => isFloor(w, x, r + 1) || isLadder(w, x, r);
+  const key = (x: number, r: number) => r * cols + x;
+  const parent = new Map<number, number>([[key(from.x, from.y), -1]]);
+  const queue: [number, number][] = [[from.x, from.y]];
+  let origin: [number, number] = [from.x, from.y];
+  const push = (x: number, r: number) => {
+    // Falling continues until something can be stood on.
+    let rr = r;
+    while (free(x, rr) && !stand(x, rr) && rr < rows - 1) rr += 1;
+    if (!free(x, rr) || !stand(x, rr) || parent.has(key(x, rr))) return;
+    parent.set(key(x, rr), key(origin[0], origin[1]));
+    queue.push([x, rr]);
+  };
+  for (let h = 0; h < queue.length; h++) {
+    const [x, r] = queue[h]!;
+    origin = [x, r];
+    if (x === to.x && r === to.y) break;
+    // Sideways steps need a floor underfoot (not the middle of a ladder); the start may be a ledge.
+    if (isFloor(w, x, r + 1) || (x === from.x && r === from.y && !isLadder(w, x, r))) {
+      for (const dx of [-1, 1]) if (free(x + dx, r)) push(x + dx, r);
+    }
+    if (isLadder(w, x, r) && free(x, r - 1)) push(x, r - 1);
+    if (isLadder(w, x, r + 1)) push(x, r + 1);
+    extra?.(x, r, push);
+  }
+  if (!parent.has(key(to.x, to.y))) return null;
+  let cur = key(to.x, to.y);
+  while (parent.get(cur) !== key(from.x, from.y) && parent.get(cur) !== -1) cur = parent.get(cur)!;
+  if (cur === key(from.x, from.y)) return null;
+  const nx = cur % cols;
+  const nr = Math.floor(cur / cols);
+  return { dir: Math.sign(nx - from.x), up: nr < from.y && nx === from.x, down: nr > from.y && nx === from.x };
+}

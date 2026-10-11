@@ -386,6 +386,21 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Jump', b: 'Jump' },
     controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['▲', '▼'], label: 'Climb' }, { keys: ['Space'], label: 'Jump' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('pipe-bumper', 'Pipe Bumper', 'Platform', 660_000, {
+    description: 'Bump the platforms from below to flip the creatures crawling on them, then kick them away. Hit the POW block to flip them all.',
+    touch: { a: 'Jump', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['Space', '▲'], label: 'Jump / bump' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('stack-chef', 'Stack Chef', 'Platform', 590_000, {
+    description: 'Walk over the burger layers to drop them down the floors and build four burgers, while hungry foods chase you. Pepper stuns them.',
+    touch: { a: 'Pepper', b: 'Pepper' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['▲', '▼'], label: 'Climb' }, { keys: ['Space'], label: 'Pepper' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('bomb-hopper', 'Bomb Hopper', 'Platform', 480_000, {
+    description: 'Leap and glide around one big screen collecting every bomb. Grab the flashing one first for a bonus and dodge the patrols.',
+    touch: { a: 'Jump / glide', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['Space', '▲'], label: 'Jump (hold to glide)' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

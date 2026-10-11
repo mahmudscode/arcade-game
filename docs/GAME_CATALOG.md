@@ -58,7 +58,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 |---|---|---|---|---|
 | 40 | Donkey Kong | PF | M | dev |
 | 41 | Donkey Kong Jr. | PF | M | todo |
-| 42 | Mario Bros. | PF | M | todo |
+| 42 | Mario Bros. | PF | M | dev |
 | 43 | Bubble Bobble | PF | L | todo |
 | 44 | Q*bert | GP | M | dev |
 | 45 | Popeye | PF | M | todo |
@@ -66,13 +66,13 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 47 | Ice Climber | SC | M | todo |
 | 48 | Joust | PF | M | dev |
 | 49 | Elevator Action | PF | M | todo |
-| 50 | BurgerTime | PF | M | todo |
+| 50 | BurgerTime | PF | M | dev |
 | 51 | Rygar | SC | M | todo |
 | 52 | Wonder Boy | SC | M | todo |
 | 53 | Ghosts 'n Goblins | SC | L | todo |
 | 54 | Spelunker | SC | M | todo |
 | 55 | Kangaroo | PF | M | todo |
-| 56 | Bomb Jack | PF | M | todo |
+| 56 | Bomb Jack | PF | M | dev |
 | 57 | Congo Bongo | PF | L | todo |
 | 58 | Space Panic | PF | S | dev |
 | 59 | Toki | SC | L | todo |
