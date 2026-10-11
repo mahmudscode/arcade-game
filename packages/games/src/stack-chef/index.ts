@@ -1,6 +1,6 @@
 import type { GameDefinition, Input, Rng, UpdateContext } from '@arcade/engine';
 import { COLORS, H, W, banner, burst, clear, drawSparks, gameOver, hud, makeStatus, stepSparks, type Spark } from '../_shared/ui';
-import { DEFAULT_PLAT, newBody, pathStep, stepBody, type Body, type PlatConfig, type PlatWorld } from '../_shared/platformer';
+import { DEFAULT_PLAT, newBody, pathStep, steerToLadder, stepBody, type Body, type PlatConfig, type PlatWorld } from '../_shared/platformer';
 
 const COLS = 28;
 const ROWS = 18;
@@ -276,7 +276,7 @@ function update(s: ChefState, input: Input, dt: number, ctx: UpdateContext): voi
         f.down = false;
       }
     }
-    stepBody(b, w, { dir: f.dir, up: f.up, down: f.down, jump: false }, dt, { ...ENEMY_CFG, walk: ENEMY_CFG.walk + Math.min(s.level, 8) * 0.12 });
+    stepBody(b, w, { ...steerToLadder(b, { dir: f.dir, up: f.up, down: f.down }), jump: false }, dt, { ...ENEMY_CFG, walk: ENEMY_CFG.walk + Math.min(s.level, 8) * 0.12 });
     if (me.alive && Math.abs(b.x - me.x) < 0.6 && Math.abs(b.y - me.y) < 0.8) {
       loseLife(s, rng, emit);
       if (s.over) return;

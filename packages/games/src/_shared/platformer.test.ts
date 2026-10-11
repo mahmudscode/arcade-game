@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_PLAT, isFloor, newBody, pathStep, stepBody, supported, type Body, type Intent, type PlatWorld } from './platformer';
+import { DEFAULT_PLAT, isFloor, newBody, pathStep, steerToLadder, stepBody, supported, type Body, type Intent, type PlatWorld } from './platformer';
 
 const NONE: Intent = { dir: 0, up: false, down: false, jump: false };
 const DT = 1 / 60;
@@ -193,5 +193,44 @@ describe('platformer physics', () => {
       const w = world(['          ', '      ####', '          ', '##########']);
       expect(pathStep(w, 10, 4, { x: 8, y: 0 }, { x: 2, y: 2 })).toEqual({ dir: -1, up: false, down: false });
     });
+  });
+
+  describe('steerToLadder', () => {
+    it('eases toward the middle of the tile before a climb, then lets the climb through', () => {
+      const edge = newBody(10.05, 5);
+      const steer = steerToLadder(edge, { dir: 0, up: true, down: false });
+      expect(steer.up).toBe(false);
+      expect(steer.dir).toBeGreaterThan(0);
+      expect(steer.dir).toBeLessThanOrEqual(1);
+      const centred = newBody(10.45, 5);
+      expect(steerToLadder(centred, { dir: 0, up: true, down: false })).toEqual({ dir: 0, up: true, down: false });
+    });
+
+    it('leaves walking alone, and slows down near the centre so it cannot overshoot', () => {
+      const b = newBody(10.1, 5);
+      expect(steerToLadder(b, { dir: 1, up: false, down: false })).toEqual({ dir: 1, up: false, down: false });
+      const far = steerToLadder(newBody(10.0, 5), { dir: 0, up: true, down: false }).dir;
+      const near = steerToLadder(newBody(10.28, 5), { dir: 0, up: true, down: false }).dir;
+      expect(near).toBeLessThan(far);
+    });
+
+    it('does nothing to a body that is already climbing', () => {
+      const b = newBody(10.0, 5);
+      b.climbing = true;
+      expect(steerToLadder(b, { dir: 0, up: true, down: false })).toEqual({ dir: 0, up: true, down: false });
+    });
+  });
+
+  it('jumping off a ladder while holding Up does not re-grab it straight away', () => {
+    const w = world(['#          #', '#   H      #', '#   H      #', '#   H      #', '#   H      #', '############']);
+    const b = newBody(4.5, 5);
+    b.onGround = true;
+    run(b, w, { ...NONE, up: true }, 25);
+    expect(b.climbing).toBe(true);
+    stepBody(b, w, { dir: 1, up: true, down: false, jump: true }, DT);
+    expect(b.climbing).toBe(false);
+    for (let f = 0; f < 6; f++) stepBody(b, w, { dir: 0, up: true, down: false, jump: false }, DT);
+    expect(b.climbing).toBe(false); // still in the air, not yanked back
+    expect(b.vy).not.toBe(0);
   });
 });

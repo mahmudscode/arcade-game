@@ -47,7 +47,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 32 | Bomberman | MZ | M | dev |
 | 33 | Lode Runner | PF | M | dev |
 | 34 | Rally-X | MZ | M | dev |
-| 35 | Mappy | PF | M | todo |
+| 35 | Mappy | PF | M | dev |
 | 36 | Wizard of Wor | MZ | M | dev |
 | 37 | Amidar | MZ | S | dev |
 | 38 | Qix | GP | S | dev |
@@ -57,23 +57,23 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
 | 40 | Donkey Kong | PF | M | dev |
-| 41 | Donkey Kong Jr. | PF | M | todo |
+| 41 | Donkey Kong Jr. | PF | M | dev |
 | 42 | Mario Bros. | PF | M | dev |
-| 43 | Bubble Bobble | PF | L | todo |
+| 43 | Bubble Bobble | PF | L | dev |
 | 44 | Q*bert | GP | M | dev |
-| 45 | Popeye | PF | M | todo |
+| 45 | Popeye | PF | M | dev |
 | 46 | Pitfall! | SC | M | dev |
 | 47 | Ice Climber | SC | M | todo |
 | 48 | Joust | PF | M | dev |
-| 49 | Elevator Action | PF | M | todo |
+| 49 | Elevator Action | PF | M | dev |
 | 50 | BurgerTime | PF | M | dev |
 | 51 | Rygar | SC | M | todo |
 | 52 | Wonder Boy | SC | M | todo |
 | 53 | Ghosts 'n Goblins | SC | L | todo |
 | 54 | Spelunker | SC | M | todo |
-| 55 | Kangaroo | PF | M | todo |
+| 55 | Kangaroo | PF | M | dev |
 | 56 | Bomb Jack | PF | M | dev |
-| 57 | Congo Bongo | PF | L | todo |
+| 57 | Congo Bongo | PF | L | dev |
 | 58 | Space Panic | PF | S | dev |
 | 59 | Toki | SC | L | todo |
 

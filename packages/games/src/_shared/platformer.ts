@@ -14,6 +14,8 @@ export interface Body {
   climbing: boolean;
   /** Seconds left in which a one-way floor is ignored (dropping through). */
   drop: number;
+  /** Seconds left before a ladder can be grabbed again (set when jumping off one). */
+  grabCd?: number;
 }
 
 export interface PlatWorld {
@@ -77,12 +79,13 @@ export function supported(b: Body, w: PlatWorld, cfg: PlatConfig = DEFAULT_PLAT)
 export function stepBody(b: Body, w: PlatWorld, intent: Intent, dt: number, cfg: PlatConfig = DEFAULT_PLAT): StepResult {
   const result: StepResult = { landed: false };
   b.drop = Math.max(0, b.drop - dt);
+  if (b.grabCd) b.grabCd = Math.max(0, b.grabCd - dt);
   if (intent.dir !== 0) b.face = intent.dir;
 
   // ---- ladders
   const cx = Math.floor(b.x);
   const centred = Math.abs(b.x - (cx + 0.5)) < 0.4;
-  if (!b.climbing && centred) {
+  if (!b.climbing && centred && !b.grabCd) {
     const above = isLadder(w, cx, Math.floor(b.y - EPS));
     const below = isLadder(w, cx, Math.floor(b.y + EPS));
     if ((intent.up && above) || (intent.down && below && (b.onGround || supported(b, w, cfg)))) {
@@ -98,6 +101,7 @@ export function stepBody(b: Body, w: PlatWorld, intent: Intent, dt: number, cfg:
     b.vy = 0;
     if (intent.jump && cfg.jump > 0 && intent.dir !== 0) {
       b.climbing = false;
+      b.grabCd = 0.3;
       b.vy = -cfg.jump * 0.8;
       b.vx = intent.dir * cfg.walk;
     } else {
@@ -259,4 +263,17 @@ export function pathStep(
   const nx = cur % cols;
   const nr = Math.floor(cur / cols);
   return { dir: Math.sign(nx - from.x), up: nr < from.y && nx === from.x, down: nr > from.y && nx === from.x };
+}
+
+/**
+ * Applied every frame to an AI's intent: before a climb, ease toward the middle of the ladder column.
+ * Bodies only grab a ladder near its centre and path steps are decided per tile, so an AI arriving at a
+ * tile's edge would otherwise stall. The approach slows as it nears the centre, so it never overshoots.
+ */
+export function steerToLadder(b: Body, intent: { dir: number; up: boolean; down: boolean }): { dir: number; up: boolean; down: boolean } {
+  if ((intent.up || intent.down) && !b.climbing) {
+    const off = Math.floor(b.x) + 0.5 - b.x;
+    if (Math.abs(off) > 0.2) return { dir: Math.sign(off) * Math.min(1, Math.abs(off) * 3), up: false, down: false };
+  }
+  return intent;
 }

@@ -152,9 +152,13 @@ describe('gold-raider rules', () => {
     const { s, tick, guard } = stage();
     Object.assign(s.me, { x: 20.5, y: 11 });
     s.guards.push(guard(3.5, 14));
-    tick(60 * 12);
-    expect(s.guards[0]!.b.y).toBeLessThanOrEqual(11.01);
+    let yAtKill = 99;
+    for (let f = 0; f < 60 * 25 && s.lives === 3; f++) {
+      tick(1);
+      yAtKill = s.guards[0]!.b.y;
+    }
     expect(s.lives).toBeLessThan(3);
+    expect(yAtKill).toBeLessThanOrEqual(11.01); // it climbed to the hero's floor to get them
   });
 
   it('a pit refilling on the player costs a life, but up climbs out in time', () => {

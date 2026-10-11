@@ -1,6 +1,6 @@
 import type { GameDefinition, Input, Rng, UpdateContext } from '@arcade/engine';
 import { COLORS, H, W, banner, burst, clear, drawSparks, gameOver, hud, makeStatus, stepSparks, type Spark } from '../_shared/ui';
-import { DEFAULT_PLAT, isFloor, newBody, pathStep, stepBody, type Body, type Intent, type PathStep, type PlatConfig, type PlatWorld } from '../_shared/platformer';
+import { DEFAULT_PLAT, isFloor, newBody, pathStep, steerToLadder, stepBody, type Body, type Intent, type PathStep, type PlatConfig, type PlatWorld } from '../_shared/platformer';
 
 const COLS = 28;
 const ROWS = 16;
@@ -307,7 +307,7 @@ function update(s: RaiderState, input: Input, dt: number, ctx: UpdateContext): v
         g.down = false;
       }
     }
-    stepBody(b, w, { dir: g.dir, up: g.up, down: g.down, jump: false }, dt, GUARD_CFG);
+    stepBody(b, w, { ...steerToLadder(b, { dir: g.dir, up: g.up, down: g.down }), jump: false }, dt, GUARD_CFG);
     if (me.alive && Math.abs(b.x - me.x) < 0.55 && Math.abs(b.y - me.y) < 0.8) loseLife(s, rng, emit);
   }
 

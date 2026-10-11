@@ -401,6 +401,41 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Jump / glide', b: 'Jump' },
     controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['Space', '▲'], label: 'Jump (hold to glide)' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('spring-sneak', 'Spring Sneak', 'Platform', 430000, {
+    description: 'Bounce between floors on trampolines, recover the stolen loot and use power doors to blast the chasing cats.',
+    touch: { a: 'Action', b: 'Door' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['Space'], label: 'Open power door' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('roo-rescue', 'Roo Rescue', 'Platform', 520000, {
+    description: 'Climb the floors to rescue your joey, punching the apples and monkeys in your way.',
+    touch: { a: 'Punch', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['▲', '▼'], label: 'Climb' }, { keys: ['X'], label: 'Jump' }, { keys: ['Space'], label: 'Punch' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('bubble-brawler', 'Bubble Brawler', 'Platform', 740000, {
+    description: 'Blow bubbles to trap the monsters, pop them for fruit, and clear each round before the hurry-up ghost arrives.',
+    touch: { a: 'Jump', b: 'Bubble' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['Space', '▲'], label: 'Jump' }, { keys: ['X'], label: 'Blow bubble' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('lift-agent', 'Lift Agent', 'Platform', 450000, {
+    description: 'Ride the elevators down a guarded tower, grab the secret documents behind the red doors and slip out. Duck to dodge shots.',
+    touch: { a: 'Shoot', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['▲', '▼'], label: 'Elevator / enter door / duck' }, { keys: ['X'], label: 'Jump' }, { keys: ['Space'], label: 'Shoot' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('vine-climber', 'Vine Climber', 'Platform', 460000, {
+    description: 'Swing between jungle vines to reach the key, shaking fruit down on the snapjaws that chase you.',
+    touch: { a: 'Jump', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['▲', '▼'], label: 'Climb vines' }, { keys: ['Space'], label: 'Jump' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('sailor-slugger', 'Sailor Slugger', 'Platform', 400000, {
+    description: 'Catch the hearts drifting down to the sea while a big bruiser hunts you. Grab spinach and punch him into the water.',
+    touch: { a: 'Punch', b: 'Punch' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['▲', '▼'], label: 'Stairs' }, { keys: ['Space'], label: 'Punch' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('canopy-climb', 'Canopy Climb', 'Platform', 390000, {
+    description: 'Scale a winding isometric cliff toward the ape, hopping the coconuts he rolls down at you.',
+    touch: { a: 'Hop', b: 'Hop' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move (screen directions)' }, { keys: ['Space'], label: 'Hop' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

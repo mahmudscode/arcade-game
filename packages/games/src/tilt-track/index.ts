@@ -1,17 +1,13 @@
 import type { GameDefinition, Input, Rng, UpdateContext } from '@arcade/engine';
+import { N, VOID, TW, TH, diamond, isoX, isoY, makeTrack, heightAt as heightOf, onTrack as onTrackOf } from '../_shared/iso-track';
 import { COLORS, H, TAU, W, banner, clear, drawSparks, gameOver, hud, makeStatus, stepSparks, type Spark } from '../_shared/ui';
 
-const N = 28;
-const VOID = -999;
 const GRAVITY = 12;
 const PUSH = 11;
 const DRAG = 0.95;
 const MAX_SPEED = 8;
 const CHECK_EVERY = 20;
 const PENALTY = 3;
-const TW = 44;
-const TH = 22;
-const HZ = 15;
 
 interface Ball {
   x: number;
@@ -41,59 +37,15 @@ export interface TiltState {
   over: boolean;
 }
 
-const tileH = (s: TiltState, ix: number, iy: number) => (ix < 0 || iy < 0 || ix >= N || iy >= N ? VOID : s.h[iy * N + ix]!);
-export const onTrack = (s: TiltState, x: number, y: number) => tileH(s, Math.floor(x), Math.floor(y)) > VOID / 2;
-
-/** Smooth surface height: bilinear between tile centres, void neighbours borrowing the local tile's height. */
-export function heightAt(s: TiltState, x: number, y: number): number {
-  const here = tileH(s, Math.floor(x), Math.floor(y));
-  if (here <= VOID / 2) return VOID;
-  const fx = x - 0.5;
-  const fy = y - 0.5;
-  const ix = Math.floor(fx);
-  const iy = Math.floor(fy);
-  const tx = fx - ix;
-  const ty = fy - iy;
-  const g = (a: number, b: number) => {
-    const v = tileH(s, a, b);
-    return v <= VOID / 2 ? here : v;
-  };
-  return g(ix, iy) * (1 - tx) * (1 - ty) + g(ix + 1, iy) * tx * (1 - ty) + g(ix, iy + 1) * (1 - tx) * ty + g(ix + 1, iy + 1) * tx * ty;
-}
+export const onTrack = (s: TiltState, x: number, y: number) => onTrackOf(s.h, x, y);
+export const heightAt = (s: TiltState, x: number, y: number) => heightOf(s.h, x, y);
 
 function genTrack(s: TiltState, rng: Rng): void {
-  const path: { x: number; y: number }[] = [{ x: 3, y: 3 }];
-  const segments = Math.min(7 + s.level, 13);
-  let dir = 0;
-  const slopes = [0.18, 0.28, 0.4, 0.55, 0];
-  const slopeAt: number[] = [0];
-  outer: for (let seg = 0; seg < segments; seg++) {
-    const len = rng.int(4, 7);
-    const slope = seg === 0 ? 0.2 : rng.pick(slopes) + Math.min(s.level, 6) * 0.02;
-    for (let k = 0; k < len; k++) {
-      const last = path[path.length - 1]!;
-      const nx = last.x + (dir === 0 ? 1 : 0);
-      const ny = last.y + (dir === 1 ? 1 : 0);
-      if (nx > N - 4 || ny > N - 4) break outer;
-      path.push({ x: nx, y: ny });
-      slopeAt.push(slope);
-    }
-    dir ^= 1;
-  }
-  s.path = path;
-  s.h = Array.from({ length: N * N }, () => VOID);
-  let height = 12;
-  path.forEach((c, k) => {
-    height -= slopeAt[k]!;
-    for (let dy = -1; dy <= 1; dy++) {
-      for (let dx = -1; dx <= 1; dx++) {
-        const i = (c.y + dy) * N + c.x + dx;
-        if (s.h[i] === VOID) s.h[i] = height;
-      }
-    }
-  });
+  const track = makeTrack(rng, s.level, false, 12);
+  s.path = track.path;
+  s.h = track.h;
   s.progress = 0;
-  s.time = Math.round(path.length * 0.62 + 14);
+  s.time = Math.round(s.path.length * 0.62 + 14);
   s.steelies = [];
   s.spawnTimer = 8;
   placeAtCheckpoint(s);
@@ -257,20 +209,6 @@ function update(s: TiltState, input: Input, dt: number, ctx: UpdateContext): voi
 }
 
 // ---- isometric rendering --------------------------------------------------------------
-
-const isoX = (x: number, y: number) => (x - y) * (TW / 2);
-const isoY = (x: number, y: number, z: number) => (x + y) * (TH / 2) - z * HZ;
-
-function diamond(g: CanvasRenderingContext2D, cx: number, cy: number, fill: string): void {
-  g.fillStyle = fill;
-  g.beginPath();
-  g.moveTo(cx, cy - TH / 2);
-  g.lineTo(cx + TW / 2, cy);
-  g.lineTo(cx, cy + TH / 2);
-  g.lineTo(cx - TW / 2, cy);
-  g.closePath();
-  g.fill();
-}
 
 function ball(g: CanvasRenderingContext2D, s: TiltState, b: Ball, ox: number, oy: number, color: string): void {
   const z = (heightAt(s, b.x, b.y) <= VOID / 2 ? heightAt(s, Math.min(Math.max(b.x, 0.5), N - 0.5), Math.min(Math.max(b.y, 0.5), N - 0.5)) : heightAt(s, b.x, b.y)) - b.fall * b.fall * 6;

@@ -7,12 +7,12 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 | Category | 🟢 Built | 🔴 Left | Total |
 |---|---|---|---|
 | Shooters | 21 | 4 | 25 |
-| Maze and Chase | 13 | 1 | 14 |
-| Platformers | 8 | 12 | 20 |
+| Maze and Chase | 14 | 0 | 14 |
+| Platformers | 14 | 6 | 20 |
 | Action and Fighting | 2 | 12 | 14 |
 | Racing and Sports | 8 | 6 | 14 |
 | Puzzle and Casual | 13 | 0 | 13 |
-| **Total** | **65** | **35** | **100** |
+| **Total** | **72** | **28** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -54,29 +54,29 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 32 | Bomberman | Maze and Chase | MZ | M | dev |
 | 🟢 | 33 | Lode Runner | Maze and Chase | PF | M | dev |
 | 🟢 | 34 | Rally-X | Maze and Chase | MZ | M | dev |
-| 🔴 | 35 | Mappy | Maze and Chase | PF | M | todo |
+| 🟢 | 35 | Mappy | Maze and Chase | PF | M | dev |
 | 🟢 | 36 | Wizard of Wor | Maze and Chase | MZ | M | dev |
 | 🟢 | 37 | Amidar | Maze and Chase | MZ | S | dev |
 | 🟢 | 38 | Qix | Maze and Chase | GP | S | dev |
 | 🟢 | 39 | Tron | Maze and Chase | AR | M | dev |
 | 🟢 | 40 | Donkey Kong | Platformers | PF | M | dev |
-| 🔴 | 41 | Donkey Kong Jr. | Platformers | PF | M | todo |
+| 🟢 | 41 | Donkey Kong Jr. | Platformers | PF | M | dev |
 | 🟢 | 42 | Mario Bros. | Platformers | PF | M | dev |
-| 🔴 | 43 | Bubble Bobble | Platformers | PF | L | todo |
+| 🟢 | 43 | Bubble Bobble | Platformers | PF | L | dev |
 | 🟢 | 44 | Q*bert | Platformers | GP | M | dev |
-| 🔴 | 45 | Popeye | Platformers | PF | M | todo |
+| 🟢 | 45 | Popeye | Platformers | PF | M | dev |
 | 🟢 | 46 | Pitfall! | Platformers | SC | M | dev |
 | 🔴 | 47 | Ice Climber | Platformers | SC | M | todo |
 | 🟢 | 48 | Joust | Platformers | PF | M | dev |
-| 🔴 | 49 | Elevator Action | Platformers | PF | M | todo |
+| 🟢 | 49 | Elevator Action | Platformers | PF | M | dev |
 | 🟢 | 50 | BurgerTime | Platformers | PF | M | dev |
 | 🔴 | 51 | Rygar | Platformers | SC | M | todo |
 | 🔴 | 52 | Wonder Boy | Platformers | SC | M | todo |
 | 🔴 | 53 | Ghosts 'n Goblins | Platformers | SC | L | todo |
 | 🔴 | 54 | Spelunker | Platformers | SC | M | todo |
-| 🔴 | 55 | Kangaroo | Platformers | PF | M | todo |
+| 🟢 | 55 | Kangaroo | Platformers | PF | M | dev |
 | 🟢 | 56 | Bomb Jack | Platformers | PF | M | dev |
-| 🔴 | 57 | Congo Bongo | Platformers | PF | L | todo |
+| 🟢 | 57 | Congo Bongo | Platformers | PF | L | dev |
 | 🟢 | 58 | Space Panic | Platformers | PF | S | dev |
 | 🔴 | 59 | Toki | Platformers | SC | L | todo |
 | 🔴 | 60 | Contra | Action and Fighting | RG | L | todo |

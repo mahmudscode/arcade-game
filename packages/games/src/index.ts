@@ -72,6 +72,13 @@ const loaders: Record<string, Loader> = {
   'pipe-bumper': () => import('./pipe-bumper'),
   'stack-chef': () => import('./stack-chef'),
   'bomb-hopper': () => import('./bomb-hopper'),
+  'spring-sneak': () => import('./spring-sneak'),
+  'roo-rescue': () => import('./roo-rescue'),
+  'bubble-brawler': () => import('./bubble-brawler'),
+  'lift-agent': () => import('./lift-agent'),
+  'vine-climber': () => import('./vine-climber'),
+  'sailor-slugger': () => import('./sailor-slugger'),
+  'canopy-climb': () => import('./canopy-climb'),
 };
 
 export function playableSlugs(): string[] {
