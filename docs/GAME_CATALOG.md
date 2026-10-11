@@ -45,7 +45,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 30 | Lady Bug | MZ | M | dev |
 | 31 | Mr. Do! | MZ | M | dev |
 | 32 | Bomberman | MZ | M | dev |
-| 33 | Lode Runner | PF | M | todo |
+| 33 | Lode Runner | PF | M | dev |
 | 34 | Rally-X | MZ | M | dev |
 | 35 | Mappy | PF | M | todo |
 | 36 | Wizard of Wor | MZ | M | dev |
@@ -56,7 +56,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 ## Platformers (20)
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
-| 40 | Donkey Kong | PF | M | todo |
+| 40 | Donkey Kong | PF | M | dev |
 | 41 | Donkey Kong Jr. | PF | M | todo |
 | 42 | Mario Bros. | PF | M | todo |
 | 43 | Bubble Bobble | PF | L | todo |

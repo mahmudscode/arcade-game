@@ -7,12 +7,12 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 | Category | 🟢 Built | 🔴 Left | Total |
 |---|---|---|---|
 | Shooters | 21 | 4 | 25 |
-| Maze and Chase | 12 | 2 | 14 |
-| Platformers | 4 | 16 | 20 |
+| Maze and Chase | 13 | 1 | 14 |
+| Platformers | 5 | 15 | 20 |
 | Action and Fighting | 2 | 12 | 14 |
 | Racing and Sports | 8 | 6 | 14 |
 | Puzzle and Casual | 13 | 0 | 13 |
-| **Total** | **60** | **40** | **100** |
+| **Total** | **62** | **38** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -52,14 +52,14 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 30 | Lady Bug | Maze and Chase | MZ | M | dev |
 | 🟢 | 31 | Mr. Do! | Maze and Chase | MZ | M | dev |
 | 🟢 | 32 | Bomberman | Maze and Chase | MZ | M | dev |
-| 🔴 | 33 | Lode Runner | Maze and Chase | PF | M | todo |
+| 🟢 | 33 | Lode Runner | Maze and Chase | PF | M | dev |
 | 🟢 | 34 | Rally-X | Maze and Chase | MZ | M | dev |
 | 🔴 | 35 | Mappy | Maze and Chase | PF | M | todo |
 | 🟢 | 36 | Wizard of Wor | Maze and Chase | MZ | M | dev |
 | 🟢 | 37 | Amidar | Maze and Chase | MZ | S | dev |
 | 🟢 | 38 | Qix | Maze and Chase | GP | S | dev |
 | 🟢 | 39 | Tron | Maze and Chase | AR | M | dev |
-| 🔴 | 40 | Donkey Kong | Platformers | PF | M | todo |
+| 🟢 | 40 | Donkey Kong | Platformers | PF | M | dev |
 | 🔴 | 41 | Donkey Kong Jr. | Platformers | PF | M | todo |
 | 🔴 | 42 | Mario Bros. | Platformers | PF | M | todo |
 | 🔴 | 43 | Bubble Bobble | Platformers | PF | L | todo |

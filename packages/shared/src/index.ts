@@ -376,6 +376,16 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Action', b: 'Alt' },
     controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Roll (screen directions)' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('gold-raider', 'Gold Raider', 'Platform', 510_000, {
+    description: 'Dig pits in the brick floors to trap the guards, grab every bar of gold, then climb the hidden ladder to escape.',
+    touch: { a: 'Dig left', b: 'Dig right' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Run / climb' }, { keys: ['Z'], label: 'Dig left' }, { keys: ['X'], label: 'Dig right' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('barrel-brute', 'Barrel Brute', 'Platform', 700_000, {
+    description: 'Climb the crooked girders to the top while a giant brute rolls barrels at you. Hop them, or grab a hammer and smash them.',
+    touch: { a: 'Jump', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['▲', '▼'], label: 'Climb' }, { keys: ['Space'], label: 'Jump' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

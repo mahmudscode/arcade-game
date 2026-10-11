@@ -67,6 +67,8 @@ const loaders: Record<string, Loader> = {
   'vault-delver': () => import('./vault-delver'),
   'skyline-stomper': () => import('./skyline-stomper'),
   'tilt-track': () => import('./tilt-track'),
+  'gold-raider': () => import('./gold-raider'),
+  'barrel-brute': () => import('./barrel-brute'),
 };
 
 export function playableSlugs(): string[] {
