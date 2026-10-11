@@ -1,4 +1,4 @@
-import { type FighterState } from '../_shared/fighter';
+import type { FighterState } from '../_shared/fighter';
 import { describe, expect, it } from 'vitest';
 import { NO_INPUT, TICK, createRng, runHeadless, type Input } from '@arcade/engine';
 import arenaMasters from './index';

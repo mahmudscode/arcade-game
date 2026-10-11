@@ -123,16 +123,13 @@ describe('canopy-climb rules', () => {
     const { s, tick } = summit();
     tick(1, held({}, { a: true }));
     let top = 0;
-    let secondHop = false;
     for (let f = 0; f < 60; f++) {
       tick(1, f === 5 ? held({}, { a: true }) : NO_INPUT);
       top = Math.max(top, s.me.hop);
-      if (f === 5 && s.me.hopV > 2.5 && s.me.hop > top - 0.01 && false) secondHop = true;
     }
     expect(top).toBeGreaterThan(0.8);
     expect(top).toBeLessThan(1.8);
     expect(s.me.hop).toBe(0);
-    expect(secondHop).toBe(false);
   });
 
   it('coconuts roll down the path from the ape, in one of three lanes, and vanish at the bottom', () => {

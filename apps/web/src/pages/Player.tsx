@@ -164,7 +164,7 @@ function PlayerView({ game }: { game: GameMeta }) {
           {/* Mobile score bar + controller */}
           <div className="mt-3 flex items-center justify-between rounded-xl border border-line bg-ink-2 px-4 py-3 md:hidden">
             <span className="font-pixel text-[11px]">SCORE {pad(status?.score ?? 0)}</span>
-            <span className="flex gap-1.5 text-coral" aria-label={`${status?.lives ?? 0} lives`}>
+            <span className="flex gap-1.5 text-coral" role="img" aria-label={`${status?.lives ?? 0} lives`}>
               {Array.from({ length: status?.lives ?? 0 }, (_, i) => <HeartIcon key={i} width={14} height={14} filled />)}
             </span>
           </div>

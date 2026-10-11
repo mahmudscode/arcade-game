@@ -1,4 +1,4 @@
-import { type BoxerState } from '../_shared/boxer';
+import type { BoxerState } from '../_shared/boxer';
 import { describe, expect, it } from 'vitest';
 import { NO_INPUT, TICK, createRng, runHeadless, type Input } from '@arcade/engine';
 import gloveRush from './index';
