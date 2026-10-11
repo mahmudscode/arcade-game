@@ -9,10 +9,10 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 | Shooters | 25 | 0 | 25 |
 | Maze and Chase | 14 | 0 | 14 |
 | Platformers | 20 | 0 | 20 |
-| Action and Fighting | 11 | 3 | 14 |
-| Racing and Sports | 10 | 4 | 14 |
+| Action and Fighting | 12 | 2 | 14 |
+| Racing and Sports | 13 | 1 | 14 |
 | Puzzle and Casual | 13 | 0 | 13 |
-| **Total** | **93** | **7** | **100** |
+| **Total** | **97** | **3** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -92,16 +92,16 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 70 | Gauntlet | Action and Fighting | AR | L | dev |
 | 🔴 | 71 | Karate Champ | Action and Fighting | FT | M | todo |
 | 🟢 | 72 | Rampage | Action and Fighting | AR | M | dev |
-| 🔴 | 73 | Spy Hunter | Action and Fighting | RT | M | todo |
+| 🟢 | 73 | Spy Hunter | Action and Fighting | RT | M | dev |
 | 🟢 | 74 | Pole Position | Racing and Sports | R3 | L | dev |
 | 🟢 | 75 | Out Run | Racing and Sports | R3 | L | dev |
-| 🔴 | 76 | Hang-On | Racing and Sports | R3 | L | todo |
+| 🟢 | 76 | Hang-On | Racing and Sports | R3 | L | dev |
 | 🟢 | 77 | Night Driver | Racing and Sports | R3 | M | dev |
-| 🔴 | 78 | Super Sprint | Racing and Sports | RT | M | todo |
+| 🟢 | 78 | Super Sprint | Racing and Sports | RT | M | dev |
 | 🟢 | 79 | Paperboy | Racing and Sports | SC | M | dev |
 | 🟢 | 80 | Excitebike | Racing and Sports | SC | M | dev |
 | 🟢 | 81 | Road Fighter | Racing and Sports | RT | M | dev |
-| 🔴 | 82 | Bump 'n' Jump | Racing and Sports | RT | M | todo |
+| 🟢 | 82 | Bump 'n' Jump | Racing and Sports | RT | M | dev |
 | 🟢 | 83 | Pong | Racing and Sports | PB | S | dev |
 | 🟢 | 84 | Breakout | Racing and Sports | PB | S | dev |
 | 🟢 | 85 | Arkanoid | Racing and Sports | PB | M | dev |

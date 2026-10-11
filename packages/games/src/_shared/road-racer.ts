@@ -18,6 +18,8 @@ export interface RoadConfig {
   offroad: number;
   /** Dark tunnel look: draws only lit lane markers and a vignette. */
   tunnel?: boolean;
+  /** A motorbike: narrower, quicker steering, leans into corners and brakes harder. */
+  bike?: boolean;
 }
 
 const SEG = 200;
@@ -99,13 +101,13 @@ export function createRoadRacer(cfg: RoadConfig): GameDefinition<RoadState> {
     s.crash = Math.max(0, s.crash - dt);
     if (accel && !crashed) s.speed += 140 * dt;
     else s.speed -= 70 * dt;
-    if (brake) s.speed -= 260 * dt;
+    if (brake) s.speed -= (cfg.bike ? 340 : 260) * dt;
     const offRoad = Math.abs(s.x) > 1;
     const cap = offRoad ? MAX_SPEED * (1 - cfg.offroad) : MAX_SPEED;
     if (s.speed > cap) s.speed -= 260 * dt;
     s.speed = Math.min(MAX_SPEED, Math.max(0, s.speed));
 
-    const steer = ((input.held.right ? 1 : 0) - (input.held.left ? 1 : 0)) * 1.9 * dt * (s.speed / MAX_SPEED + 0.15);
+    const steer = ((input.held.right ? 1 : 0) - (input.held.left ? 1 : 0)) * (cfg.bike ? 2.6 : 1.9) * dt * (s.speed / MAX_SPEED + 0.15);
     s.x += steer;
     // Curves push you outward in proportion to speed.
     s.x -= s.curves[segAt(s, s.z)]! * (s.speed / MAX_SPEED) * 0.9 * dt * 3;
@@ -123,7 +125,7 @@ export function createRoadRacer(cfg: RoadConfig): GameDefinition<RoadState> {
       let dz = c.z - s.z;
       if (dz < -trackLen / 2) dz += trackLen;
       if (dz > trackLen / 2) dz -= trackLen;
-      if (dz > 0 && dz < 200 && Math.abs(c.x - s.x) < 0.3 && s.crash <= 0) {
+      if (dz > 0 && dz < 200 && Math.abs(c.x - s.x) < (cfg.bike ? 0.2 : 0.3) && s.crash <= 0) {
         s.crash = 1.2;
         s.speed = Math.min(s.speed, c.speed * 0.5);
         emit('die');
@@ -209,15 +211,27 @@ export function createRoadRacer(cfg: RoadConfig): GameDefinition<RoadState> {
       g.fillRect(0, 0, W, H);
     }
 
-    // Player car.
+    // Player vehicle.
     const shake = s.crash > 0 ? Math.sin(time * 60) * 4 : 0;
-    g.fillStyle = COLORS.cyan;
-    g.fillRect(W / 2 - 38 + shake, H - 90, 76, 34);
-    g.fillStyle = COLORS.paper;
-    g.fillRect(W / 2 - 24 + shake, H - 106, 48, 18);
-    g.fillStyle = COLORS.bg;
-    g.fillRect(W / 2 - 42 + shake, H - 62, 14, 14);
-    g.fillRect(W / 2 + 28 + shake, H - 62, 14, 14);
+    if (cfg.bike) {
+      const lean = ((s.curves[segAt(s, s.z)] ?? 0) * 6) | 0;
+      g.fillStyle = COLORS.cyan;
+      g.fillRect(W / 2 - 12 + shake + lean, H - 96, 24, 44);
+      g.fillStyle = COLORS.paper;
+      g.fillRect(W / 2 - 9 + shake + lean, H - 120, 18, 26);
+      g.fillStyle = COLORS.coral;
+      g.fillRect(W / 2 - 7 + shake + lean, H - 134, 14, 14);
+      g.fillStyle = COLORS.bg;
+      g.fillRect(W / 2 - 8 + shake + lean, H - 56, 16, 12);
+    } else {
+      g.fillStyle = COLORS.cyan;
+      g.fillRect(W / 2 - 38 + shake, H - 90, 76, 34);
+      g.fillStyle = COLORS.paper;
+      g.fillRect(W / 2 - 24 + shake, H - 106, 48, 18);
+      g.fillStyle = COLORS.bg;
+      g.fillRect(W / 2 - 42 + shake, H - 62, 14, 14);
+      g.fillRect(W / 2 + 28 + shake, H - 62, 14, 14);
+    }
 
     hud(g, s, `SPEED ${Math.round(s.speed)}   TIME ${Math.ceil(s.time)}   STAGE ${s.checkpoint}`);
     if (s.crash > 0.8) banner(g, 'CRASH!', 200);

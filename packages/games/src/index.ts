@@ -100,6 +100,10 @@ const loaders: Record<string, Loader> = {
   'tower-monk': () => import('./tower-monk'),
   'field-commando': () => import('./field-commando'),
   'iron-trooper': () => import('./iron-trooper'),
+  'road-agent': () => import('./road-agent'),
+  'ridge-rider': () => import('./ridge-rider'),
+  'sprint-circuit': () => import('./sprint-circuit'),
+  'bounce-buggy': () => import('./bounce-buggy'),
 };
 
 export function playableSlugs(): string[] {

@@ -531,6 +531,26 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Fire', b: 'Grenade' },
     controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move / aim' }, { keys: ['Space', 'Z'], label: 'Fire (hold)' }, { keys: ['X'], label: 'Grenade (lobs over cover)' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('road-agent', 'Road Agent', 'Racing', 480000, {
+    description: 'Drive a gun-armed car down a winding road: shoot hostile cars, spare the civilians, and pick up missiles from weapon vans.',
+    touch: { a: 'Guns', b: 'Missile' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲'], label: 'Faster' }, { keys: ['▼'], label: 'Brake' }, { keys: ['Space', 'Z'], label: 'Machine gun (hold)' }, { keys: ['X'], label: 'Missile' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('ridge-rider', 'Ridge Rider', 'Racing', 450000, {
+    description: 'Lean a superbike through long coastal bends, weave through traffic and beat the checkpoint clock.',
+    touch: { a: 'Gas', b: 'Brake' },
+    controls: [{ keys: ['◀', '▶'], label: 'Lean / steer' }, { keys: ['▲', 'Space'], label: 'Accelerate' }, { keys: ['▼', 'X'], label: 'Brake' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('sprint-circuit', 'Sprint Circuit', 'Racing', 430000, {
+    description: 'A single-screen circuit with three rivals: slide through the bends, dodge oil, grab wrenches and finish in the top two.',
+    touch: { a: 'Gas', b: 'Brake' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲', 'Space'], label: 'Accelerate' }, { keys: ['▼', 'X'], label: 'Brake' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('bounce-buggy', 'Bounce Buggy', 'Racing', 410000, {
+    description: 'Bounce down the road: leap the water, land on rivals to squash them and shoulder them off the edge.',
+    touch: { a: 'Big jump', b: 'Big jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲'], label: 'Faster' }, { keys: ['▼'], label: 'Brake' }, { keys: ['Space', 'Z'], label: 'Big jump (as you land)' }, { keys: ['P'], label: 'Pause' }],
+  }),
   game('route-rider', 'Route Rider', 'Racing', 350000, {
     description: 'Ride down the street throwing papers into mailboxes, smashing windows of non-subscribers, and dodging cars, dogs and potholes.',
     touch: { a: 'Throw left', b: 'Throw right' },

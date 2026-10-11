@@ -93,20 +93,20 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 70 | Gauntlet | AR | L | dev |
 | 71 | Karate Champ | FT | M | todo |
 | 72 | Rampage | AR | M | dev |
-| 73 | Spy Hunter | RT | M | todo |
+| 73 | Spy Hunter | RT | M | dev |
 
 ## Racing and Sports (14)
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
 | 74 | Pole Position | R3 | L | dev |
 | 75 | Out Run | R3 | L | dev |
-| 76 | Hang-On | R3 | L | todo |
+| 76 | Hang-On | R3 | L | dev |
 | 77 | Night Driver | R3 | M | dev |
-| 78 | Super Sprint | RT | M | todo |
+| 78 | Super Sprint | RT | M | dev |
 | 79 | Paperboy | SC | M | dev |
 | 80 | Excitebike | SC | M | dev |
 | 81 | Road Fighter | RT | M | dev |
-| 82 | Bump 'n' Jump | RT | M | todo |
+| 82 | Bump 'n' Jump | RT | M | dev |
 | 83 | Pong | PB | S | dev |
 | 84 | Breakout | PB | S | dev |
 | 85 | Arkanoid | PB | M | dev |
