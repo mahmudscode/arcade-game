@@ -351,6 +351,31 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Fire', b: 'Fire' },
     controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space'], label: 'Fire' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('orb-popper', 'Orb Popper', 'Puzzle', 640_000, {
+    description: 'Aim and bounce glowing orbs into the cluster. Match three to pop them and cut off hanging orbs for a cascade.',
+    touch: { a: 'Fire', b: 'Swap' },
+    controls: [{ keys: ['◀', '▶'], label: 'Aim' }, { keys: ['Space', '▲'], label: 'Fire' }, { keys: ['X'], label: 'Swap orb' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('crystal-quarry', 'Crystal Quarry', 'Puzzle', 490_000, {
+    description: 'Dig through a cave, collect crystals and dodge falling boulders and wall-hugging fireflies before time runs out.',
+    touch: { a: 'Action', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Dig / move / push' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('vault-delver', 'Vault Delver', 'Shooter', 560_000, {
+    description: 'Shoot your way through a monster-filled dungeon, smash the spawners, grab the key and escape the vault. Health drains as you go.',
+    touch: { a: 'Fire', b: 'Potion' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move (8-way)' }, { keys: ['Space'], label: 'Shoot (hold)' }, { keys: ['X'], label: 'Potion' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('skyline-stomper', 'Skyline Stomper', 'Shooter', 430_000, {
+    description: 'Climb the towers, smash every window and flatten the city while tanks, choppers and snipers fight back.',
+    touch: { a: 'Punch', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk / climb sideways' }, { keys: ['▲', '▼'], label: 'Climb' }, { keys: ['Space'], label: 'Punch' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('tilt-track', 'Tilt Track', 'Racing', 580_000, {
+    description: 'Steer a marble down winding isometric slopes against the clock. Fall off and lose time; dodge the steel marbles.',
+    touch: { a: 'Action', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Roll (screen directions)' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

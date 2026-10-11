@@ -62,6 +62,11 @@ const loaders: Record<string, Loader> = {
   'garden-gates': () => import('./garden-gates'),
   'orchard-digger': () => import('./orchard-digger'),
   'crypt-crawler': () => import('./crypt-crawler'),
+  'orb-popper': () => import('./orb-popper'),
+  'crystal-quarry': () => import('./crystal-quarry'),
+  'vault-delver': () => import('./vault-delver'),
+  'skyline-stomper': () => import('./skyline-stomper'),
+  'tilt-track': () => import('./tilt-track'),
 };
 
 export function playableSlugs(): string[] {

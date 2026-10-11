@@ -9,10 +9,10 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 | Shooters | 21 | 4 | 25 |
 | Maze and Chase | 12 | 2 | 14 |
 | Platformers | 4 | 16 | 20 |
-| Action and Fighting | 0 | 14 | 14 |
+| Action and Fighting | 2 | 12 | 14 |
 | Racing and Sports | 8 | 6 | 14 |
-| Puzzle and Casual | 10 | 3 | 13 |
-| **Total** | **55** | **45** | **100** |
+| Puzzle and Casual | 13 | 0 | 13 |
+| **Total** | **60** | **40** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -89,9 +89,9 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🔴 | 67 | Rolling Thunder | Action and Fighting | SC | L | todo |
 | 🔴 | 68 | Shinobi | Action and Fighting | SC | L | todo |
 | 🔴 | 69 | Golden Axe | Action and Fighting | BU | L | todo |
-| 🔴 | 70 | Gauntlet | Action and Fighting | AR | L | todo |
+| 🟢 | 70 | Gauntlet | Action and Fighting | AR | L | dev |
 | 🔴 | 71 | Karate Champ | Action and Fighting | FT | M | todo |
-| 🔴 | 72 | Rampage | Action and Fighting | AR | M | todo |
+| 🟢 | 72 | Rampage | Action and Fighting | AR | M | dev |
 | 🔴 | 73 | Spy Hunter | Action and Fighting | RT | M | todo |
 | 🟢 | 74 | Pole Position | Racing and Sports | R3 | L | dev |
 | 🟢 | 75 | Out Run | Racing and Sports | R3 | L | dev |
@@ -111,12 +111,12 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 89 | Dr. Mario | Puzzle and Casual | FB | M | dev |
 | 🟢 | 90 | Puyo Puyo | Puzzle and Casual | FB | M | dev |
 | 🟢 | 91 | Columns | Puzzle and Casual | FB | M | dev |
-| 🔴 | 92 | Bust-A-Move | Puzzle and Casual | GP | M | todo |
+| 🟢 | 92 | Bust-A-Move | Puzzle and Casual | GP | M | dev |
 | 🟢 | 93 | Snake | Puzzle and Casual | GP | S | dev |
 | 🟢 | 94 | Klax | Puzzle and Casual | FB | M | dev |
-| 🔴 | 95 | Boulder Dash | Puzzle and Casual | GP | M | todo |
+| 🟢 | 95 | Boulder Dash | Puzzle and Casual | GP | M | dev |
 | 🟢 | 96 | Sokoban | Puzzle and Casual | GP | S | dev |
 | 🟢 | 97 | Kaboom! | Puzzle and Casual | PB | S | dev |
 | 🟢 | 98 | Frogger | Puzzle and Casual | GP | M | dev |
-| 🔴 | 99 | Marble Madness | Puzzle and Casual | GP | L | todo |
+| 🟢 | 99 | Marble Madness | Puzzle and Casual | GP | L | dev |
 | 🟢 | 100 | Simon | Puzzle and Casual | GP | S | dev |

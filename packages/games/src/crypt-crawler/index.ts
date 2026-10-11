@@ -1,5 +1,6 @@
 import type { GameDefinition, Input, Rng, UpdateContext } from '@arcade/engine';
 import { COLORS, H, TAU, W, banner, burst, clear, drawSparks, gameOver, hud, makeStatus, stepSparks, type Spark } from '../_shared/ui';
+import { generateDungeon as generateDungeonShared } from '../_shared/dungeon';
 import { DIRS, heldDir, isReverse, newWalker, reverseWalker, stepWalker, walkerPos, type Walker } from '../_shared/walker';
 
 const COLS = 19;
@@ -55,39 +56,7 @@ const wall = (s: CryptState, x: number, y: number) => !inside(x, y) || s.grid[id
 const px = (x: number) => OX + x * CELL + CELL / 2;
 const py = (y: number) => OY + y * CELL + CELL / 2;
 
-function reachable(grid: number[]): boolean {
-  const seen = new Set<number>([idx(1, 1)]);
-  const queue = [idx(1, 1)];
-  for (let h = 0; h < queue.length; h++) {
-    const c = queue[h]!;
-    for (const [dx, dy] of DIRS) {
-      const nx = (c % COLS) + dx;
-      const ny = Math.floor(c / COLS) + dy;
-      if (inside(nx, ny) && grid[idx(nx, ny)] === 0 && !seen.has(idx(nx, ny))) {
-        seen.add(idx(nx, ny));
-        queue.push(idx(nx, ny));
-      }
-    }
-  }
-  return seen.size === grid.filter((c) => c === 0).length;
-}
-
-export function generateDungeon(rng: Rng): number[] {
-  const grid = Array.from({ length: COLS * ROWS }, (_, i) => {
-    const x = i % COLS;
-    const y = Math.floor(i / COLS);
-    return x === 0 || y === 0 || x === COLS - 1 || y === ROWS - 1 || (x % 2 === 0 && y % 2 === 0) ? 1 : 0;
-  });
-  // Extra wall segments between pillars, kept only while the dungeon stays connected.
-  const spots: number[] = [];
-  for (let y = 1; y < ROWS - 1; y++) for (let x = 1; x < COLS - 1; x++) if ((x + y) % 2 === 1) spots.push(idx(x, y));
-  for (const i of spots) {
-    if (rng.next() > 0.32) continue;
-    grid[i] = 1;
-    if (!reachable(grid)) grid[i] = 0;
-  }
-  return grid;
-}
+export const generateDungeon = (rng: Rng) => generateDungeonShared(rng, COLS, ROWS);
 
 function lineClear(s: CryptState, ax: number, ay: number, bx: number, by: number): boolean {
   if (ax !== bx && ay !== by) return false;

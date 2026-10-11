@@ -90,9 +90,9 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 67 | Rolling Thunder | SC | L | todo |
 | 68 | Shinobi | SC | L | todo |
 | 69 | Golden Axe | BU | L | todo |
-| 70 | Gauntlet | AR | L | todo |
+| 70 | Gauntlet | AR | L | dev |
 | 71 | Karate Champ | FT | M | todo |
-| 72 | Rampage | AR | M | todo |
+| 72 | Rampage | AR | M | dev |
 | 73 | Spy Hunter | RT | M | todo |
 
 ## Racing and Sports (14)
@@ -120,14 +120,14 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 89 | Dr. Mario | FB | M | dev |
 | 90 | Puyo Puyo | FB | M | dev |
 | 91 | Columns | FB | M | dev |
-| 92 | Bust-A-Move | GP | M | todo |
+| 92 | Bust-A-Move | GP | M | dev |
 | 93 | Snake | GP | S | dev |
 | 94 | Klax | FB | M | dev |
-| 95 | Boulder Dash | GP | M | todo |
+| 95 | Boulder Dash | GP | M | dev |
 | 96 | Sokoban | GP | S | dev |
 | 97 | Kaboom! | PB | S | dev |
 | 98 | Frogger | GP | M | dev |
-| 99 | Marble Madness | GP | L | todo |
+| 99 | Marble Madness | GP | L | dev |
 | 100 | Simon | GP | S | dev |
 
 ## Totals
