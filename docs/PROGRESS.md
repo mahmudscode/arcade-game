@@ -9,10 +9,10 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 | Shooters | 25 | 0 | 25 |
 | Maze and Chase | 14 | 0 | 14 |
 | Platformers | 20 | 0 | 20 |
-| Action and Fighting | 4 | 10 | 14 |
+| Action and Fighting | 11 | 3 | 14 |
 | Racing and Sports | 10 | 4 | 14 |
 | Puzzle and Casual | 13 | 0 | 13 |
-| **Total** | **86** | **14** | **100** |
+| **Total** | **93** | **7** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -79,16 +79,16 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 57 | Congo Bongo | Platformers | PF | L | dev |
 | 🟢 | 58 | Space Panic | Platformers | PF | S | dev |
 | 🟢 | 59 | Toki | Platformers | SC | L | dev |
-| 🔴 | 60 | Contra | Action and Fighting | RG | L | todo |
-| 🔴 | 61 | Double Dragon | Action and Fighting | BU | L | todo |
-| 🔴 | 62 | Kung-Fu Master | Action and Fighting | BU | M | todo |
+| 🟢 | 60 | Contra | Action and Fighting | RG | L | dev |
+| 🟢 | 61 | Double Dragon | Action and Fighting | BU | L | dev |
+| 🟢 | 62 | Kung-Fu Master | Action and Fighting | BU | M | dev |
 | 🔴 | 63 | Street Fighter II | Action and Fighting | FT | L | todo |
-| 🔴 | 64 | Final Fight | Action and Fighting | BU | L | todo |
-| 🔴 | 65 | Commando | Action and Fighting | RG | M | todo |
-| 🔴 | 66 | Ikari Warriors | Action and Fighting | RG | M | todo |
+| 🟢 | 64 | Final Fight | Action and Fighting | BU | L | dev |
+| 🟢 | 65 | Commando | Action and Fighting | RG | M | dev |
+| 🟢 | 66 | Ikari Warriors | Action and Fighting | RG | M | dev |
 | 🟢 | 67 | Rolling Thunder | Action and Fighting | SC | L | dev |
 | 🟢 | 68 | Shinobi | Action and Fighting | SC | L | dev |
-| 🔴 | 69 | Golden Axe | Action and Fighting | BU | L | todo |
+| 🟢 | 69 | Golden Axe | Action and Fighting | BU | L | dev |
 | 🟢 | 70 | Gauntlet | Action and Fighting | AR | L | dev |
 | 🔴 | 71 | Karate Champ | Action and Fighting | FT | M | todo |
 | 🟢 | 72 | Rampage | Action and Fighting | AR | M | dev |

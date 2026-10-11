@@ -7,7 +7,7 @@ import { DEFAULT_PLAT, newBody, stepBody, type Body, type PlatConfig, type PlatW
  * steps, spikes and floating ledges; enemies wake up as the hero approaches; a boss guards the end.
  * Games choose their weapon, enemy mix and a few optional mechanics (armour, energy, ammo, hostages...).
  */
-export type EnemyKind = 'walker' | 'hopper' | 'flyer' | 'shooter' | 'zombie';
+export type EnemyKind = 'walker' | 'hopper' | 'flyer' | 'shooter' | 'zombie' | 'runner';
 
 export interface Weapon {
   /** throw: straight shot; arc: lobbed shot; melee: short reach; hybrid: melee when close, else throw. */
@@ -40,6 +40,10 @@ export interface ScrollerConfig {
   hostages?: boolean;
   /** Doors along the route restock ammo and release a guard (Rolling Thunder). */
   doors?: boolean;
+  /** Aim in eight directions with the arrow keys, and hold fire for a stream of shots (run-and-gun). */
+  aim8?: boolean;
+  /** Down on the ground makes the hero lie flat: enemy bullets pass overhead. */
+  prone?: boolean;
   jump: number;
   walk: number;
   pitRate: number;
@@ -83,7 +87,7 @@ interface Shot {
 interface Item {
   x: number;
   y: number;
-  kind: 'fruit' | 'ammo' | 'coin';
+  kind: 'fruit' | 'ammo' | 'coin' | 'power';
 }
 interface Hostage {
   x: number;
@@ -102,7 +106,7 @@ export interface ScrollerState {
   /** One-way ledges: [row, from, to]. */
   ledges: [number, number, number][];
   spikes: number[];
-  hero: Body & { alive: boolean; hp: number; invuln: number; cd: number; ammo: number; energy: number; swing: number };
+  hero: Body & { alive: boolean; hp: number; invuln: number; cd: number; ammo: number; energy: number; swing: number; prone: boolean; power: number; aimX: number; aimY: number };
   foes: Foe[];
   shots: Shot[];
   items: Item[];
@@ -126,8 +130,8 @@ export interface ScrollerState {
   over: boolean;
 }
 
-const POINTS: Record<EnemyKind, number> = { walker: 100, hopper: 150, flyer: 150, shooter: 250, zombie: 100 };
-const HP: Record<EnemyKind, number> = { walker: 1, hopper: 1, flyer: 1, shooter: 2, zombie: 1 };
+const POINTS: Record<EnemyKind, number> = { walker: 100, hopper: 150, flyer: 150, shooter: 250, zombie: 100, runner: 150 };
+const HP: Record<EnemyKind, number> = { walker: 1, hopper: 1, flyer: 1, shooter: 2, zombie: 1, runner: 1 };
 
 export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerState> {
   const heroCfg: PlatConfig = { ...DEFAULT_PLAT, walk: cfg.walk, jump: cfg.jump, air: 1 };
@@ -150,6 +154,11 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
       const r = rng.next();
       if (x < 12 || arena) {
         const n = Math.min(arena ? s.len - x : 12 - x, 8);
+        for (let i = 0; i < n; i++) s.top.push(row);
+        x += n;
+      } else if (x + 14 > s.len - 32) {
+        // Too close to the boss arena for anything fancy: plain ground.
+        const n = rng.int(4, 7);
         for (let i = 0; i < n; i++) s.top.push(row);
         x += n;
       } else if (r < cfg.pitRate) {
@@ -200,6 +209,12 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
       const kind: Item['kind'] = cfg.energy ? 'fruit' : cfg.ammo && rng.next() < 0.4 ? 'ammo' : 'coin';
       s.items.push({ x: c + 0.5, y: s.top[c]! - rng.range(0.6, 2.2), kind });
     }
+    if (cfg.aim8) {
+      for (let k = 0; k < 3; k++) {
+        const c = Math.floor((s.len - 40) * ((k + 0.8) / 3.4)) + rng.int(-3, 3);
+        if (safe(c)) s.items.push({ x: c + 0.5, y: s.top[c]! - 1.6, kind: 'power' });
+      }
+    }
     if (cfg.hostages) {
       for (let k = 0; k < 3; k++) {
         const c = Math.floor((s.len - 40) * ((k + 1) / 4)) + rng.int(-4, 4);
@@ -217,7 +232,7 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
   function resetHero(s: ScrollerState, atX: number): void {
     const c = Math.max(1, Math.min(s.len - 2, Math.floor(atX)));
     const row = s.top[c]! >= 0 ? s.top[c]! : BASE;
-    Object.assign(s.hero, newBody(c + 0.5, row), { alive: true, hp: cfg.health, invuln: 2, cd: 0, swing: 0 });
+    Object.assign(s.hero, newBody(c + 0.5, row), { alive: true, hp: cfg.health, invuln: 2, cd: 0, swing: 0, prone: false, aimX: 1, aimY: 0 });
     s.hero.onGround = true;
     if (cfg.ammo) s.hero.ammo = Math.max(s.hero.ammo, Math.floor(cfg.ammo / 2));
     s.hero.energy = Math.max(s.hero.energy, 60);
@@ -246,7 +261,7 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
       top: [],
       ledges: [],
       spikes: [],
-      hero: { ...newBody(1.5, BASE), alive: true, hp: cfg.health, invuln: 2, cd: 0, ammo: cfg.ammo ?? 0, energy: 100, swing: 0 },
+      hero: { ...newBody(1.5, BASE), alive: true, hp: cfg.health, invuln: 2, cd: 0, ammo: cfg.ammo ?? 0, energy: 100, swing: 0, prone: false, power: 0, aimX: 1, aimY: 0 },
       foes: [],
       shots: [],
       items: [],
@@ -339,7 +354,17 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
       hero.invuln = Math.max(0, hero.invuln - dt);
       hero.cd = Math.max(0, hero.cd - dt);
       hero.swing = Math.max(0, hero.swing - dt);
-      stepBody(hero, w, { dir: (input.held.right ? 1 : 0) - (input.held.left ? 1 : 0), up: false, down: false, jump: input.pressed.b || input.pressed.up }, dt, heroCfg);
+      hero.prone = !!cfg.prone && input.held.down && hero.onGround;
+      const walkDir = hero.prone ? 0 : (input.held.right ? 1 : 0) - (input.held.left ? 1 : 0);
+      stepBody(hero, w, { dir: walkDir, up: false, down: false, jump: input.pressed.b || (!cfg.aim8 && input.pressed.up) }, dt, heroCfg);
+      if (cfg.aim8) {
+        // Eight-way aim: arrows pick the direction, otherwise straight ahead. Down in the air shoots down.
+        const ax = (input.held.right ? 1 : 0) - (input.held.left ? 1 : 0);
+        const ay = input.held.up ? -1 : input.held.down && !hero.onGround ? 1 : 0;
+        hero.aimX = ax === 0 && ay === 0 ? hero.face : ax !== 0 ? ax : ay !== 0 && hero.prone ? hero.face : 0;
+        hero.aimY = ay;
+        if (hero.aimX === 0 && hero.aimY === 0) hero.aimX = hero.face;
+      }
       hero.x = Math.min(s.len - 0.5, Math.max(0.5, hero.x));
       if (hero.y > ROWS + 2) killHeroOutright(s, rng, emit);
       if (s.spikes.includes(Math.floor(hero.x)) && Math.abs(hero.y - s.top[Math.floor(hero.x)]!) < 0.05) hurtHero(s, rng, emit);
@@ -354,7 +379,8 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
 
       // Attack.
       const wp = cfg.weapon;
-      if (input.pressed.a && hero.cd <= 0 && (!cfg.ammo || hero.ammo > 0 || wp.kind === 'melee')) {
+      const fireNow = cfg.aim8 ? input.held.a : input.pressed.a;
+      if (fireNow && hero.cd <= 0 && (!cfg.ammo || hero.ammo > 0 || wp.kind === 'melee')) {
         const near = s.foes.some((f) => !f.dead && f.awake && (f.x - hero.x) * hero.face > 0 && Math.abs(f.x - hero.x) < wp.reach && Math.abs(f.y - hero.y) < 1.4);
         const melee = wp.kind === 'melee' || (wp.kind === 'hybrid' && near);
         hero.cd = wp.cd;
@@ -368,9 +394,18 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
             if (f.hp <= 0) killFoe(s, f, rng, emit);
           }
           if (!s.boss.dead && s.boss.awake && hits(s.boss.x, s.boss.y)) damageBoss(s, wp.kind === 'hybrid' ? 2 : wp.dmg, rng, emit);
-        } else if (s.shots.filter((sh) => sh.mine).length < wp.max) {
+        } else if (cfg.aim8 || s.shots.filter((sh) => sh.mine).length < wp.max) {
           if (cfg.ammo) hero.ammo -= 1;
-          s.shots.push({ x: hero.x + hero.face * 0.6, y: hero.y - 0.9, vx: hero.face * wp.speed, vy: wp.kind === 'arc' ? -8 : 0, life: wp.life, mine: true, dmg: wp.dmg });
+          if (cfg.aim8) {
+            const len = Math.hypot(hero.aimX, hero.aimY) || 1;
+            const base = Math.atan2(hero.aimY / len, hero.aimX / len);
+            const spread = hero.power >= 1 ? [-0.22, 0, 0.22] : [0];
+            const y0 = hero.y - (hero.prone ? 0.45 : 0.9);
+            for (const d of spread) {
+              if (s.shots.filter((sh) => sh.mine).length >= wp.max + (hero.power >= 1 ? 4 : 0)) break;
+              s.shots.push({ x: hero.x + Math.cos(base) * 0.7, y: y0 + Math.sin(base) * 0.7, vx: Math.cos(base + d) * wp.speed, vy: Math.sin(base + d) * wp.speed, life: wp.life, mine: true, dmg: wp.dmg });
+            }
+          } else s.shots.push({ x: hero.x + hero.face * 0.6, y: hero.y - 0.9, vx: hero.face * wp.speed, vy: wp.kind === 'arc' ? -8 : 0, life: wp.life, mine: true, dmg: wp.dmg });
           emit('fire');
         }
       }
@@ -415,6 +450,7 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
         f.y += Math.sin(f.t * 3) * 1.6 * dt;
       } else {
         let dir = f.kind === 'shooter' ? 0 : f.kind === 'walker' ? f.dir : Math.sign(dx) || 1;
+        if (f.kind === 'runner') dir = Math.sign(dx) || 1;
         let jump = false;
         if (f.kind === 'walker') {
           const ahead = Math.floor(f.x + f.dir * 0.8);
@@ -422,7 +458,7 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
           dir = f.dir;
         } else if (f.kind === 'hopper') jump = f.onGround && f.cd <= 0;
         if (jump) f.cd = 1.4;
-        stepBody(body, w, { dir: dir * (f.kind === 'zombie' ? 0.8 : 1), up: false, down: false, jump }, dt, foeCfg);
+        stepBody(body, w, { dir: dir * (f.kind === 'zombie' ? 0.8 : f.kind === 'runner' ? 1.9 : 1), up: false, down: false, jump: jump || (f.kind === 'runner' && f.onGround && f.cd <= 0 && (s.top[Math.floor(f.x + dir)] ?? 99) < Math.round(f.y)) }, dt, foeCfg);
         f.x = body.x;
         f.y = body.y;
         f.vx = body.vx;
@@ -467,9 +503,10 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
       const it = s.items[i]!;
       if (hero.alive && Math.abs(it.x - hero.x) < 0.8 && Math.abs(it.y - (hero.y - 0.6)) < 1) {
         s.items.splice(i, 1);
-        if (it.kind === 'fruit') hero.energy = Math.min(100, hero.energy + 22);
+        if (it.kind === 'power') hero.power = Math.min(1, hero.power + 1);
+        else if (it.kind === 'fruit') hero.energy = Math.min(100, hero.energy + 22);
         else if (it.kind === 'ammo') hero.ammo = Math.min((cfg.ammo ?? 0), hero.ammo + 6);
-        s.score += it.kind === 'coin' ? 100 : 200;
+        s.score += it.kind === 'coin' ? 100 : it.kind === 'power' ? 500 : 200;
         emit('pickup');
       }
     }
@@ -506,7 +543,7 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
           s.shots.splice(i, 1);
           damageBoss(s, sh.dmg, rng, emit);
         }
-      } else if (hero.alive && Math.abs(sh.x - hero.x) < 0.5 && Math.abs(sh.y - (hero.y - 0.9)) < 0.9) {
+      } else if (hero.alive && Math.abs(sh.x - hero.x) < 0.5 && Math.abs(sh.y - (hero.y - (hero.prone ? 0.35 : 0.9))) < (hero.prone ? 0.4 : 0.9)) {
         s.shots.splice(i, 1);
         hurtHero(s, rng, emit);
         if (s.over) return;
@@ -601,14 +638,14 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
       g.fillRect(sxx(h.x) - 6, py(h.y) - 28, 12, 5);
     }
     for (const it of s.items) {
-      g.fillStyle = it.kind === 'fruit' ? COLORS.coral : it.kind === 'ammo' ? COLORS.cyan : COLORS.gold;
+      g.fillStyle = it.kind === 'fruit' ? COLORS.coral : it.kind === 'ammo' ? COLORS.cyan : it.kind === 'power' ? COLORS.purple : COLORS.gold;
       g.beginPath();
       g.arc(sxx(it.x), py(it.y), 7, 0, 6.3);
       g.fill();
     }
     for (const f of s.foes) {
       if (!f.awake && Math.abs(f.x - s.hero.x) > 18) continue;
-      g.fillStyle = f.kind === 'walker' ? '#7BE495' : f.kind === 'hopper' ? COLORS.gold : f.kind === 'flyer' ? COLORS.purple : f.kind === 'zombie' ? '#6b8f71' : COLORS.coral;
+      g.fillStyle = f.kind === 'walker' ? '#7BE495' : f.kind === 'runner' ? COLORS.coral : f.kind === 'hopper' ? COLORS.gold : f.kind === 'flyer' ? COLORS.purple : f.kind === 'zombie' ? '#6b8f71' : COLORS.coral;
       if (f.kind === 'flyer') {
         g.beginPath();
         g.ellipse(sxx(f.x), py(f.y), 13, 8, 0, 0, 6.3);
@@ -639,11 +676,17 @@ export function createScroller(cfg: ScrollerConfig): GameDefinition<ScrollerStat
     const h = s.hero;
     if (h.alive && (h.invuln <= 0 || Math.floor(time * 12) % 2 === 0)) {
       g.fillStyle = cfg.colors.accent;
-      g.fillRect(sxx(h.x) - 9, py(h.y) - 28, 18, 28);
-      g.fillStyle = COLORS.paper;
-      g.fillRect(sxx(h.x) - 7, py(h.y) - 34, 14, 8);
-      g.fillStyle = COLORS.bg;
-      g.fillRect(sxx(h.x) - 2 + h.face * 4, py(h.y) - 31, 3, 3);
+      if (h.prone) {
+        g.fillRect(sxx(h.x) - 14, py(h.y) - 12, 28, 12);
+        g.fillStyle = COLORS.paper;
+        g.fillRect(sxx(h.x) + h.face * 10 - 5, py(h.y) - 16, 10, 8);
+      } else {
+        g.fillRect(sxx(h.x) - 9, py(h.y) - 28, 18, 28);
+        g.fillStyle = COLORS.paper;
+        g.fillRect(sxx(h.x) - 7, py(h.y) - 34, 14, 8);
+        g.fillStyle = COLORS.bg;
+        g.fillRect(sxx(h.x) - 2 + h.face * 4, py(h.y) - 31, 3, 3);
+      }
       if (h.swing > 0) {
         g.fillStyle = COLORS.gold;
         g.fillRect(sxx(h.x) + h.face * 14 - (h.face < 0 ? cfg.weapon.reach * CELL : 0), py(h.y) - 20, cfg.weapon.reach * CELL, 6);

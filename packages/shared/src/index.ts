@@ -496,6 +496,41 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Strike', b: 'Jump' },
     controls: [{ keys: ['◀', '▶'], label: 'Run' }, { keys: ['X', '▲'], label: 'Jump' }, { keys: ['Space'], label: 'Shuriken / sword' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('jungle-commando', 'Jungle Commando', 'Shooter', 640000, {
+    description: 'Run and gun through the jungle: aim in eight directions, lie flat to dodge bullets and grab the spread gun. One hit and you are down.',
+    touch: { a: 'Fire', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Run / aim' }, { keys: ['X'], label: 'Jump' }, { keys: ['Space', 'Z'], label: 'Fire (hold)' }, { keys: ['▼'], label: 'Lie flat on the ground' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('back-alley-brawl', 'Back-Alley Brawl', 'Fighting', 610000, {
+    description: 'Fight through the alley in a three-hit combo, jump-kick, and grab knives and bats before the boss at the end of each stage.',
+    touch: { a: 'Punch', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space', 'Z'], label: 'Punch combo / jump kick' }, { keys: ['X'], label: 'Jump' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('metro-rumble', 'Metro Rumble', 'Fighting', 590000, {
+    description: 'Clear the subway streets with heavy punches. Down plus punch is a spin that clears the crowd but costs health.',
+    touch: { a: 'Punch', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space', 'Z'], label: 'Punch combo' }, { keys: ['▼', 'Space'], label: 'Spin (costs health)' }, { keys: ['X'], label: 'Jump' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('sunblade-saga', 'Sunblade Saga', 'Fighting', 570000, {
+    description: 'A long-reach blade fighter: smash crates for magic pots and press Up plus attack to scorch everything on screen.',
+    touch: { a: 'Slash', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move' }, { keys: ['Space', 'Z'], label: 'Slash combo' }, { keys: ['▲', 'Space'], label: 'Magic (uses pots)' }, { keys: ['X'], label: 'Jump' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('tower-monk', 'Tower Monk', 'Fighting', 530000, {
+    description: 'Climb the tower along a single corridor: shake off grippers, duck high knives, jump low ones, and beat the floor boss.',
+    touch: { a: 'Strike', b: 'Jump' },
+    controls: [{ keys: ['◀', '▶'], label: 'Walk' }, { keys: ['▼'], label: 'Duck' }, { keys: ['Space', 'Z'], label: 'Strike' }, { keys: ['X'], label: 'Jump' }, { keys: ['◀', '▶'], label: 'Mash to break a grab' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('field-commando', 'Field Commando', 'Shooter', 520000, {
+    description: 'Advance up the field on foot, shooting in eight directions and lobbing grenades over cover. One hit and you are down.',
+    touch: { a: 'Fire', b: 'Grenade' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move / aim' }, { keys: ['Space', 'Z'], label: 'Fire (hold)' }, { keys: ['X'], label: 'Grenade (lobs over cover)' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('iron-trooper', 'Iron Trooper', 'Shooter', 500000, {
+    description: 'Push up the battlefield, commandeer tanks that soak up four hits, and storm the fortress at the end of each stage.',
+    touch: { a: 'Fire', b: 'Grenade' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move / aim' }, { keys: ['Space', 'Z'], label: 'Fire (hold)' }, { keys: ['X'], label: 'Grenade (lobs over cover)' }, { keys: ['P'], label: 'Pause' }],
+  }),
   game('route-rider', 'Route Rider', 'Racing', 350000, {
     description: 'Ride down the street throwing papers into mailboxes, smashing windows of non-subscribers, and dodging cars, dogs and potholes.',
     touch: { a: 'Throw left', b: 'Throw right' },

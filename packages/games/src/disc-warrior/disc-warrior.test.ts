@@ -85,7 +85,7 @@ function road() {
   const foe = (kind: Foe['kind'], x: number, y = BASE, awake = true): Foe => ({ kind, x, y, vx: 0, vy: 0, hp: kind === 'shooter' ? 2 : 1, cd: 99, t: 0, dir: -1, awake, dead: false, onGround: kind !== 'flyer' });
   return { s, tick, foe };
 }
-const attack = held({}, { a: true });
+const attack = held({ a: true }, { a: true });
 const jumpKey = held({}, { b: true });
 
 describe(`${CONFIG.id} rules`, () => {

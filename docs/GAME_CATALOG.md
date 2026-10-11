@@ -80,16 +80,16 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 ## Action and Fighting (14)
 | # | Game | Archetype | Size | Status |
 |---|---|---|---|---|
-| 60 | Contra | RG | L | todo |
-| 61 | Double Dragon | BU | L | todo |
-| 62 | Kung-Fu Master | BU | M | todo |
+| 60 | Contra | RG | L | dev |
+| 61 | Double Dragon | BU | L | dev |
+| 62 | Kung-Fu Master | BU | M | dev |
 | 63 | Street Fighter II | FT | L | todo |
-| 64 | Final Fight | BU | L | todo |
-| 65 | Commando | RG | M | todo |
-| 66 | Ikari Warriors | RG | M | todo |
+| 64 | Final Fight | BU | L | dev |
+| 65 | Commando | RG | M | dev |
+| 66 | Ikari Warriors | RG | M | dev |
 | 67 | Rolling Thunder | SC | L | dev |
 | 68 | Shinobi | SC | L | dev |
-| 69 | Golden Axe | BU | L | todo |
+| 69 | Golden Axe | BU | L | dev |
 | 70 | Gauntlet | AR | L | dev |
 | 71 | Karate Champ | FT | M | todo |
 | 72 | Rampage | AR | M | dev |

@@ -93,6 +93,13 @@ const loaders: Record<string, Loader> = {
   'ninja-strike': () => import('./ninja-strike'),
   'route-rider': () => import('./route-rider'),
   'dirt-rider': () => import('./dirt-rider'),
+  'jungle-commando': () => import('./jungle-commando'),
+  'back-alley-brawl': () => import('./back-alley-brawl'),
+  'metro-rumble': () => import('./metro-rumble'),
+  'sunblade-saga': () => import('./sunblade-saga'),
+  'tower-monk': () => import('./tower-monk'),
+  'field-commando': () => import('./field-commando'),
+  'iron-trooper': () => import('./iron-trooper'),
 };
 
 export function playableSlugs(): string[] {
