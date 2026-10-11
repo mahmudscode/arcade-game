@@ -436,6 +436,26 @@ export const GAMES: GameMeta[] = [
     touch: { a: 'Hop', b: 'Hop' },
     controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Move (screen directions)' }, { keys: ['Space'], label: 'Hop' }, { keys: ['P'], label: 'Pause' }],
   }),
+  game('planet-patrol', 'Planet Patrol', 'Shooter', 900000, {
+    description: 'Patrol a long wrapping planet, shoot the landers before they abduct the humanoids, and catch any that fall.',
+    touch: { a: 'Fire', b: 'Smart bomb' },
+    controls: [{ keys: ['◀', '▶'], label: 'Thrust / turn' }, { keys: ['▲', '▼'], label: 'Altitude' }, { keys: ['Space'], label: 'Fire' }, { keys: ['X'], label: 'Smart bomb' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('portal-patrol', 'Portal Patrol', 'Shooter', 610000, {
+    description: 'The planet patrol continues with mine-laying bombers and pods that burst into swarmers. Shoot the mines to clear a path.',
+    touch: { a: 'Fire', b: 'Smart bomb' },
+    controls: [{ keys: ['◀', '▶'], label: 'Thrust / turn' }, { keys: ['▲', '▼'], label: 'Altitude' }, { keys: ['Space'], label: 'Fire' }, { keys: ['X'], label: 'Smart bomb' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('zone-striker', 'Zone Striker', 'Shooter', 530000, {
+    description: 'Shoot air raiders and bomb the ground installations through the crosshair ahead of you, then take down the fortress.',
+    touch: { a: 'Fire', b: 'Bomb' },
+    controls: [{ keys: ['◀', '▶', '▲', '▼'], label: 'Fly' }, { keys: ['Space'], label: 'Shoot air' }, { keys: ['X'], label: 'Bomb ground' }, { keys: ['P'], label: 'Pause' }],
+  }),
+  game('altitude-raid', 'Altitude Raid', 'Shooter', 580000, {
+    description: 'Fly an isometric fortress run: climb and dive through wall gaps, shoot fuel tanks to refuel, and fire low at ground turrets.',
+    touch: { a: 'Fire', b: 'Alt' },
+    controls: [{ keys: ['◀', '▶'], label: 'Steer' }, { keys: ['▲', '▼'], label: 'Climb / dive' }, { keys: ['Space'], label: 'Fire' }, { keys: ['P'], label: 'Pause' }],
+  }),
 ];
 
 export const FEATURED_SLUG = 'comet-crusher';

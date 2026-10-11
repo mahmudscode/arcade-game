@@ -6,13 +6,13 @@ Generated from [GAME_CATALOG.md](GAME_CATALOG.md). 🟢 = built (status `dev` or
 
 | Category | 🟢 Built | 🔴 Left | Total |
 |---|---|---|---|
-| Shooters | 21 | 4 | 25 |
+| Shooters | 25 | 0 | 25 |
 | Maze and Chase | 14 | 0 | 14 |
 | Platformers | 14 | 6 | 20 |
 | Action and Fighting | 2 | 12 | 14 |
 | Racing and Sports | 8 | 6 | 14 |
 | Puzzle and Casual | 13 | 0 | 13 |
-| **Total** | **72** | **28** | **100** |
+| **Total** | **76** | **24** | **100** |
 
 Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 
@@ -24,15 +24,15 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 2 | Galaga | Shooters | FS | M | dev |
 | 🟢 | 3 | Asteroids | Shooters | AR | S | dev |
 | 🟢 | 4 | Centipede | Shooters | FS | M | dev |
-| 🔴 | 5 | Defender | Shooters | SS | L | todo |
+| 🟢 | 5 | Defender | Shooters | SS | L | dev |
 | 🟢 | 6 | Scramble | Shooters | SS | M | dev |
-| 🔴 | 7 | Xevious | Shooters | SS | M | todo |
+| 🟢 | 7 | Xevious | Shooters | SS | M | dev |
 | 🟢 | 8 | 1942 | Shooters | SS | M | dev |
 | 🟢 | 9 | Galaxian | Shooters | FS | S | dev |
 | 🟢 | 10 | Gyruss | Shooters | FS | M | dev |
 | 🟢 | 11 | Missile Command | Shooters | FS | S | dev |
 | 🟢 | 12 | Phoenix | Shooters | FS | M | dev |
-| 🔴 | 13 | Zaxxon | Shooters | SS | L | todo |
+| 🟢 | 13 | Zaxxon | Shooters | SS | L | dev |
 | 🟢 | 14 | R-Type | Shooters | SS | M | dev |
 | 🟢 | 15 | Gradius | Shooters | SS | M | dev |
 | 🟢 | 16 | Time Pilot | Shooters | AR | M | dev |
@@ -44,7 +44,7 @@ Comet Crusher is the original Asteroids-style game and is counted as #3 below.
 | 🟢 | 22 | Moon Patrol | Shooters | SC | M | dev |
 | 🟢 | 23 | Battlezone | Shooters | AR | L | dev |
 | 🟢 | 24 | Bosconian | Shooters | AR | M | dev |
-| 🔴 | 25 | Stargate | Shooters | SS | L | todo |
+| 🟢 | 25 | Stargate | Shooters | SS | L | dev |
 | 🟢 | 26 | Pac-Man | Maze and Chase | MZ | M | dev |
 | 🟢 | 27 | Ms. Pac-Man | Maze and Chase | MZ | M | dev |
 | 🟢 | 28 | Dig Dug | Maze and Chase | MZ | M | dev |

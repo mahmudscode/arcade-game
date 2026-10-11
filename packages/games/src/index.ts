@@ -79,6 +79,10 @@ const loaders: Record<string, Loader> = {
   'vine-climber': () => import('./vine-climber'),
   'sailor-slugger': () => import('./sailor-slugger'),
   'canopy-climb': () => import('./canopy-climb'),
+  'planet-patrol': () => import('./planet-patrol'),
+  'portal-patrol': () => import('./portal-patrol'),
+  'zone-striker': () => import('./zone-striker'),
+  'altitude-raid': () => import('./altitude-raid'),
 };
 
 export function playableSlugs(): string[] {

@@ -13,15 +13,15 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 2 | Galaga | FS | M | dev |
 | 3 | Asteroids | AR | S | dev |
 | 4 | Centipede | FS | M | dev |
-| 5 | Defender | SS | L | todo |
+| 5 | Defender | SS | L | dev |
 | 6 | Scramble | SS | M | dev |
-| 7 | Xevious | SS | M | todo |
+| 7 | Xevious | SS | M | dev |
 | 8 | 1942 | SS | M | dev |
 | 9 | Galaxian | FS | S | dev |
 | 10 | Gyruss | FS | M | dev |
 | 11 | Missile Command | FS | S | dev |
 | 12 | Phoenix | FS | M | dev |
-| 13 | Zaxxon | SS | L | todo |
+| 13 | Zaxxon | SS | L | dev |
 | 14 | R-Type | SS | M | dev |
 | 15 | Gradius | SS | M | dev |
 | 16 | Time Pilot | AR | M | dev |
@@ -33,7 +33,7 @@ Status: `todo` -> `spec` -> `dev` -> `qa` -> `live`.
 | 22 | Moon Patrol | SC | M | dev |
 | 23 | Battlezone | AR | L | dev |
 | 24 | Bosconian | AR | M | dev |
-| 25 | Stargate | SS | L | todo |
+| 25 | Stargate | SS | L | dev |
 
 ## Maze and Chase (14)
 | # | Game | Archetype | Size | Status |
